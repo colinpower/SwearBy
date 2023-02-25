@@ -16,6 +16,7 @@ struct Posts: Identifiable, Codable, Hashable {
     var is_public: Bool
     var is_verified: Bool
     var post_id: String
+    var product_id: String
     var purchase_id: String
     var user_id: String
     var timestamp: Int
@@ -25,6 +26,7 @@ struct Posts: Identifiable, Codable, Hashable {
         case is_public
         case is_verified
         case post_id
+        case product_id
         case purchase_id
         case user_id
         case timestamp

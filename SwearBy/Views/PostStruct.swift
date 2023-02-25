@@ -17,16 +17,27 @@ struct PostStruct: View {
     
     @ObservedObject private var private_users_vm = UsersVM()
     @State private var private_backgroundURL:String = ""
+    @State private var private_purchaseURL:String = ""
+    @State private var is_showing_half_sheet: Bool = false
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             
             header
             
+            image
             
             
             
+        }
+        .sheet(isPresented: $is_showing_half_sheet) {
+            
+            VStack {
+                Spacer()
+                Text(post.purchase_id)
+                Spacer()
+            }
         }
     }
     
@@ -47,6 +58,7 @@ struct PostStruct: View {
                         .padding(.trailing)
                     
                     Text(post.user_id)
+                    Spacer()
                 }
             }
             
@@ -69,15 +81,16 @@ struct PostStruct: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .padding(.trailing)
+                    .padding(.bottom, 4)
             } else {
                 
                 Rectangle()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                     .foregroundColor(.gray)
-                    .padding(.trailing)
+                    .padding(.bottom, 4)
             }
             
+            Text(post.description).multilineTextAlignment(.leading)
             
         }
         .onAppear {
@@ -92,6 +105,51 @@ struct PostStruct: View {
                     return
                 } else {
                     self.private_backgroundURL = "\(url!)"
+                }
+            }
+        }
+        
+        
+    }
+    
+    var purchase_linked: some View {
+        
+        VStack {
+            
+            Text("Shop verified purchases")
+            
+            if private_backgroundURL != "" {
+                
+                Button {
+                    
+                    is_showing_half_sheet = true
+                    
+                } label: {
+                    WebImage(url: URL(string: private_purchaseURL)!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 60, height: 60)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+            } else {
+                
+                Rectangle()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.gray)
+            }
+        }
+        .onAppear {
+            
+            let backgroundPath = "product/" + post.product_id + "/image.png"
+            
+            let storage = Storage.storage().reference()
+            
+            storage.child(backgroundPath).downloadURL { url, err in
+                if err != nil {
+                    print(err?.localizedDescription ?? "Issue showing the right image")
+                    return
+                } else {
+                    self.private_purchaseURL = "\(url!)"
                 }
             }
         }

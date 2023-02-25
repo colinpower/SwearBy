@@ -11,6 +11,8 @@ struct Home: View {
     
     @ObservedObject var users_vm: UsersVM
     
+    @StateObject var posts_vm = PostsVM()
+    
     @State private var presentedSheet: PresentedSheet? = nil
     
     @State private var path = NavigationPath()
@@ -21,16 +23,43 @@ struct Home: View {
 
             VStack {
                 
+                header
                 
+                ScrollView {
+                    
+                    ForEach(posts_vm.all_posts) { post in
+                        
+                        Button {
+                            
+                            path.append(post)
+                            
+                        } label: {
+                            
+                            
+                            Text("alsdkfjsld")
+                            //PostStruct(post: post, path: $path)
+                            
+                        }
+                        
+                        
+                    }
+                }
+            }
+            .edgesIgnoringSafeArea(.top)
+            .onAppear {
                 
+                self.posts_vm.getAllPosts()
                 
-                
-                
-            }.edgesIgnoringSafeArea(.top)
-            
+            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Posts.self) { post in
+                PostView()
+            }
+            .navigationDestination(for: Users.self) { user in
+                PostView()
+            }
         }
-        
-        
     }
     
     

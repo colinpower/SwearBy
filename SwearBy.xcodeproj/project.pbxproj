@@ -46,6 +46,7 @@
 		30FB5E5529AA736500020C9A /* Purchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5429AA736500020C9A /* Purchases.swift */; };
 		30FB5E5729AA73D400020C9A /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5629AA73D400020C9A /* Products.swift */; };
 		30FB5E5929AA742100020C9A /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5829AA742100020C9A /* Brands.swift */; };
+		30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5A29AA7C7800020C9A /* PostsVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		30FB5E5429AA736500020C9A /* Purchases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchases.swift; sourceTree = "<group>"; };
 		30FB5E5629AA73D400020C9A /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		30FB5E5829AA742100020C9A /* Brands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brands.swift; sourceTree = "<group>"; };
+		30FB5E5A29AA7C7800020C9A /* PostsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 			children = (
 				30FB5E4529A861BD00020C9A /* DataManager.swift */,
 				30FB5E4129A8603700020C9A /* UsersVM.swift */,
+				30FB5E5A29AA7C7800020C9A /* PostsVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30FB5E5729AA73D400020C9A /* Products.swift in Sources */,
+				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
