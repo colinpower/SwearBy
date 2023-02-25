@@ -19,7 +19,7 @@ struct Home: View {
     
     var body: some View {
         
-        NavigationStack {
+        NavigationStack(path: $path) {
 
             VStack {
                 
@@ -36,8 +36,8 @@ struct Home: View {
                         } label: {
                             
                             
-                            Text("alsdkfjsld")
-                            //PostStruct(post: post, path: $path)
+                            //Text("alsdkfjsld")
+                            PostStruct(post: post, path: $path)
                             
                         }
                         
@@ -54,10 +54,10 @@ struct Home: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Posts.self) { post in
-                PostView()
+                PostView(users_vm: users_vm, post: post, path: $path)
             }
             .navigationDestination(for: Users.self) { user in
-                PostView()
+                Profile(users_vm: users_vm)
             }
         }
     }

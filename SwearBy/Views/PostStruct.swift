@@ -28,6 +28,7 @@ struct PostStruct: View {
             
             image
             
+            purchase_linked
             
             
         }
@@ -74,7 +75,7 @@ struct PostStruct: View {
     
     var image: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             if private_backgroundURL != "" {
                 WebImage(url: URL(string: private_backgroundURL)!)
                     .resizable()
@@ -91,6 +92,7 @@ struct PostStruct: View {
             }
             
             Text(post.description).multilineTextAlignment(.leading)
+                .frame(alignment: .topLeading)
             
         }
         .onAppear {
@@ -114,9 +116,18 @@ struct PostStruct: View {
     
     var purchase_linked: some View {
         
-        VStack {
+        VStack(alignment: .leading, spacing: 0) {
             
-            Text("Shop verified purchases")
+            HStack {
+                VStack {
+                    Divider()
+                }
+                Text("Shop verified purchases")
+                    .foregroundColor(.black)
+                VStack {
+                    Divider()
+                }
+            }.padding(.horizontal)
             
             if private_backgroundURL != "" {
                 
@@ -132,10 +143,15 @@ struct PostStruct: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             } else {
-                
-                Rectangle()
-                    .frame(width: 60, height: 60)
-                    .foregroundColor(.gray)
+                Button {
+                    
+                    is_showing_half_sheet = true
+                    
+                } label: {
+                    Rectangle()
+                        .frame(width: 60, height: 60)
+                        .foregroundColor(.gray)
+                }
             }
         }
         .onAppear {

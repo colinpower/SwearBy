@@ -8,7 +8,25 @@
 import SwiftUI
 
 struct PostView: View {
+    
+    @ObservedObject var users_vm: UsersVM
+    
+    var post: Posts
+    
+    @Binding var path: NavigationPath
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            
+            Text("HEADER")
+            
+            PostStruct(post: post, path: $path)
+            
+            Text("FOOTER")
+            
+        }
+        
+        
     }
 }
