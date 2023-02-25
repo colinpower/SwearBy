@@ -104,7 +104,7 @@ struct PostStruct: View {
         }
         .onAppear {
             
-            let backgroundPath = "post/" + post.post_id + "/image.png"
+            let backgroundPath = "post/" + post.post_id + ".png"
             
             let storage = Storage.storage().reference()
             
@@ -136,40 +136,35 @@ struct PostStruct: View {
                 }
             }.padding(.horizontal)
             
-            if private_backgroundURL != "" {
-                
-                Button {
+            Button {
+
+                selected_purchase = private_purchases_vm.get_purchase_by_id
+
+                showingHalfSheet = .purchase
+            } label: {
+//                if private_backgroundURL != "" {
+//
+//                    WebImage(url: URL(string: private_purchaseURL)!)
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 60, height: 60)
+//                        .clipShape(RoundedRectangle(cornerRadius: 8))
+//
+//                } else {
                     
-                    showingHalfSheet = .purchase
-                    
-                } label: {
-                    WebImage(url: URL(string: private_purchaseURL)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 60, height: 60)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
-            } else {
-                Button {
-                    
-                    selected_purchase = private_purchases_vm.get_purchase_by_id
-                    
-                    showingHalfSheet = .purchase
-                    
-                } label: {
                     Rectangle()
                         .frame(width: 60, height: 60)
                         .foregroundColor(.gray)
-                }
+//                }
             }
         }
         .onAppear {
             
-            let backgroundPath = "product/" + post.product_id + "/image.png"
+            let backgroundPath123 = "product/" + post.product_id + ".png"
             
             let storage = Storage.storage().reference()
             
-            storage.child(backgroundPath).downloadURL { url, err in
+            storage.child(backgroundPath123).downloadURL { url, err in
                 if err != nil {
                     print(err?.localizedDescription ?? "Issue showing the right image")
                     return

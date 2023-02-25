@@ -6,40 +6,134 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct ItemHalfSheet: View {
     
     var purchase: Purchases
+    
+    @ObservedObject private var private_brand_vm = BrandsVM()
+    @ObservedObject private var private_product_vm = ProductsVM()
+    
+    @State private var private_brandURL:String = ""
+    @State private var private_productURL:String = ""
     
     var body: some View {
         
         VStack(alignment: .center) {
             
             if purchase.verification_status == "VERIFIED" {
-                Text("Verified purchase")
+                HStack {
+                    Image(systemName: "checkmark.shield.fill")
+                    Text("Verified purchase")
+                }.padding(.top, 20)
             } else {
                 Text("Not yet verified")
+                    .padding(.top, 20)
             }
             
             HStack {
                 
-                Rectangle().frame(width: 100, height: 100)
-                    .foregroundColor(.blue)
-                    .padding(.trailing)
+                if private_productURL != "" {
+                    WebImage(url: URL(string: private_productURL)!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 120, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                } else {
+                    Rectangle()
+                        .frame(width: 120, height: 120)
+                        .foregroundColor(.gray)
+                }
                 
                 VStack {
-                    Text(purchase.brand_id)
+                    Text(private_product_vm.get_product_by_id.name)
+                    HStack {
+                        
+                        if private_brandURL != "" {
+                            WebImage(url: URL(string: private_brandURL)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                                .clipShape(Circle())
+                        } else {
+                            Circle()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.red)
+                        }
+                        
+                        Text(private_brand_vm.get_brand_by_id.name)
+                        
+                    }
                 }
                 
                 Spacer()
                 
             }.padding(.horizontal)
-                .padding(.top, 40)
+                .padding(.top, 30)
             
-            Text("BUTTON LINKING TO THE ITEM")
+            Spacer()
             
+            Button {
+                print(private_product_vm.get_product_by_id.link)
+            } label: {
+                
+                Text("tap button to see the link")
+                
+            }
             
+            Spacer()
             
+            Link(destination: URL(string: private_product_vm.get_product_by_id.link)!) {
+//            Link(destination: URL(string: "https://www.google.com")!) {
+            
+                
+                HStack {
+                    
+                    Spacer()
+                    
+                    Text("View product")
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                }
+                .padding(.vertical)
+                .background(Capsule().foregroundColor(.blue))
+                .padding(.horizontal)
+                .padding(.bottom, 60)
+            }
+        }
+        .edgesIgnoringSafeArea(.top)
+        .frame(height: UIScreen.main.bounds.height / 2)
+        .onAppear {
+            
+            self.private_brand_vm.getBrandById(brand_id: purchase.brand_id)
+            self.private_product_vm.getProductById(product_id: purchase.product_id)
+            
+            let brandPath = "brand/" + purchase.brand_id + ".png"
+            let productPath = "product/" + purchase.product_id + ".png"
+            
+            let storage = Storage.storage().reference()
+            
+            storage.child(brandPath).downloadURL { url, err in
+                if err != nil {
+                    print(err?.localizedDescription ?? "Issue showing the right image")
+                    return
+                } else {
+                    self.private_brandURL = "\(url!)"
+                }
+            }
+            
+            storage.child(productPath).downloadURL { url, err in
+                if err != nil {
+                    print(err?.localizedDescription ?? "Issue showing the right image")
+                    return
+                } else {
+                    self.private_productURL = "\(url!)"
+                }
+            }
         }
     }
 }
