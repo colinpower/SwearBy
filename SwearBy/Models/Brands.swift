@@ -18,7 +18,7 @@ struct Brands: Identifiable, Codable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case name
-        case link
+        case website
         case brand_id
     }
 }
