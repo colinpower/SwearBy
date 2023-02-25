@@ -47,6 +47,8 @@
 		30FB5E5729AA73D400020C9A /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5629AA73D400020C9A /* Products.swift */; };
 		30FB5E5929AA742100020C9A /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5829AA742100020C9A /* Brands.swift */; };
 		30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5A29AA7C7800020C9A /* PostsVM.swift */; };
+		30FB5E5D29AAAAB700020C9A /* ItemHalfSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */; };
+		30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5E29AAACA400020C9A /* PurchasesVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		30FB5E5629AA73D400020C9A /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		30FB5E5829AA742100020C9A /* Brands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brands.swift; sourceTree = "<group>"; };
 		30FB5E5A29AA7C7800020C9A /* PostsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVM.swift; sourceTree = "<group>"; };
+		30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHalfSheet.swift; sourceTree = "<group>"; };
+		30FB5E5E29AAACA400020C9A /* PurchasesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,7 @@
 				30FB5E4529A861BD00020C9A /* DataManager.swift */,
 				30FB5E4129A8603700020C9A /* UsersVM.swift */,
 				30FB5E5A29AA7C7800020C9A /* PostsVM.swift */,
+				30FB5E5E29AAACA400020C9A /* PurchasesVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				30FB5E3F29A8600500020C9A /* Profile.swift */,
 				30FB5E4A29A87F8400020C9A /* PostView.swift */,
 				30FB5E4C29A87FBD00020C9A /* PostStruct.swift */,
+				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
+				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30FB5E5729AA73D400020C9A /* Products.swift in Sources */,
 				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
@@ -400,6 +407,7 @@
 				30FB5E3C29A85FC600020C9A /* TabRouter.swift in Sources */,
 				30FB5E5329AA72D800020C9A /* Posts.swift in Sources */,
 				30FB5E4229A8603700020C9A /* UsersVM.swift in Sources */,
+				30FB5E5D29AAAAB700020C9A /* ItemHalfSheet.swift in Sources */,
 				30FB5E4F29A9568A00020C9A /* AppViewModel.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,
 				30FB5E4429A8605E00020C9A /* Users.swift in Sources */,

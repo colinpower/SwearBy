@@ -18,47 +18,51 @@ struct Home: View {
     @State private var path = NavigationPath()
     
     var body: some View {
-        
-        NavigationStack(path: $path) {
-
-            VStack {
+        VStack {
+            NavigationStack(path: $path) {
                 
-                header
-                
-                ScrollView {
+                VStack {
                     
-                    ForEach(posts_vm.all_posts) { post in
+                    header
+                    
+                    ScrollView {
                         
-                        Button {
+                        ForEach(posts_vm.all_posts) { post in
                             
-                            path.append(post)
+                            Button {
+                                
+                                path.append(post)
+                                
+                            } label: {
+                                
+                                
+                                //Text("alsdkfjsld")
+                                PostStruct(post: post, path: $path)
+                                
+                            }
                             
-                        } label: {
-                            
-                            
-                            //Text("alsdkfjsld")
-                            PostStruct(post: post, path: $path)
                             
                         }
-                        
-                        
                     }
                 }
+                .edgesIgnoringSafeArea(.top)
+                .onAppear {
+                    
+                    self.posts_vm.getAllPosts()
+                    
+                }
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationDestination(for: Posts.self) { post in
+                    PostView(users_vm: users_vm, post: post, path: $path)
+                }
+                .navigationDestination(for: Users.self) { user in
+                    Profile(users_vm: users_vm)
+                }
             }
-            .edgesIgnoringSafeArea(.top)
-            .onAppear {
-                
-                self.posts_vm.getAllPosts()
-                
-            }
-            .navigationTitle("")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Posts.self) { post in
-                PostView(users_vm: users_vm, post: post, path: $path)
-            }
-            .navigationDestination(for: Users.self) { user in
-                Profile(users_vm: users_vm)
-            }
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.width, height: 60)
+                .foregroundColor(.red)
         }
     }
     

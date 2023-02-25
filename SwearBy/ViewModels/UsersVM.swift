@@ -89,7 +89,7 @@ class UsersVM: ObservableObject, Identifiable {
     
     func getUserByID(user_id: String) {
         
-        let docRef = db.collection("useres").document(user_id)
+        let docRef = db.collection("users").document(user_id)
 
         docRef.getDocument { document, error in
             if let error = error as NSError? {

@@ -16,9 +16,13 @@ struct PostStruct: View {
     @Binding var path: NavigationPath
     
     @ObservedObject private var private_users_vm = UsersVM()
+    @ObservedObject private var private_purchases_vm = PurchasesVM()
+    
     @State private var private_backgroundURL:String = ""
     @State private var private_purchaseURL:String = ""
-    @State private var is_showing_half_sheet: Bool = false
+
+    @State private var showingHalfSheet: HalfSheetOnPost? = nil
+    @State private var selected_purchase:Purchases = Purchases(brand_id: "", product_id: "", purchase_id: "", user_id: "", verification_status: "")
     
     var body: some View {
         
@@ -32,12 +36,14 @@ struct PostStruct: View {
             
             
         }
-        .sheet(isPresented: $is_showing_half_sheet) {
-            
-            VStack {
-                Spacer()
-                Text(post.purchase_id)
-                Spacer()
+        .sheet(item: $showingHalfSheet, onDismiss: { showingHalfSheet = nil }) { [selected_purchase] sheet in
+
+            switch sheet {        // .purchases, ... (?)
+
+            case .purchase:
+                ItemHalfSheet(purchase: selected_purchase)
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
         }
     }
@@ -63,13 +69,14 @@ struct PostStruct: View {
                 }
             }
             
-        }.padding()
-            .onAppear {
-                
-                self.private_users_vm.getUserByID(user_id: post.user_id)
-                
-                
-            }
+        }
+        .padding()
+        .onAppear {
+            
+            self.private_users_vm.getUserByID(user_id: post.user_id)
+            
+            
+        }
         
     }
     
@@ -133,7 +140,7 @@ struct PostStruct: View {
                 
                 Button {
                     
-                    is_showing_half_sheet = true
+                    showingHalfSheet = .purchase
                     
                 } label: {
                     WebImage(url: URL(string: private_purchaseURL)!)
@@ -145,7 +152,9 @@ struct PostStruct: View {
             } else {
                 Button {
                     
-                    is_showing_half_sheet = true
+                    selected_purchase = private_purchases_vm.get_purchase_by_id
+                    
+                    showingHalfSheet = .purchase
                     
                 } label: {
                     Rectangle()
@@ -168,8 +177,19 @@ struct PostStruct: View {
                     self.private_purchaseURL = "\(url!)"
                 }
             }
+                
+            self.private_purchases_vm.getPurchaseById(purchase_id: post.purchase_id)
+            
         }
         
         
+    }
+}
+
+
+enum HalfSheetOnPost: String, Identifiable {
+    case purchase
+    var id: String {
+        return self.rawValue
     }
 }

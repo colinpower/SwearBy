@@ -24,12 +24,14 @@ struct TabRouter: View {
                 .tabItem {
                     Image(systemName: "house.fill")
                 }
+                .ignoresSafeArea(.all)
             
             Profile(users_vm: users_vm)
                 .tag(Tab.profile)
                 .tabItem {
                     Image(systemName: "person.fill")
                 }
+                .ignoresSafeArea(.all)
         }
         
     }

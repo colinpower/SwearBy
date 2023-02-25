@@ -20,7 +20,6 @@ struct ContentView: View {
 
         
         TabRouter(users_vm: users_vm)
-            .ignoresSafeArea(.all)
         
         .onAppear {
             
