@@ -42,6 +42,10 @@
 		30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E4C29A87FBD00020C9A /* PostStruct.swift */; };
 		30FB5E4F29A9568A00020C9A /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E4E29A9568A00020C9A /* AppViewModel.swift */; };
 		30FB5E5129A95CF500020C9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5E5029A95CF500020C9A /* GoogleService-Info.plist */; };
+		30FB5E5329AA72D800020C9A /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5229AA72D800020C9A /* Posts.swift */; };
+		30FB5E5529AA736500020C9A /* Purchases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5429AA736500020C9A /* Purchases.swift */; };
+		30FB5E5729AA73D400020C9A /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5629AA73D400020C9A /* Products.swift */; };
+		30FB5E5929AA742100020C9A /* Brands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5E5829AA742100020C9A /* Brands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +86,10 @@
 		30FB5E4C29A87FBD00020C9A /* PostStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStruct.swift; sourceTree = "<group>"; };
 		30FB5E4E29A9568A00020C9A /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		30FB5E5029A95CF500020C9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		30FB5E5229AA72D800020C9A /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		30FB5E5429AA736500020C9A /* Purchases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchases.swift; sourceTree = "<group>"; };
+		30FB5E5629AA73D400020C9A /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
+		30FB5E5829AA742100020C9A /* Brands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				30FB5E4329A8605E00020C9A /* Users.swift */,
+				30FB5E5229AA72D800020C9A /* Posts.swift */,
+				30FB5E5429AA736500020C9A /* Purchases.swift */,
+				30FB5E5629AA73D400020C9A /* Products.swift */,
+				30FB5E5829AA742100020C9A /* Brands.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -375,10 +387,14 @@
 				30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
+				30FB5E5729AA73D400020C9A /* Products.swift in Sources */,
+				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
+				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
 				30FB5E3E29A85FFF00020C9A /* Home.swift in Sources */,
 				30FB5E3C29A85FC600020C9A /* TabRouter.swift in Sources */,
+				30FB5E5329AA72D800020C9A /* Posts.swift in Sources */,
 				30FB5E4229A8603700020C9A /* UsersVM.swift in Sources */,
 				30FB5E4F29A9568A00020C9A /* AppViewModel.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,

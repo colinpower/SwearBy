@@ -22,8 +22,12 @@ class UsersVM: ObservableObject, Identifiable {
     private var db = Firestore.firestore()
     
     @Published var one_user = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
+    
+    @Published var get_user_by_id = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
 
     var one_user_listener: ListenerRegistration!
+    
+    
     
     func listenForOneUser(user_id: String) {
 
@@ -82,6 +86,30 @@ class UsersVM: ObservableObject, Identifiable {
 //                }
 //        }
 //    }
+    
+    func getUserByID(user_id: String) {
+        
+        let docRef = db.collection("useres").document(user_id)
+
+        docRef.getDocument { document, error in
+            if let error = error as NSError? {
+                print("Error getting document: \(error)")
+            }
+            else {
+                if let document = document {
+                    do {
+                        self.get_user_by_id = try document.data(as: Users.self)
+                        print(self.get_user_by_id)
+                    }
+                    catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+        
+        
+    }
     
     
 }

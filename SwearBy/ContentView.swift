@@ -19,17 +19,8 @@ struct ContentView: View {
         
 
         
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Text("aldkfjasldkf")
-            
-            
-            
-        }
-        .padding()
+        TabRouter(users_vm: users_vm)
+            .ignoresSafeArea(.all)
         
         .onAppear {
             
@@ -55,7 +46,5 @@ struct ContentView: View {
                 }
             }
         }
-        
-        
     }
 }
