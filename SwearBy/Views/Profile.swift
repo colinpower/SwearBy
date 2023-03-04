@@ -15,9 +15,13 @@ struct Profile: View {
     @Binding var email: String
     @Binding var selectedTab: Int
     
+    @State var isShowingAddFriendsPage: Bool = false
+    
     var body: some View {
         VStack {
-            Text("PROFILE")
+            
+            PrimaryHeader(title: "My Profile", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            
             
             Spacer()
             
@@ -52,6 +56,9 @@ struct Profile: View {
             
             MyTabView(selectedTab: $selectedTab)
         }.edgesIgnoringSafeArea(.all)
+            .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
+                AddFriends(isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            }
         
     }
 }

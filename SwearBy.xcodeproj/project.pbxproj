@@ -39,6 +39,9 @@
 		30640C3529B316F900981D3C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 30640C3429B316F900981D3C /* FirebaseStorageCombine-Community */; };
 		30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C3629B322AB00981D3C /* EmptyVariables.swift */; };
 		30640C3A29B32BBD00981D3C /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C3929B32BBD00981D3C /* Components.swift */; };
+		30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C3B29B339DE00981D3C /* AddFriends.swift */; };
+		30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */; };
+		30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C3F29B3424500981D3C /* HelperFunctions.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -96,6 +99,9 @@
 		30640C0329B313CE00981D3C /* RequestEmailLinkVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEmailLinkVM.swift; sourceTree = "<group>"; };
 		30640C3629B322AB00981D3C /* EmptyVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyVariables.swift; sourceTree = "<group>"; };
 		30640C3929B32BBD00981D3C /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		30640C3B29B339DE00981D3C /* AddFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriends.swift; sourceTree = "<group>"; };
+		30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePostCondensed.swift; sourceTree = "<group>"; };
+		30640C3F29B3424500981D3C /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 				30FB5DEC29A7E20900020C9A /* ContentView.swift */,
 				30FB5E4E29A9568A00020C9A /* AppViewModel.swift */,
 				30640C3929B32BBD00981D3C /* Components.swift */,
+				30640C3F29B3424500981D3C /* HelperFunctions.swift */,
 				30FB5E4929A87F2F00020C9A /* Views */,
 				30FB5E4829A87F2A00020C9A /* ViewModels */,
 				30FB5E4729A87F2400020C9A /* Models */,
@@ -284,12 +291,14 @@
 				30FB5E3B29A85FC600020C9A /* TabRouter.swift */,
 				30640C3829B3299B00981D3C /* Sign up or login */,
 				30FB5E3D29A85FFF00020C9A /* Home.swift */,
+				30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */,
 				30FB5E3F29A8600500020C9A /* Profile.swift */,
 				30640BF729B2D36100981D3C /* MyProfile.swift */,
 				30FB5E4A29A87F8400020C9A /* PostView.swift */,
 				30FB5E4C29A87FBD00020C9A /* PostStruct.swift */,
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
+				30640C3B29B339DE00981D3C /* AddFriends.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,14 +470,17 @@
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
+				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
 				30640BF829B2D36100981D3C /* MyProfile.swift in Sources */,
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
+				30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */,
 				30FB5E5729AA73D400020C9A /* Products.swift in Sources */,
 				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
+				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,

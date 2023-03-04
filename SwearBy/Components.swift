@@ -81,3 +81,47 @@ extension Color {
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: opacity)
     }
 }
+
+//MARK: PRIMARY HEADER
+struct PrimaryHeader: View {
+    
+    var title: String
+    @Binding var isShowingAddFriendsPage: Bool
+    
+    var body: some View {
+
+        HStack (alignment: .center) {
+            
+            Spacer()
+            Text(title)
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundColor(Color("text.black"))
+                .padding(.leading, 40)
+            Spacer()
+            
+            Button {
+
+                isShowingAddFriendsPage = true
+
+            } label: {
+
+                ZStack(alignment: .center) {
+                    Circle()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(Color("ShareGray"))
+                    Image(systemName: "person.fill.badge.plus")
+                        .font(.system(size: 19))
+                        .foregroundColor(Color("text.gray"))
+                }
+            }
+            
+        }
+        .padding(.bottom, 4)
+        .frame(height: 44)
+        .padding(.top, 60)
+        .padding(.horizontal)
+        .padding(.horizontal)
+    }
+}
+
+

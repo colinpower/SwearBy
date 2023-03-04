@@ -16,16 +16,20 @@ struct Home: View {
     
     @State private var path = NavigationPath()
     
+    @State var isShowingAddFriendsPage: Bool = false
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            
+            PrimaryHeader(title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            
             NavigationStack(path: $path) {
                 
                 VStack {
                     
-                    header
+                    ScrollView(showsIndicators: false) {
                     
-                    ScrollView {
-                        
+                    VStack(alignment: .center) {
                         ForEach(posts_vm.all_posts) { post in
                             
                             Button {
@@ -34,7 +38,9 @@ struct Home: View {
                                 
                             } label: {
                                 
-                                PostStruct(post: post, path: $path)
+                                LargePostCondensed(post: post, path: $path)
+                                //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width + 44)
+                                //PostStruct(post: post, path: $path)
                                 
                             }
                             
@@ -42,10 +48,6 @@ struct Home: View {
                         }
                     }
                 }
-                .edgesIgnoringSafeArea(.top)
-                .onAppear {
-                    
-                    self.posts_vm.getAllPosts()
                     
                 }
                 .navigationTitle("")
@@ -62,7 +64,16 @@ struct Home: View {
                 }
             }
             MyTabView(selectedTab: $selectedTab)
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            
+            self.posts_vm.getAllPosts()
+            
+        }
+        .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
+            AddFriends(isShowingAddFriendsPage: $isShowingAddFriendsPage)
+        }
     }
     
     
