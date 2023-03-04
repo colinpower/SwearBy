@@ -26,7 +26,7 @@ class UserObject {
 class AppViewModel: ObservableObject {
     
     @Published var signedIn = false
-    @Published var currentUser1: User?
+    //@Published var currentUser1: Users?
     
     @Published var isNewUserAuth = false
     
@@ -60,8 +60,10 @@ class AppViewModel: ObservableObject {
                 print("Got user: \(user1)")
                 
                 //UsersVM().listenForOneUser(userID: user1.uid)
+                let temp_user_id = user1.uid
+                print("Got user id: \(temp_user_id)")
                 
-                users_vm.listenForOneUser(user_id: user1.uid)
+                users_vm.listenForOneUser(user_id: temp_user_id)
                 
                 print(String(user1.uid))
                 print(user1.email ?? "")
@@ -95,16 +97,17 @@ class AppViewModel: ObservableObject {
         }
       }
     
-    func signOut(user_vm: UsersVM) -> Bool {
+    func signOut(users_vm: UsersVM) -> Bool {
         do {
-            user_vm.one_user = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
+            
+            users_vm.one_user = EmptyVariables().empty_user
             
             try Auth.auth().signOut()
             
             self.signedIn = false
             self.session = nil
             
-            user_vm.one_user_listener.remove()
+            users_vm.one_user_listener.remove()
             
             return true
             

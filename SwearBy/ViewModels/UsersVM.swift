@@ -21,15 +21,16 @@ class UsersVM: ObservableObject, Identifiable {
     var dm = DataManager()
     private var db = Firestore.firestore()
     
-    @Published var one_user = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
-    
-    @Published var get_user_by_id = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
+    @Published var one_user = EmptyVariables().empty_user
+    @Published var get_user_by_id = EmptyVariables().empty_user
 
     var one_user_listener: ListenerRegistration!
     
     
     
     func listenForOneUser(user_id: String) {
+        
+        print("PASSING THE FOLLOWING USER_ID TO FIND IT \(user_id)")
 
         self.dm.getOneUserListener(user_id: user_id, onSuccess: { (user) in
 

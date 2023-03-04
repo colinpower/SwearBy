@@ -49,22 +49,25 @@ class DataManager: ObservableObject {
                     return
                 }
                 
-                var emptyUser = Users(email: "", email_verified: false, name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
+                var empty_user = EmptyVariables().empty_user
                 
                 do {
                     print("GOT HERE IN THE getOneUserListener")
                     
                     if document.exists {
-                        emptyUser = try! document.data(as: Users.self)
+                        
+                        print(document.data())
+                        
+                        empty_user = try! document.data(as: Users.self)
                     } else {
-                        emptyUser.user_id = "NO USER FOUND"
+                        empty_user.user_id = "NO USER FOUND"
                     }
                 }
                 catch {
                     print(error)
                     return
                 }
-                onSuccess(emptyUser)
+                onSuccess(empty_user)
             }
         listener(listenerRegistration) //escaping listener
     }

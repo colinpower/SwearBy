@@ -15,8 +15,9 @@ struct PostStruct: View {
     
     @Binding var path: NavigationPath
     
-    @ObservedObject private var private_users_vm = UsersVM()
-    @ObservedObject private var private_purchases_vm = PurchasesVM()
+    @StateObject private var private_users_vm = UsersVM()
+    @StateObject private var private_purchases_vm = PurchasesVM()
+    @StateObject private var private_posts_vm = PostsVM()
     
     @State private var private_backgroundURL:String = ""
     @State private var private_purchaseURL:String = ""
@@ -44,9 +45,12 @@ struct PostStruct: View {
 //        }
         .onAppear {
             
+            print("THIS IS THE POST PASSED")
+            print("THIS IS THE POST THAT EXISTS NOW")
+            
             self.private_purchases_vm.getPurchaseById(purchase_id: post.purchase_id)
             
-            print("THIS IS THE POST PASSED")
+            
         }
     }
     
