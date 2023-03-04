@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct TestSheet: View {
+    
+    @Binding var selectedTab: Int
+    
+    
     var body: some View {
-        Text("Hello, SLKDFJS!")
+        
+        VStack {
+            Text("Hello, SLKDFJS!")
+            
+            Spacer()
+            
+            MyTabView(selectedTab: $selectedTab)
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -10,6 +10,8 @@ import SwiftUI
 struct Home: View {
     
     @ObservedObject var users_vm: UsersVM
+    @Binding var selectedTab: Int
+    
     @StateObject var posts_vm = PostsVM()
     
     @State private var path = NavigationPath()
@@ -59,10 +61,8 @@ struct Home: View {
                     //TestSheet()
                 }
             }
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width, height: 60)
-                .foregroundColor(.red)
-        }
+            MyTabView(selectedTab: $selectedTab)
+        }.edgesIgnoringSafeArea(.all)
     }
     
     

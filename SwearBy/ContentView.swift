@@ -13,7 +13,9 @@ struct ContentView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
     @StateObject var users_vm = UsersVM()
-    @State private var email: String = ""
+    @State var email: String = ""
+    
+    @State var selectedTab:Int = 0
     
     var body: some View {
         
@@ -24,7 +26,19 @@ struct ContentView: View {
         Group {
             if (currentSessionUID != "" && currentSessionEmail != "") {
                 
-                TabRouter(users_vm: users_vm)
+                //TabRouter(users_vm: users_vm, email: $email)
+                
+                
+                switch selectedTab {
+                case 0:
+                    Home(users_vm: users_vm, selectedTab: $selectedTab)
+                case 1:
+                    TestSheet(selectedTab: $selectedTab)
+                case 2:
+                    Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                default:
+                    Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                }
                 
             } else {
                 

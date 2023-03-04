@@ -1,51 +1,52 @@
+////
+////  TabRouter.swift
+////  SwearBy
+////
+////  Created by Colin Power on 2/23/23.
+////
 //
-//  TabRouter.swift
-//  SwearBy
+//import Foundation
+//import SwiftUI
 //
-//  Created by Colin Power on 2/23/23.
+//struct TabRouter: View {
+//    
+//    @StateObject var appData: AppDataModel = AppDataModel()
+//    @ObservedObject var users_vm: UsersVM
+//    @Binding var email: String
+//    
+//    var body: some View {
+//        
+//        
+//        TabView(selection: $appData.currentTab) {
+//            
+//            
+//            Home(users_vm: users_vm)
+//                .tag(Tab.home)
+//                .tabItem {
+//                    Image(systemName: "house.fill")
+//                }
+//                .ignoresSafeArea(.all)
+//            
+//            Profile(users_vm: users_vm, email: $email)
+//                .tag(Tab.profile)
+//                .tabItem {
+//                    Image(systemName: "person.fill")
+//                }
+//                .ignoresSafeArea(.all)
+//        }
+//        
+//    }
+//}
 //
-
-import Foundation
-import SwiftUI
-
-struct TabRouter: View {
-    
-    @StateObject var appData: AppDataModel = AppDataModel()
-    @ObservedObject var users_vm: UsersVM
-    
-    var body: some View {
-        
-        
-        TabView(selection: $appData.currentTab) {
-            
-            
-            Home(users_vm: users_vm)
-                .tag(Tab.home)
-                .tabItem {
-                    Image(systemName: "house.fill")
-                }
-                .ignoresSafeArea(.all)
-            
-            Profile(users_vm: users_vm)
-                .tag(Tab.profile)
-                .tabItem {
-                    Image(systemName: "person.fill")
-                }
-                .ignoresSafeArea(.all)
-        }
-        
-    }
-}
-
-class AppDataModel: ObservableObject {
-    
-    @Published var currentTab: Tab = .home
-    
-}
-
-// Tab enum
-enum Tab: String{
-    case home = "home"
-    case search = "search"
-    case profile = "profile"
-}
+//class AppDataModel: ObservableObject {
+//    
+//    @Published var currentTab: Tab = .home
+//    
+//}
+//
+//// Tab enum
+//enum Tab: String{
+//    case home = "home"
+//    case search = "search"
+//    case profile = "profile"
+//}
