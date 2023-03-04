@@ -99,7 +99,6 @@ class UsersVM: ObservableObject, Identifiable {
                 if let document = document {
                     do {
                         self.get_user_by_id = try document.data(as: Users.self)
-                        print(self.get_user_by_id)
                     }
                     catch {
                         print(error)

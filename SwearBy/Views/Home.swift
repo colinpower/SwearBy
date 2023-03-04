@@ -10,10 +10,7 @@ import SwiftUI
 struct Home: View {
     
     @ObservedObject var users_vm: UsersVM
-    
     @StateObject var posts_vm = PostsVM()
-    
-    @State private var presentedSheet: PresentedSheet? = nil
     
     @State private var path = NavigationPath()
     
@@ -35,8 +32,6 @@ struct Home: View {
                                 
                             } label: {
                                 
-                                
-                                //Text("alsdkfjsld")
                                 PostStruct(post: post, path: $path)
                                 
                             }
@@ -57,7 +52,11 @@ struct Home: View {
                     PostView(users_vm: users_vm, post: post, path: $path)
                 }
                 .navigationDestination(for: Users.self) { user in
-                    Profile(users_vm: users_vm)
+                    MyProfile(users_vm: users_vm, path: $path)
+                }
+                .navigationDestination(for: Purchases.self) { purchase in
+                    ItemHalfSheet(purchase: purchase)
+                    //TestSheet()
                 }
             }
             Rectangle()

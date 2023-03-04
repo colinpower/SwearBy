@@ -13,8 +13,8 @@ struct ItemHalfSheet: View {
     
     var purchase: Purchases
     
-    @ObservedObject private var private_brand_vm = BrandsVM()
-    @ObservedObject private var private_product_vm = ProductsVM()
+    @StateObject private var private_brand_vm = BrandsVM()
+    @StateObject private var private_product_vm = ProductsVM()
     
     @State private var private_brandURL:String = ""
     @State private var private_productURL:String = ""

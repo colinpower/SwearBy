@@ -30,7 +30,6 @@ class PurchasesVM: ObservableObject, Identifiable {
                 if let document = document {
                     do {
                         self.get_purchase_by_id = try document.data(as: Purchases.self)
-                        print(self.get_purchase_by_id)
                     }
                     catch {
                         print(error)

@@ -11,7 +11,6 @@ struct Profile: View {
     
     @ObservedObject var users_vm: UsersVM
     
-    
     var body: some View {
         Text("PROFILE")
     }

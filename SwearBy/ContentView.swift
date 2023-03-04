@@ -18,9 +18,19 @@ struct ContentView: View {
     var body: some View {
         
 
+        let currentSessionUID = viewModel.session?.uid ?? ""
+        let currentSessionEmail = viewModel.session?.email ?? ""
         
-        TabRouter(users_vm: users_vm)
-        
+        Group {
+            if (currentSessionUID != "" && currentSessionEmail != "") {
+                
+                TabRouter(users_vm: users_vm)
+                
+            } else {
+                
+                Start(users_vm: users_vm, email: $email)
+            }
+        }
         .onAppear {
             
             viewModel.listen(users_vm: users_vm)

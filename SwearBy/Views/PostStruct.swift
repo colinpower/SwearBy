@@ -20,9 +20,6 @@ struct PostStruct: View {
     
     @State private var private_backgroundURL:String = ""
     @State private var private_purchaseURL:String = ""
-
-    @State private var showingHalfSheet: HalfSheetOnPost? = nil
-    @State private var selected_purchase:Purchases = Purchases(brand_id: "", product_id: "", purchase_id: "", user_id: "", verification_status: "")
     
     var body: some View {
         
@@ -34,22 +31,26 @@ struct PostStruct: View {
             
             purchase_linked
             
-            
         }
-        .sheet(item: $showingHalfSheet, onDismiss: { showingHalfSheet = nil }) { [selected_purchase] sheet in
-
-            switch sheet {        // .purchases, ... (?)
-
-            case .purchase:
-                ItemHalfSheet(purchase: selected_purchase)
-                    .presentationDetents([.medium])
-                    .presentationDragIndicator(.visible)
-            }
+//        .sheet(item: $showingHalfSheet, onDismiss: { showingHalfSheet = nil }) { [selected_purchase] sheet in
+//
+//            switch sheet {        // .purchases, ... (?)
+//
+//            case .purchase:
+//                ItemHalfSheet(purchase: selected_purchase)
+//                    .presentationDetents([.medium])
+//                    .presentationDragIndicator(.visible)
+//            }
+//        }
+        .onAppear {
+            
+            self.private_purchases_vm.getPurchaseById(purchase_id: post.purchase_id)
+            
+            print("THIS IS THE POST PASSED")
         }
     }
     
     var header: some View {
-        
         
         HStack {
             
@@ -117,8 +118,6 @@ struct PostStruct: View {
                 }
             }
         }
-        
-        
     }
     
     var purchase_linked: some View {
@@ -138,9 +137,16 @@ struct PostStruct: View {
             
             Button {
 
-                selected_purchase = private_purchases_vm.get_purchase_by_id
+                //selected_purchase = private_purchases_vm.get_purchase_by_id
 
-                showingHalfSheet = .purchase
+                print("THIS IS THE PURCHASE PASSED")
+                let temp_purchase = private_purchases_vm.get_purchase_by_id
+                
+                print(temp_purchase)
+                
+                
+                path.append(temp_purchase)
+                //showingHalfSheet = .purchase
             } label: {
 //                if private_backgroundURL != "" {
 //
@@ -172,8 +178,6 @@ struct PostStruct: View {
                     self.private_purchaseURL = "\(url!)"
                 }
             }
-                
-            self.private_purchases_vm.getPurchaseById(purchase_id: post.purchase_id)
             
         }
         
@@ -181,10 +185,3 @@ struct PostStruct: View {
     }
 }
 
-
-enum HalfSheetOnPost: String, Identifiable {
-    case purchase
-    var id: String {
-        return self.rawValue
-    }
-}
