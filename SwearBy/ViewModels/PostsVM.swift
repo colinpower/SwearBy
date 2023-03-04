@@ -22,6 +22,7 @@ class PostsVM: ObservableObject, Identifiable {
     private var db = Firestore.firestore()
     
     @Published var all_posts = [Posts]()
+    @Published var one_user_posts = [Posts]()
     
     func getAllPosts() {
         
@@ -36,6 +37,27 @@ class PostsVM: ObservableObject, Identifiable {
                 print("Number of documents: \(snapshot.documents.count)")
     
                 self.all_posts = snapshot.documents.compactMap({ queryDocumentSnapshot -> Posts? in
+    
+                    print(try? queryDocumentSnapshot.data(as: Posts.self) as Any)
+                    return try? queryDocumentSnapshot.data(as: Posts.self)
+                })
+            }
+    }
+    
+    func getOneUserPosts(user_id: String) {
+        
+        db.collection("posts")
+            .whereField("user_id", isEqualTo: user_id)
+            .getDocuments { (snapshot, error) in
+    
+                guard let snapshot = snapshot, error == nil else {
+                    //handle error
+                    print("found error")
+                    return
+                }
+                print("Number of documents: \(snapshot.documents.count)")
+    
+                self.one_user_posts = snapshot.documents.compactMap({ queryDocumentSnapshot -> Posts? in
     
                     print(try? queryDocumentSnapshot.data(as: Posts.self) as Any)
                     return try? queryDocumentSnapshot.data(as: Posts.self)

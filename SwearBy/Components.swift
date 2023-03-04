@@ -120,7 +120,7 @@ struct PrimaryHeader: View {
         .frame(height: 44)
         .padding(.top, 60)
         .padding(.horizontal)
-        .padding(.horizontal)
+        .padding(.horizontal, 4)
     }
 }
 

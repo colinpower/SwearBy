@@ -16,8 +16,8 @@ struct LargePostCondensed: View {
     @Binding var path: NavigationPath
     
     @StateObject private var private_users_vm = UsersVM()
-    @StateObject private var private_purchases_vm = PurchasesVM()
     @StateObject private var private_posts_vm = PostsVM()
+    @StateObject private var private_products_vm = ProductsVM()
     
     @State private var private_userImageURL:String = ""
     @State private var private_purchaseURL:String = ""      //GET RID OF THIS
@@ -59,20 +59,18 @@ struct LargePostCondensed: View {
                                 
                             }.frame(height: geometry.size.width)
                             
-                            VStack(spacing: 10) {
+                            VStack(spacing: 15) {
                                 
                                 Spacer()
                                 
-                                Button {
-                                    path.append(private_purchases_vm.get_purchase_by_id)
-                                } label: {
-                                    SleekButton(icon_name: "bag.fill")
+                                Link(destination: URL(string: private_products_vm.get_product_by_id.link)!) {
+                                    SleekButton(icon_name: "cart.fill")
                                 }
                                 
                                 Button {
-                                    
+                                    didMarkStar.toggle()
                                 } label: {
-                                    SleekButton(icon_name: "star.fill")
+                                    SleekButton(isSelected: didMarkStar, icon_name: "star.fill")
                                 }
                                 
                                 Button {
@@ -104,8 +102,8 @@ struct LargePostCondensed: View {
         
         .onAppear {
             
+            self.private_products_vm.getProductById(product_id: post.product_id)
             self.private_users_vm.getUserByID(user_id: post.user_id)
-            self.private_purchases_vm.getPurchaseById(purchase_id: post.purchase_id)
             
             let backgroundPath = "post/" + post.post_id + ".png"
             
@@ -170,72 +168,6 @@ struct LargePostCondensed: View {
         
     }
     
-    
-    
-    var purchase_linked: some View {
-        
-        VStack(alignment: .leading, spacing: 0) {
-            
-            HStack {
-                VStack {
-                    Divider()
-                }
-                Text("Shop verified purchases")
-                    .foregroundColor(.black)
-                VStack {
-                    Divider()
-                }
-            }.padding(.horizontal)
-            
-            Button {
-
-                //selected_purchase = private_purchases_vm.get_purchase_by_id
-
-                print("THIS IS THE PURCHASE PASSED")
-                let temp_purchase = private_purchases_vm.get_purchase_by_id
-                
-                print(temp_purchase)
-                
-                
-                path.append(temp_purchase)
-                //showingHalfSheet = .purchase
-            } label: {
-//                if private_backgroundURL != "" {
-//
-//                    WebImage(url: URL(string: private_purchaseURL)!)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 60, height: 60)
-//                        .clipShape(RoundedRectangle(cornerRadius: 8))
-//
-//                } else {
-                    
-                    Rectangle()
-                        .frame(width: 60, height: 60)
-                        .foregroundColor(.gray)
-//                }
-            }
-        }
-        .onAppear {
-            
-            let backgroundPath123 = "product/" + post.product_id + ".png"
-            
-            let storage = Storage.storage().reference()
-            
-            storage.child(backgroundPath123).downloadURL { url, err in
-                if err != nil {
-                    print(err?.localizedDescription ?? "Issue showing the right image")
-                    return
-                } else {
-                    self.private_purchaseURL = "\(url!)"
-                }
-            }
-            
-        }
-        
-        
-    }
-    
     var description: some View {
         
         Button {
@@ -256,16 +188,19 @@ struct LargePostCondensed: View {
 
 struct SleekButton: View {
     
+    var isSelected: Bool = false
+    
     var icon_name: String
     
     var body: some View {
         
         ZStack(alignment: .center) {
             Circle()
-                .frame(width: 36, height: 36)
-                .foregroundColor(Color.white.opacity(0.43))
+                .frame(width: 40, height: 40)
+                .foregroundColor(isSelected ? Color.white : Color.white.opacity(0.5))
             Image(systemName: icon_name)
-                .foregroundColor(Color.white)
+                .font(.system(size: 20))
+                .foregroundColor(isSelected ? Color("SwearByGold") : Color.white)
         }
         
     }
