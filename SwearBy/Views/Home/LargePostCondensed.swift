@@ -23,6 +23,9 @@ struct LargePostCondensed: View {
     @State private var private_purchaseURL:String = ""      //GET RID OF THIS
     @State private var private_profileURL:String = ""
     
+    @State private var didMarkStar:Bool = false
+    
+    
     var body: some View {
         
         VStack(spacing: 0) {
@@ -56,24 +59,36 @@ struct LargePostCondensed: View {
                                 
                             }.frame(height: geometry.size.width)
                             
-                            VStack(spacing: 0) {
+                            VStack(spacing: 10) {
                                 
                                 Spacer()
                                 
-                                Circle().frame(width: 32, height: 32)
-                                    .padding(.bottom, 10)
-                                    .foregroundColor(.red)
-                                Circle().frame(width: 32, height: 32)
-                                    .padding(.bottom, 10)
-                                    .foregroundColor(.red)
-                                Circle().frame(width: 32, height: 32)
-                                    .foregroundColor(.red)
-                            }.frame(height: geometry.size.width)
+                                Button {
+                                    path.append(private_purchases_vm.get_purchase_by_id)
+                                } label: {
+                                    SleekButton(icon_name: "bag.fill")
+                                }
+                                
+                                Button {
+                                    
+                                } label: {
+                                    SleekButton(icon_name: "star.fill")
+                                }
+                                
+                                Button {
+                                    
+                                } label: {
+                                    SleekButton(icon_name: "paperplane.fill")
+                                }
+                                
+
+                            }.padding(.bottom, 10)
+                                .frame(height: geometry.size.width)
                             
                         }
                         .padding(.horizontal, 15)
-                        .padding(.bottom, 15)
-                        .frame(width: geometry.size.width)
+                        .padding(.bottom, 20)
+                        .frame(width: geometry.size.width, height: geometry.size.width)
                         
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width)
@@ -154,6 +169,7 @@ struct LargePostCondensed: View {
         }
         
     }
+    
     
     
     var purchase_linked: some View {
@@ -237,3 +253,20 @@ struct LargePostCondensed: View {
     
 }
 
+
+struct SleekButton: View {
+    
+    var icon_name: String
+    
+    var body: some View {
+        
+        ZStack(alignment: .center) {
+            Circle()
+                .frame(width: 36, height: 36)
+                .foregroundColor(Color.white.opacity(0.43))
+            Image(systemName: icon_name)
+                .foregroundColor(Color.white)
+        }
+        
+    }
+}

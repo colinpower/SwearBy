@@ -21,11 +21,11 @@ struct Home: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            PrimaryHeader(title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
-            
             NavigationStack(path: $path) {
                 
-                VStack {
+                VStack(spacing: 0) {
+                    
+                    PrimaryHeader(title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
                     
                     ScrollView(showsIndicators: false) {
                     
@@ -43,20 +43,19 @@ struct Home: View {
                                 //PostStruct(post: post, path: $path)
                                 
                             }
-                            
-                            
-                        }
+                        }.padding(.bottom).padding(.bottom)
                     }
                 }
                     
                 }
+                .edgesIgnoringSafeArea(.all)
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Posts.self) { post in
                     PostView(users_vm: users_vm, post: post, path: $path)
                 }
                 .navigationDestination(for: Users.self) { user in
-                    MyProfile(users_vm: users_vm, path: $path)
+                    FriendProfile(users_vm: users_vm, path: $path)
                 }
                 .navigationDestination(for: Purchases.self) { purchase in
                     ItemHalfSheet(purchase: purchase)

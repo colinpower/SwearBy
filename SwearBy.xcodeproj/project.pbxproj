@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30640BF829B2D36100981D3C /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640BF729B2D36100981D3C /* MyProfile.swift */; };
+		30640BF829B2D36100981D3C /* FriendProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640BF729B2D36100981D3C /* FriendProfile.swift */; };
 		30640BFA29B2E41800981D3C /* TestSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640BF929B2E41800981D3C /* TestSheet.swift */; };
 		30640BFC29B2EEFE00981D3C /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640BFB29B2EEFE00981D3C /* Start.swift */; };
 		30640BFE29B2EF9F00981D3C /* EnterEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640BFD29B2EF9F00981D3C /* EnterEmail.swift */; };
@@ -89,7 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		30640BF729B2D36100981D3C /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
+		30640BF729B2D36100981D3C /* FriendProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfile.swift; sourceTree = "<group>"; };
 		30640BF929B2E41800981D3C /* TestSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSheet.swift; sourceTree = "<group>"; };
 		30640BFB29B2EEFE00981D3C /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		30640BFD29B2EF9F00981D3C /* EnterEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmail.swift; sourceTree = "<group>"; };
@@ -193,6 +193,32 @@
 			path = "Sign up or login";
 			sourceTree = "<group>";
 		};
+		30640C4129B3508F00981D3C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				30FB5E3D29A85FFF00020C9A /* Home.swift */,
+				30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		30640C4229B350A800981D3C /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				30640BF729B2D36100981D3C /* FriendProfile.swift */,
+				30FB5E3F29A8600500020C9A /* Profile.swift */,
+			);
+			path = Profiles;
+			sourceTree = "<group>";
+		};
+		30640C4329B3510200981D3C /* Posts and Products */ = {
+			isa = PBXGroup;
+			children = (
+				30FB5E4A29A87F8400020C9A /* PostView.swift */,
+			);
+			path = "Posts and Products";
+			sourceTree = "<group>";
+		};
 		30FB5DDE29A7E20900020C9A = {
 			isa = PBXGroup;
 			children = (
@@ -290,11 +316,9 @@
 			children = (
 				30FB5E3B29A85FC600020C9A /* TabRouter.swift */,
 				30640C3829B3299B00981D3C /* Sign up or login */,
-				30FB5E3D29A85FFF00020C9A /* Home.swift */,
-				30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */,
-				30FB5E3F29A8600500020C9A /* Profile.swift */,
-				30640BF729B2D36100981D3C /* MyProfile.swift */,
-				30FB5E4A29A87F8400020C9A /* PostView.swift */,
+				30640C4129B3508F00981D3C /* Home */,
+				30640C4229B350A800981D3C /* Profiles */,
+				30640C4329B3510200981D3C /* Posts and Products */,
 				30FB5E4C29A87FBD00020C9A /* PostStruct.swift */,
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
@@ -471,7 +495,7 @@
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
-				30640BF829B2D36100981D3C /* MyProfile.swift in Sources */,
+				30640BF829B2D36100981D3C /* FriendProfile.swift in Sources */,
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
 				30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */,
