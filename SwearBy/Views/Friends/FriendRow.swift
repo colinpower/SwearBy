@@ -43,6 +43,8 @@ struct FriendRow: View {
                             .font(.system(size: 16, weight: .regular))
                     }
                     
+                    //adsl;kfjasld
+                    
                     Spacer()
                     
                     Image(systemName: "chevron.right")
