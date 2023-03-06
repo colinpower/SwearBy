@@ -18,82 +18,86 @@ struct SuggestedFriendRow: View {
     var body: some View {
         
         let found_friend: Users = lookup_number_users_vm.get_users_by_phone_number.first ?? EmptyVariables().empty_user
+        let my_friend_requests = users_vm.one_user.friend_requests
+        let my_friends_list = users_vm.one_user.friends_list
         
-        HStack(alignment: .center, spacing: 0) {
-            
-            //The Circle + Letter for each contact
-            ZStack(alignment: .center) {
-                Circle().frame(width: 40, height: 40)
-                    .foregroundColor(.blue)
-                Text(found_friend.name.first.prefix(1))
-                    .foregroundColor(.white)
-                    .font(.system(size: 18, weight: .bold))
-            }
-                .padding(.trailing, 16)
-            
-            //The first + last names and the phone number
-            VStack(alignment: .leading, spacing: 0) {
-                
-                Text(found_friend.name.first_last)
-                    .foregroundColor(Color("text.black"))
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                    .padding(.bottom, 6)
-                Text(found_friend.phone)
-                    .foregroundColor(Color("text.gray"))
-                    .font(.system(size: 16, weight: .regular))
-            }
-            
-            Spacer()
-            
-            if users_vm.one_user.friends_added.contains(found_friend.user_id) {
-                
-                ZStack(alignment: .center) {
-                    
-                    Capsule()
-                        .strokeBorder(.green, lineWidth: 2)
-                        .frame(width: 80, height: 32)
-                    Text("Sent")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundColor(Color.green)
-                }
-
+        Group {
+            if ((my_friend_requests.contains(found_friend.user_id)) || (my_friends_list.contains(found_friend.user_id))) {
+                EmptyView()
             } else {
-                
-                Button {
+                HStack(alignment: .center, spacing: 0) {
                     
-                    users_vm.sendFriendRequest(my_user_object: users_vm.one_user, my_friends_user_object: found_friend)
-
-                } label: {
-
+                    //The Circle + Letter for each contact
                     ZStack(alignment: .center) {
-
-                        Capsule()
-                            .frame(width: 80, height: 32)
-                            .foregroundColor(Color("ShareGray"))
-                        HStack(spacing: 6) {
-                            Image(systemName: "person.fill.badge.plus")
+                        Circle().frame(width: 40, height: 40)
+                            .foregroundColor(.blue)
+                        Text(found_friend.name.first.prefix(1))
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                    .padding(.trailing, 16)
+                    
+                    //The first + last names and the phone number
+                    VStack(alignment: .leading, spacing: 0) {
+                        
+                        Text(found_friend.name.first_last)
+                            .foregroundColor(Color("text.black"))
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .padding(.bottom, 6)
+                        Text(found_friend.phone)
+                            .foregroundColor(Color("text.gray"))
+                            .font(.system(size: 16, weight: .regular))
+                    }
+                    
+                    Spacer()
+                    
+                    if users_vm.one_user.friends_added.contains(found_friend.user_id) {
+                        
+                        ZStack(alignment: .center) {
+                            
+                            Capsule()
+                                .strokeBorder(.green, lineWidth: 2)
+                                .frame(width: 80, height: 32)
+                            Text("Sent")
                                 .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .foregroundColor(Color("text.black"))
-                            Text("Add")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .foregroundColor(Color("text.black"))
+                                .foregroundColor(Color.green)
                         }
+                        
+                    } else {
+                        
+                        Button {
+                            
+                            users_vm.sendFriendRequest(my_user_object: users_vm.one_user, my_friends_user_object: found_friend)
+                            
+                        } label: {
+                            
+                            ZStack(alignment: .center) {
+                                
+                                Capsule()
+                                    .frame(width: 80, height: 32)
+                                    .foregroundColor(Color("ShareGray"))
+                                HStack(spacing: 6) {
+                                    Image(systemName: "person.fill.badge.plus")
+                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                        .foregroundColor(Color("text.black"))
+                                    Text("Add")
+                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                        .foregroundColor(Color("text.black"))
+                                }
+                            }
+                        }
+                        
                     }
                 }
-                
+                .padding(.vertical, 12)
             }
-            
-            
-    
-
-                                        
         }
-        .padding(.vertical, 12)
         .onAppear {
+            
+            print(friend_phone_number)
             
             self.lookup_number_users_vm.getUserByPhoneNumber(number: friend_phone_number)
             
         }
     }
 }
-

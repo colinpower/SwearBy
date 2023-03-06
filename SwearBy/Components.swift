@@ -110,10 +110,10 @@ struct PrimaryHeader: View {
                 ZStack(alignment: .center) {
                     Circle()
                         .frame(width: 40, height: 40)
-                        .foregroundColor(Color("ShareGray"))
-                    Image(systemName: "person.fill.badge.plus")
+                        .foregroundColor(users_vm.one_user.friend_requests.isEmpty ? Color("ShareGray") : Color("ShareGray"))
+                    Image(systemName: users_vm.one_user.friend_requests.isEmpty ? "person.fill.badge.plus" : "1.circle.fill")
                         .font(.system(size: 19))
-                        .foregroundColor(Color("text.gray"))
+                        .foregroundColor(users_vm.one_user.friend_requests.isEmpty ? Color("text.gray") : Color.blue)
                 }
             }
             

@@ -56,6 +56,9 @@ struct AddFriends: View {
             .background(Color("Background"))
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Users.self) { user in
+                FriendProfile(users_vm: users_vm, path: $path, friend_user: user)
+            }
             .sheet(isPresented: $isShowingContactsList) {
                 isShowingContactsList = false
             } content: {
@@ -141,7 +144,6 @@ struct AddFriends: View {
             Group {
                 ForEach(contactsVM.contacts.filter {
                     ($0.firstName.count > 0 &&
-                     $0.lastName.count > 0 &&
                      $0.phone?.count ?? 0 > 0 &&
                      $0.firstName.prefix(1) != "#"
                     )
@@ -151,7 +153,7 @@ struct AddFriends: View {
                     if checkForExistingUserBasedOnPhoneNumber(existingUsers: arrayOfUsersPhoneNumbersOnSwearBy, contact: contact) {
                         
                         let contact_phone = contact.phone ?? ""
-                        let numberWithNumbersOnly = contact_phone.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
+                        let numberWithNumbersOnly = contact_phone.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
                         
                         SuggestedFriendRow(users_vm: users_vm, friend_phone_number: numberWithNumbersOnly)
                         
@@ -185,14 +187,8 @@ struct AddFriends: View {
                     
                     if friend_id != "" {
                         
-                        NavigationLink {
-                            //FriendProfile(users_vm: users_vm, path: $path, friend_user: <#T##Users#>)
-                            ThrowawaySheet()
-                        } label: {
-                            FriendRow(friend_user_id: friend_id)
-                        }
+                        FriendRow(friend_user_id: friend_id, path: $path)
 
-                        
                     }
                     
                 }
