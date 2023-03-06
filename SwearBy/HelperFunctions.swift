@@ -20,3 +20,8 @@ func convertTimestampToShortDate(timestamp: Int) -> String {
     return strDate
 }
 
+func getTimestamp() -> Int {
+    
+    return Int(round(Date().timeIntervalSince1970))
+
+}

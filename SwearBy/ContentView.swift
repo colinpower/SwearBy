@@ -26,20 +26,24 @@ struct ContentView: View {
         Group {
             if (currentSessionUID != "" && currentSessionEmail != "") {
                 
-                //TabRouter(users_vm: users_vm, email: $email)
-                
-                
-                switch selectedTab {
-                case 0:
-                    Home(users_vm: users_vm, selectedTab: $selectedTab)
-                case 1:
-                    TestSheet(selectedTab: $selectedTab)
-                case 2:
-                    Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
-                default:
-                    Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                if (users_vm.one_user.phone_verified) {
+                    
+                    switch selectedTab {
+                    case 0:
+                        Home(users_vm: users_vm, selectedTab: $selectedTab)
+                    case 1:
+                        TestSheet(selectedTab: $selectedTab)
+                    case 2:
+                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                    default:
+                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                    }
+                } else {
+                 
+                    //ThrowawaySheet()
+                    EnterName(users_vm: users_vm)
+                    
                 }
-                
             } else {
                 
                 Start(users_vm: users_vm, email: $email)

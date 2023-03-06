@@ -50,6 +50,10 @@
 		30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */; };
 		30640C5229B5F10800981D3C /* AcceptFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5129B5F10800981D3C /* AcceptFriendRow.swift */; };
 		30640C5429B5FE2B00981D3C /* ThrowawaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */; };
+		30640C5629B612D100981D3C /* EnterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5529B612D100981D3C /* EnterName.swift */; };
+		30640C5829B612D800981D3C /* EnterPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5729B612D800981D3C /* EnterPhone.swift */; };
+		30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5929B612E000981D3C /* CheckPhone.swift */; };
+		30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -118,6 +122,10 @@
 		30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedFriendRow.swift; sourceTree = "<group>"; };
 		30640C5129B5F10800981D3C /* AcceptFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptFriendRow.swift; sourceTree = "<group>"; };
 		30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowawaySheet.swift; sourceTree = "<group>"; };
+		30640C5529B612D100981D3C /* EnterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterName.swift; sourceTree = "<group>"; };
+		30640C5729B612D800981D3C /* EnterPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhone.swift; sourceTree = "<group>"; };
+		30640C5929B612E000981D3C /* CheckPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhone.swift; sourceTree = "<group>"; };
+		30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth_PhoneVM.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -248,6 +256,16 @@
 			path = Friends;
 			sourceTree = "<group>";
 		};
+		30640C5B29B612E900981D3C /* Enter Name and Phone */ = {
+			isa = PBXGroup;
+			children = (
+				30640C5529B612D100981D3C /* EnterName.swift */,
+				30640C5729B612D800981D3C /* EnterPhone.swift */,
+				30640C5929B612E000981D3C /* CheckPhone.swift */,
+			);
+			path = "Enter Name and Phone";
+			sourceTree = "<group>";
+		};
 		30FB5DDE29A7E20900020C9A = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +356,7 @@
 				30FB5E6029AAB0D700020C9A /* BrandsVM.swift */,
 				30FB5E6229AAB10A00020C9A /* ProductsVM.swift */,
 				30640C4929B5CFE200981D3C /* ContactsVM.swift */,
+				30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -347,6 +366,7 @@
 			children = (
 				30FB5E3B29A85FC600020C9A /* TabRouter.swift */,
 				30640C3829B3299B00981D3C /* Sign up or login */,
+				30640C5B29B612E900981D3C /* Enter Name and Phone */,
 				30640C4129B3508F00981D3C /* Home */,
 				30640C4229B350A800981D3C /* Profiles */,
 				30640C4329B3510200981D3C /* Posts and Products */,
@@ -533,11 +553,14 @@
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C4A29B5CFE200981D3C /* ContactsVM.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
+				30640C5829B612D800981D3C /* EnterPhone.swift in Sources */,
 				30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */,
 				30FB5E5729AA73D400020C9A /* Products.swift in Sources */,
+				30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */,
 				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
+				30640C5629B612D100981D3C /* EnterName.swift in Sources */,
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
 				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
@@ -557,6 +580,7 @@
 				30640C4C29B5CFF700981D3C /* ContactsViewRow.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,
 				30640C0429B313CE00981D3C /* RequestEmailLinkVM.swift in Sources */,
+				30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */,
 				30640BFC29B2EEFE00981D3C /* Start.swift in Sources */,
 				30FB5E4429A8605E00020C9A /* Users.swift in Sources */,
 				30640C4829B5CFBB00981D3C /* ContactModel.swift in Sources */,
@@ -717,7 +741,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;
@@ -753,7 +777,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;
