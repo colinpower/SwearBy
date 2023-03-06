@@ -162,5 +162,88 @@ class UsersVM: ObservableObject, Identifiable {
     }
     
     
+    func sendFriendRequest(my_user_object: Users, my_friends_user_object: Users) {
+         
+        // Add me to their "friend requests" list
+        var friends_current_requests:[String] = my_friends_user_object.friend_requests
+        friends_current_requests.append(my_user_object.user_id)
+        
+        db.collection("users").document(my_friends_user_object.user_id)
+            .updateData([
+                "friend_requests": friends_current_requests
+            ]) { err in
+                if let err = err {
+                    print("Error updating document submitting names for User object: \(err)")
+                } else {
+                    print("Updated the first and last names")
+                }
+            }
+        
+        // Add them to my "friends added" list
+        var my_friends_added:[String] = my_user_object.friends_added
+        my_friends_added.append(my_friends_user_object.user_id)
+        
+        db.collection("users").document(my_user_object.user_id)
+            .updateData([
+                "friends_added": my_friends_added
+            ]) { err in
+                if let err = err {
+                    print("Error updating document submitting names for User object: \(err)")
+                } else {
+                    print("Updated the first and last names")
+                }
+            }
+    }
     
+    func acceptFriendRequest(my_user_object: Users, my_friends_user_object: Users) {
+        
+        // Add me to their list
+        var friends_friends_list = my_friends_user_object.friends_list
+        friends_friends_list.append(my_user_object.user_id)
+        
+        // Remove me from their "added friends" list
+        var friends_friends_added = my_friends_user_object.friends_added
+        if let index = friends_friends_added.firstIndex(where: {$0 == my_user_object.user_id}) {
+            friends_friends_added.remove(at: index)
+        }
+        
+        // Update their account
+        db.collection("users").document(my_friends_user_object.user_id)
+            .updateData([
+                "friends_added": friends_friends_added,
+                "friends_list": friends_friends_list
+            ]) { err in
+                if let err = err {
+                    print("Error updating document submitting names for User object: \(err)")
+                } else {
+                    print("Updated the first and last names")
+                }
+            }
+        
+        // Add them to my list
+        var my_friends_list = my_user_object.friends_list
+        my_friends_list.append(my_friends_user_object.user_id)
+        
+        // Remove them from my "friend requests" list
+        var my_friend_requests = my_user_object.friend_requests
+        if let index = my_friend_requests.firstIndex(where: {$0 == my_friends_user_object.user_id}) {
+            my_friend_requests.remove(at: index)
+        }
+        
+        // Update my account
+        db.collection("users").document(my_user_object.user_id)
+            .updateData([
+                "friend_requests": my_friend_requests,
+                "friends_list": my_friends_list
+            ]) { err in
+                if let err = err {
+                    print("Error updating document submitting names for User object: \(err)")
+                } else {
+                    print("Updated the first and last names")
+                }
+            }
+        
+        
+        
+    }
 }

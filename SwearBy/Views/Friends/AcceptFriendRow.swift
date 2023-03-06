@@ -10,6 +10,8 @@ import SwiftUI
 
 struct AcceptFriendRow: View {
     
+    @ObservedObject var users_vm: UsersVM
+    
     var friend_user_id: String
     
     @StateObject private var lookup_users_vm = UsersVM()
@@ -45,7 +47,7 @@ struct AcceptFriendRow: View {
             
             Button {
 
-                // Accept friend request
+                users_vm.acceptFriendRequest(my_user_object: users_vm.one_user, my_friends_user_object: lookup_users_vm.get_user_by_id)
 
             } label: {
 

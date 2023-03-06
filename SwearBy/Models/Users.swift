@@ -14,6 +14,9 @@ struct Users: Identifiable, Codable, Hashable {
     @DocumentID var id: String? = UUID().uuidString
     var email: String
     var email_verified: Bool
+    var friend_requests: [String]
+    var friends_added: [String]
+    var friends_list: [String]
     var name: Struct_Profile_Name
     var phone: String
     var phone_verified: Bool
@@ -22,6 +25,9 @@ struct Users: Identifiable, Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case email
         case email_verified
+        case friend_requests
+        case friends_added
+        case friends_list
         case name
         case phone
         case phone_verified

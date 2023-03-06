@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SuggestedFriendRow: View {
     
+    @ObservedObject var users_vm: UsersVM
+    
     var friend_phone_number: String
     
     @StateObject var lookup_number_users_vm = UsersVM()
@@ -43,26 +45,46 @@ struct SuggestedFriendRow: View {
             
             Spacer()
             
-            Button {
-
-                // Send a friend request
-
-            } label: {
-
+            if users_vm.one_user.friends_added.contains(found_friend.user_id) {
+                
                 ZStack(alignment: .center) {
+                    
                     Capsule()
+                        .strokeBorder(.green, lineWidth: 2)
                         .frame(width: 80, height: 32)
-                        .foregroundColor(Color("ShareGray"))
-                    HStack(spacing: 6) {
-                        Image(systemName: "person.fill.badge.plus")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color("text.black"))
-                        Text("Add")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
-                            .foregroundColor(Color("text.black"))
+                    Text("Sent")
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .foregroundColor(Color.green)
+                }
+
+            } else {
+                
+                Button {
+                    
+                    users_vm.sendFriendRequest(my_user_object: users_vm.one_user, my_friends_user_object: found_friend)
+
+                } label: {
+
+                    ZStack(alignment: .center) {
+
+                        Capsule()
+                            .frame(width: 80, height: 32)
+                            .foregroundColor(Color("ShareGray"))
+                        HStack(spacing: 6) {
+                            Image(systemName: "person.fill.badge.plus")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("text.black"))
+                            Text("Add")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("text.black"))
+                        }
                     }
                 }
+                
             }
+            
+            
+    
 
                                         
         }

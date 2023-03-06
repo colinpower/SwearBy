@@ -18,43 +18,49 @@ struct AddFriends: View {
     @State var isShowingContactsList:Bool = false
     @State var selectedContact:[String] = ["", "Your Friend's", "Name", ""]
     
+    @State private var path = NavigationPath()
     
     var body: some View {
         
-        VStack(spacing: 0) {
+        NavigationStack(path: $path) {
             
-            AddFriendsHeader(isShowingAddFriendsPage: $isShowingAddFriendsPage)
-            
-            ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
                 
-                myShareLink
-                    .padding(.vertical)
+                AddFriendsHeader(isShowingAddFriendsPage: $isShowingAddFriendsPage)
                 
-                if true {
-                    addedMe
-                        .padding(.bottom)
-                }
-                
-                if true {
-                    contactsOnSwearBy
-                        .padding(.bottom)
-                }
-                
-                if true {
-                    myFriends
-                        .padding(.bottom)
-                }
-                
-                Spacer()
-                
-            }.padding(.horizontal)
-        }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color("Background"))
-        .sheet(isPresented: $isShowingContactsList) {
-            isShowingContactsList = false
-        } content: {
-            ContactsView(isShowingContactsList: $isShowingContactsList, selectedContact: $selectedContact)
+                ScrollView(showsIndicators: false) {
+                    
+                    myShareLink
+                        .padding(.vertical)
+                    
+                    if true {
+                        addedMe
+                            .padding(.bottom)
+                    }
+                                        
+                    if true {
+                        contactsOnSwearBy
+                            .padding(.bottom)
+                    }
+                    
+                    if true {
+                        myFriends
+                            .padding(.bottom)
+                    }
+                    
+                    Spacer()
+                    
+                }.padding(.horizontal)
+            }
+            .edgesIgnoringSafeArea(.all)
+            .background(Color("Background"))
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $isShowingContactsList) {
+                isShowingContactsList = false
+            } content: {
+                ContactsView(isShowingContactsList: $isShowingContactsList, selectedContact: $selectedContact)
+            }
         }
     }
     
@@ -104,14 +110,12 @@ struct AddFriends: View {
                 Spacer()
             }
             
-            let addedFriends: [String] = ["nH75ECZyhWwOOUfJfG7p", "E22U3BQ2jycJ2WMnZIth7gVrIKL2"]
-            
-            //users_vm.get_user_by_id
-            
             Group {
-                ForEach(addedFriends, id: \.self) { friend_id in
+                ForEach(users_vm.one_user.friend_requests, id: \.self) { friend_id in
                     
-                    AcceptFriendRow(friend_user_id: friend_id)
+                    if friend_id != "" {
+                        AcceptFriendRow(users_vm: users_vm, friend_user_id: friend_id)
+                    }
                     
                 }
             }
@@ -133,7 +137,6 @@ struct AddFriends: View {
             }
             
             let arrayOfUsersPhoneNumbersOnSwearBy = users_vm.all_users.map { $0.phone }
-            //users_vm.get_user_by_id
             
             Group {
                 ForEach(contactsVM.contacts.filter {
@@ -145,29 +148,18 @@ struct AddFriends: View {
                     
                 }) { contact in
                     
-                    //                    Text(contact.phone ?? "alsdkfal")
                     if checkForExistingUserBasedOnPhoneNumber(existingUsers: arrayOfUsersPhoneNumbersOnSwearBy, contact: contact) {
                         
                         let contact_phone = contact.phone ?? ""
                         let numberWithNumbersOnly = contact_phone.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
                         
-                        SuggestedFriendRow(friend_phone_number: numberWithNumbersOnly)
+                        SuggestedFriendRow(users_vm: users_vm, friend_phone_number: numberWithNumbersOnly)
                         
                     }
                 }
             }.padding(.horizontal)
                 .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
-                
-            
-            
-            
-//            ForEach(addedFriends, id: \.self) { friend_id in
-//
-//                FriendRow(friend_user_id: friend_id)
-//                    .padding(.horizontal)
-//                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
-//
-//            }
+
         }
         .onAppear {
             
@@ -188,17 +180,25 @@ struct AddFriends: View {
                 Spacer()
             }
             
-            let addedFriends: [String] = ["nH75ECZyhWwOOUfJfG7p", "E22U3BQ2jycJ2WMnZIth7gVrIKL2"]
-            
-            //users_vm.get_user_by_id
-            
-            ForEach(addedFriends, id: \.self) { friend_id in
-                
-                FriendRow(friend_user_id: friend_id)
-                    .padding(.horizontal)
-                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
-                
+            Group {
+                ForEach(users_vm.one_user.friends_list, id: \.self) { friend_id in
+                    
+                    if friend_id != "" {
+                        
+                        NavigationLink {
+                            //FriendProfile(users_vm: users_vm, path: $path, friend_user: <#T##Users#>)
+                            ThrowawaySheet()
+                        } label: {
+                            FriendRow(friend_user_id: friend_id)
+                        }
+
+                        
+                    }
+                    
+                }
             }
+            .padding(.horizontal)
+            .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
         }
     }
     
@@ -208,7 +208,7 @@ struct AddFriends: View {
         
         if let number = contact.phone {
             
-            let numberWithNumbersOnly = number.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "")
+            let numberWithNumbersOnly = number.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
             
             if existingUsers.contains(numberWithNumbersOnly) {
                 return true

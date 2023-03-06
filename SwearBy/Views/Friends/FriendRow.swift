@@ -39,8 +39,11 @@ struct FriendRow: View {
             }
             
             Spacer()
+            
+            Image(systemName: "chevron.right")
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .foregroundColor(Color("text.gray"))
 
-                                        
         }
         .padding(.vertical, 12)
         .onAppear {
