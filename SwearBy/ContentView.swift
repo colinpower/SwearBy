@@ -55,7 +55,7 @@ struct ContentView: View {
             let link = url.absoluteString
             
             if Auth.auth().isSignIn(withEmailLink: link) {
-                viewModel.passwordlessSignIn(email1: email, link1: link) { result in
+                viewModel.passwordlessSignIn(email: email, link: link) { result in
                     
                     switch result {
                     

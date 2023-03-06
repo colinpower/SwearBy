@@ -82,20 +82,21 @@ class AppViewModel: ObservableObject {
         
     }
     
-    func passwordlessSignIn(email1: String, link1: String,
-                                      completion: @escaping (Result<User?, Error>) -> Void) {
-        Auth.auth().signIn(withEmail: email1, link: link1) { result1, error1 in
-            
-            if let error1 = error1 {
-                
-                completion(.failure(error1))
+    func passwordlessSignIn(email: String, link: String,
+                                      completion: @escaping (Result<User, Error>) -> Void) {
+        Auth.auth().signIn(withEmail: email, link: link) { result, error in
+
+            if let error = error {
+
+                completion(.failure(error))
             } else {
-                
-                completion(.success(result1?.user))
+
+                completion(.success(result!.user))
             }
-            
+
         }
       }
+    
     
     func signOut(users_vm: UsersVM) -> Bool {
         do {
