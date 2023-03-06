@@ -20,7 +20,7 @@ struct Profile: View {
     var body: some View {
         VStack {
             
-            PrimaryHeader(title: "My Profile", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            PrimaryHeader(users_vm: users_vm, title: "My Profile", isShowingAddFriendsPage: $isShowingAddFriendsPage)
             
             
             Spacer()
@@ -57,7 +57,8 @@ struct Profile: View {
             MyTabView(selectedTab: $selectedTab)
         }.edgesIgnoringSafeArea(.all)
             .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
-                AddFriends(isShowingAddFriendsPage: $isShowingAddFriendsPage)
+                AddFriends(users_vm: users_vm, isShowingAddFriendsPage: $isShowingAddFriendsPage)
+                
             }
         
     }

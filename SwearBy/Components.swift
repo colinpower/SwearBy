@@ -85,6 +85,8 @@ extension Color {
 //MARK: PRIMARY HEADER
 struct PrimaryHeader: View {
     
+    @ObservedObject var users_vm: UsersVM
+    
     var title: String
     @Binding var isShowingAddFriendsPage: Bool
     

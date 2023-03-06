@@ -23,7 +23,9 @@ class UsersVM: ObservableObject, Identifiable {
     
     @Published var one_user = EmptyVariables().empty_user
     @Published var get_user_by_id = EmptyVariables().empty_user
-
+    @Published var all_users = [Users]()
+    @Published var get_users_by_phone_number = [Users]()
+    
     var one_user_listener: ListenerRegistration!
     
     
@@ -70,23 +72,24 @@ class UsersVM: ObservableObject, Identifiable {
 //            }
 //    }
     
-//    func submitNames(user_id: String, first_name: String, last_name: String) {
-//
-//        if user_id.isEmpty { return } else {
-//
-//            db.collection("users").document(user_id)
-//                .updateData([
-//                    "profile.name.first": first_name,
-//                    "profile.name.last": last_name
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error updating document submitting names for User object: \(err)")
-//                    } else {
-//                        print("Updated the first and last names")
-//                    }
-//                }
-//        }
-//    }
+    func updateName(user_id: String, first_name: String, last_name: String) {
+
+        if user_id.isEmpty { return } else {
+
+            db.collection("users").document(user_id)
+                .updateData([
+                    "name.first": first_name,
+                    "name.first_last": first_name + " " + last_name,
+                    "name.last": last_name
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document submitting names for User object: \(err)")
+                    } else {
+                        print("Updated the first and last names")
+                    }
+                }
+        }
+    }
     
     func getUserByID(user_id: String) {
         
@@ -110,6 +113,54 @@ class UsersVM: ObservableObject, Identifiable {
         
         
     }
+    
+    func getAllUsers() {
+        
+        db.collection("users")
+            .getDocuments { (snapshot, error) in
+    
+                guard let snapshot = snapshot, error == nil else {
+                    //handle error
+                    print("found error")
+                    return
+                }
+                print("Number of documents: \(snapshot.documents.count)")
+    
+                self.all_users = snapshot.documents.compactMap({ queryDocumentSnapshot -> Users? in
+    
+                    print(try? queryDocumentSnapshot.data(as: Users.self) as Any)
+                    return try? queryDocumentSnapshot.data(as: Users.self)
+                })
+            }
+    }
+    
+    
+    
+    
+    
+    func getUserByPhoneNumber(number: String) {
+        
+        db.collection("users")
+            .whereField("phone", isEqualTo: number)
+            .getDocuments { (snapshot, error) in
+    
+                guard let snapshot = snapshot, error == nil else {
+                    //handle error
+                    print("found error")
+                    return
+                }
+                print("Number of documents: \(snapshot.documents.count)")
+    
+                self.get_users_by_phone_number = snapshot.documents.compactMap({ queryDocumentSnapshot -> Users? in
+                    print("AT THE TRY STATEMENT for getMyReferrals")
+                    print(try? queryDocumentSnapshot.data(as: Users.self) as Any)
+                    return try? queryDocumentSnapshot.data(as: Users.self)
+                })
+            }
+        
+        
+    }
+    
     
     
 }

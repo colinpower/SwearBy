@@ -46,6 +46,9 @@
 		30640C4829B5CFBB00981D3C /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4729B5CFBB00981D3C /* ContactModel.swift */; };
 		30640C4A29B5CFE200981D3C /* ContactsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4929B5CFE200981D3C /* ContactsVM.swift */; };
 		30640C4C29B5CFF700981D3C /* ContactsViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4B29B5CFF700981D3C /* ContactsViewRow.swift */; };
+		30640C4E29B5D83600981D3C /* FriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4D29B5D83600981D3C /* FriendRow.swift */; };
+		30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */; };
+		30640C5229B5F10800981D3C /* AcceptFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5129B5F10800981D3C /* AcceptFriendRow.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -110,6 +113,9 @@
 		30640C4729B5CFBB00981D3C /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		30640C4929B5CFE200981D3C /* ContactsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsVM.swift; sourceTree = "<group>"; };
 		30640C4B29B5CFF700981D3C /* ContactsViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewRow.swift; sourceTree = "<group>"; };
+		30640C4D29B5D83600981D3C /* FriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRow.swift; sourceTree = "<group>"; };
+		30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedFriendRow.swift; sourceTree = "<group>"; };
+		30640C5129B5F10800981D3C /* AcceptFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptFriendRow.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -233,6 +239,9 @@
 				30640C3B29B339DE00981D3C /* AddFriends.swift */,
 				30640C4529B5CF8E00981D3C /* ContactsView.swift */,
 				30640C4B29B5CFF700981D3C /* ContactsViewRow.swift */,
+				30640C4D29B5D83600981D3C /* FriendRow.swift */,
+				30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */,
+				30640C5129B5F10800981D3C /* AcceptFriendRow.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -513,6 +522,7 @@
 				30640BFE29B2EF9F00981D3C /* EnterEmail.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
+				30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
 				30640BF829B2D36100981D3C /* FriendProfile.swift in Sources */,
@@ -531,10 +541,12 @@
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
 				30FB5E3E29A85FFF00020C9A /* Home.swift in Sources */,
+				30640C4E29B5D83600981D3C /* FriendRow.swift in Sources */,
 				30640C3A29B32BBD00981D3C /* Components.swift in Sources */,
 				30FB5E3C29A85FC600020C9A /* TabRouter.swift in Sources */,
 				30FB5E5329AA72D800020C9A /* Posts.swift in Sources */,
 				30FB5E4229A8603700020C9A /* UsersVM.swift in Sources */,
+				30640C5229B5F10800981D3C /* AcceptFriendRow.swift in Sources */,
 				30FB5E5D29AAAAB700020C9A /* ItemHalfSheet.swift in Sources */,
 				30FB5E4F29A9568A00020C9A /* AppViewModel.swift in Sources */,
 				30640BFA29B2E41800981D3C /* TestSheet.swift in Sources */,

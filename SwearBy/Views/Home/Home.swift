@@ -26,7 +26,7 @@ struct Home: View {
                 
                 VStack(spacing: 0) {
                     
-                    PrimaryHeader(title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+                    PrimaryHeader(users_vm: users_vm, title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
                     
                     ScrollView(showsIndicators: false) {
                     
@@ -65,7 +65,7 @@ struct Home: View {
             
         }
         .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
-            AddFriends(isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            AddFriends(users_vm: users_vm, isShowingAddFriendsPage: $isShowingAddFriendsPage)
         }
     }
 }
