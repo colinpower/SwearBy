@@ -41,6 +41,23 @@ class BrandsVM: ObservableObject, Identifiable {
         
         
     }
+        
+    func addBrand(brand_id: String, name: String, website: String) {
+         
+        db.collection("brands").document(brand_id).setData([
+            "brand_id": brand_id,
+            "name": name,
+            "website": website
+        ]) { err in
+            if let err = err {
+                print("Error creating CODE: \(err)")
+            } else {
+                print("Other kind of error.. idk??")
+            }
+        }
+    }
+    
+    
     
     
 }

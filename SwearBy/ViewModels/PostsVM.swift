@@ -64,4 +64,27 @@ class PostsVM: ObservableObject, Identifiable {
                 })
             }
     }
+    
+    func addPost(description: String, is_public: Bool, is_verified: Bool, post_id: String, product_id: String, purchase_id: String, timestamp: Int, user_id: String) {
+         
+        db.collection("posts").document(post_id).setData([
+            "description": description,
+            "is_public": is_public,
+            "is_verified": is_verified,
+            "post_id": post_id,
+            "product_id": product_id,
+            "purchase_id": purchase_id,
+            "timestamp": getTimestamp(),
+            "user_id": user_id
+        ]) { err in
+            if let err = err {
+                print("Error adding post: \(err)")
+            } else {
+                print("Other kind of error.. idk??")
+            }
+        }
+    }
+    
+    
+    
 }

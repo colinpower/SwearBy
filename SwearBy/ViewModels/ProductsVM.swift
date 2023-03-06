@@ -39,4 +39,21 @@ class ProductsVM: ObservableObject, Identifiable {
             }
         }
     }
+    
+    func addProduct(brand_id: String, link: String, name: String, product_id: String) {
+         
+        db.collection("products").document(product_id).setData([
+            "brand_id": brand_id,
+            "link": link,
+            "name": name,
+            "product_id": product_id
+        ]) { err in
+            if let err = err {
+                print("Error creating CODE: \(err)")
+            } else {
+                print("Other kind of error.. idk??")
+            }
+        }
+    }
+    
 }

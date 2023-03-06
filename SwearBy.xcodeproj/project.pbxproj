@@ -54,6 +54,10 @@
 		30640C5829B612D800981D3C /* EnterPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5729B612D800981D3C /* EnterPhone.swift */; };
 		30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5929B612E000981D3C /* CheckPhone.swift */; };
 		30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */; };
+		30640C5F29B623A600981D3C /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5E29B623A600981D3C /* AddPost.swift */; };
+		30640C6229B624D000981D3C /* AddPostSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6129B624D000981D3C /* AddPostSheet.swift */; };
+		30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6329B62A1800981D3C /* CustomImagePicker.swift */; };
+		30640C6629B62A7C00981D3C /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6529B62A7C00981D3C /* Crop.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -126,6 +130,10 @@
 		30640C5729B612D800981D3C /* EnterPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhone.swift; sourceTree = "<group>"; };
 		30640C5929B612E000981D3C /* CheckPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhone.swift; sourceTree = "<group>"; };
 		30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth_PhoneVM.swift; sourceTree = "<group>"; };
+		30640C5E29B623A600981D3C /* AddPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPost.swift; sourceTree = "<group>"; };
+		30640C6129B624D000981D3C /* AddPostSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostSheet.swift; sourceTree = "<group>"; };
+		30640C6329B62A1800981D3C /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
+		30640C6529B62A7C00981D3C /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -266,6 +274,16 @@
 			path = "Enter Name and Phone";
 			sourceTree = "<group>";
 		};
+		30640C6029B623AB00981D3C /* Add Post */ = {
+			isa = PBXGroup;
+			children = (
+				30640C5E29B623A600981D3C /* AddPost.swift */,
+				30640C6129B624D000981D3C /* AddPostSheet.swift */,
+				30640C6329B62A1800981D3C /* CustomImagePicker.swift */,
+			);
+			path = "Add Post";
+			sourceTree = "<group>";
+		};
 		30FB5DDE29A7E20900020C9A = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				30FB5E4329A8605E00020C9A /* Users.swift */,
+				30640C6529B62A7C00981D3C /* Crop.swift */,
 				30640C4729B5CFBB00981D3C /* ContactModel.swift */,
 				30FB5E5229AA72D800020C9A /* Posts.swift */,
 				30FB5E5429AA736500020C9A /* Purchases.swift */,
@@ -371,6 +390,7 @@
 				30640C4229B350A800981D3C /* Profiles */,
 				30640C4329B3510200981D3C /* Posts and Products */,
 				30FB5E4C29A87FBD00020C9A /* PostStruct.swift */,
+				30640C6029B623AB00981D3C /* Add Post */,
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
 				30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */,
@@ -541,11 +561,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30640C6229B624D000981D3C /* AddPostSheet.swift in Sources */,
 				30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */,
 				30640BFE29B2EF9F00981D3C /* EnterEmail.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */,
+				30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
 				30640BF829B2D36100981D3C /* FriendProfile.swift in Sources */,
@@ -564,6 +586,7 @@
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
 				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
+				30640C6629B62A7C00981D3C /* Crop.swift in Sources */,
 				30640C5429B5FE2B00981D3C /* ThrowawaySheet.swift in Sources */,
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
@@ -580,6 +603,7 @@
 				30640C4C29B5CFF700981D3C /* ContactsViewRow.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,
 				30640C0429B313CE00981D3C /* RequestEmailLinkVM.swift in Sources */,
+				30640C5F29B623A600981D3C /* AddPost.swift in Sources */,
 				30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */,
 				30640BFC29B2EEFE00981D3C /* Start.swift in Sources */,
 				30FB5E4429A8605E00020C9A /* Users.swift in Sources */,

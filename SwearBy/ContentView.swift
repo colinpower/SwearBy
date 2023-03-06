@@ -32,7 +32,7 @@ struct ContentView: View {
                     case 0:
                         Home(users_vm: users_vm, selectedTab: $selectedTab)
                     case 1:
-                        TestSheet(selectedTab: $selectedTab)
+                        AddPost(users_vm: users_vm, selectedTab: $selectedTab)
                     case 2:
                         Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
                     default:
