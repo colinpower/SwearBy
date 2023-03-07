@@ -58,6 +58,7 @@
 		30640C6229B624D000981D3C /* AddPostSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6129B624D000981D3C /* AddPostSheet.swift */; };
 		30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6329B62A1800981D3C /* CustomImagePicker.swift */; };
 		30640C6629B62A7C00981D3C /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6529B62A7C00981D3C /* Crop.swift */; };
+		30640C6929B7551800981D3C /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6829B7551800981D3C /* Money.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -134,6 +135,7 @@
 		30640C6129B624D000981D3C /* AddPostSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostSheet.swift; sourceTree = "<group>"; };
 		30640C6329B62A1800981D3C /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 		30640C6529B62A7C00981D3C /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
+		30640C6829B7551800981D3C /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,14 @@
 			path = "Add Post";
 			sourceTree = "<group>";
 		};
+		30640C6729B753F700981D3C /* My Codes */ = {
+			isa = PBXGroup;
+			children = (
+				30640C6829B7551800981D3C /* Money.swift */,
+			);
+			path = "My Codes";
+			sourceTree = "<group>";
+		};
 		30FB5DDE29A7E20900020C9A = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +404,7 @@
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
 				30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */,
+				30640C6729B753F700981D3C /* My Codes */,
 				30640C4429B5CF8000981D3C /* Friends */,
 			);
 			path = Views;
@@ -591,6 +602,7 @@
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
 				30FB5E3E29A85FFF00020C9A /* Home.swift in Sources */,
+				30640C6929B7551800981D3C /* Money.swift in Sources */,
 				30640C4E29B5D83600981D3C /* FriendRow.swift in Sources */,
 				30640C3A29B32BBD00981D3C /* Components.swift in Sources */,
 				30FB5E3C29A85FC600020C9A /* TabRouter.swift in Sources */,
@@ -765,12 +777,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwearBy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SwearBy;
 				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to your contacts so SwearBy can find your friends for you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -778,6 +791,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -801,12 +815,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwearBy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SwearBy;
 				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to your contacts so SwearBy can find your friends for you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -814,6 +829,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

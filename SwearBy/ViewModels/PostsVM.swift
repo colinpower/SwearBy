@@ -22,11 +22,17 @@ class PostsVM: ObservableObject, Identifiable {
     private var db = Firestore.firestore()
     
     @Published var all_posts = [Posts]()
+    
     @Published var one_user_posts = [Posts]()
+    
+    @Published var posts_in_user_feed = [Posts]()
+    
+    var posts_in_user_feed_listener: ListenerRegistration!
     
     func getAllPosts() {
         
         db.collection("posts")
+            .order(by: "timestamp", descending: true)
             .getDocuments { (snapshot, error) in
     
                 guard let snapshot = snapshot, error == nil else {
@@ -44,6 +50,20 @@ class PostsVM: ObservableObject, Identifiable {
             }
     }
     
+    func listenForPostsInUserFeed(users_vm: UsersVM) {
+    
+        self.dm.getPostsInUserFeedListener(users_vm: users_vm, onSuccess: { (posts) in
+
+            self.posts_in_user_feed = posts
+
+            print("FOUND POSTS")
+            print(self.posts_in_user_feed)
+
+        }, listener: { (listener) in
+            self.posts_in_user_feed_listener = listener
+        })
+    }
+
     func getOneUserPosts(user_id: String) {
         
         db.collection("posts")

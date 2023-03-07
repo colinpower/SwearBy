@@ -23,6 +23,7 @@ struct MyTabView: View {
                 TabViewItem(position: 0, selectedTab: $selectedTab)
                 TabViewItem(position: 1, selectedTab: $selectedTab)
                 TabViewItem(position: 2, selectedTab: $selectedTab)
+                TabViewItem(position: 3, selectedTab: $selectedTab)
                 Spacer()
             }.padding(.horizontal)
             Spacer()
@@ -46,6 +47,8 @@ struct TabViewItem: View {
         case 1:
             return ["plus.square.fill", "Add Post"]
         case 2:
+            return ["dollarsign.square.fill", "Vault"]
+        case 3:
             return ["person.fill", "Profile"]
         default:
             return ["house.fill", "Home"]

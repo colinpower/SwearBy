@@ -31,7 +31,7 @@ struct Home: View {
                     ScrollView(showsIndicators: false) {
                     
                         VStack(alignment: .center) {
-                            ForEach(posts_vm.all_posts) { post in
+                            ForEach(posts_vm.posts_in_user_feed) { post in
                                 
                                 Button {
                                     
@@ -61,7 +61,7 @@ struct Home: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             
-            self.posts_vm.getAllPosts()
+            self.posts_vm.listenForPostsInUserFeed(users_vm: users_vm)
             
         }
         .fullScreenCover(isPresented: $isShowingAddFriendsPage) {

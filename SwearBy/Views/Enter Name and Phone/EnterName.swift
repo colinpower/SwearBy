@@ -124,7 +124,7 @@ struct EnterName: View {
             }
             .onAppear {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     firstFocused = true
                     lastFocused = false
                 }

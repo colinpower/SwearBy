@@ -34,6 +34,8 @@ struct ContentView: View {
                     case 1:
                         AddPost(users_vm: users_vm, selectedTab: $selectedTab)
                     case 2:
+                        Money()
+                    case 3:
                         Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
                     default:
                         Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)

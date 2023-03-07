@@ -32,6 +32,8 @@ struct TextFieldPhoneNumberModifer: ViewModifier {
                     if String($0[$0.index($0.startIndex, offsetBy: 9)]) != "-" {
                         value = String($0.prefix(9)) + "-" + String($0[$0.index($0.startIndex, offsetBy: 9)])
                     }
+                } else if value.count > 14 {
+                    value = String($0.prefix(14))
                 }
             }
     }
@@ -101,7 +103,7 @@ struct EnterPhone: View {
                     //send verification code
                     auth_phone_uuid = UUID().uuidString
                     
-                    phone = "+1" + formattedPhoneNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "")
+                    phone = formattedPhoneNumber.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "")
                     
                     Auth_PhoneVM().requestOTP(user: users_vm.one_user, phone: phone, auth_phone_uuid: auth_phone_uuid)
                     
@@ -113,19 +115,16 @@ struct EnterPhone: View {
                         Spacer()
                         Text("Send Code")
                             .font(.system(size: 20, weight: .semibold, design: .rounded))
-                            .foregroundColor(formattedPhoneNumber.isEmpty ? Color("text.gray") : Color.white)
+                            .foregroundColor((formattedPhoneNumber.count != 14) ? Color("text.gray") : Color.white)
                             .padding(.vertical)
                         Spacer()
                     }
-                    .background(Capsule().foregroundColor(formattedPhoneNumber == "" ? Color("TextFieldGray") : Color("UncommonRed")))
+                    .background(Capsule().foregroundColor((formattedPhoneNumber.count != 14) ? Color("TextFieldGray") : Color("UncommonRed")))
                     .padding(.horizontal)
                     .padding(.top).padding(.top).padding(.top)
                     
-                }.disabled(formattedPhoneNumber.isEmpty)
-                
-                
-                //    CheckPhone(phoneNumber: $phoneNumber, newUUID: $newUUID)
-                
+                }.disabled(formattedPhoneNumber.count != 14)
+                //617-655-7618
                 Spacer()
             }
             .padding(.horizontal)
@@ -135,7 +134,7 @@ struct EnterPhone: View {
             CheckPhone(users_vm: users_vm, setuppath: $setuppath, phone: $phone, auth_phone_uuid: $auth_phone_uuid)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isFocused = true
             }
         }

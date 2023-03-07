@@ -73,4 +73,32 @@ class DataManager: ObservableObject {
     }
     
     
+    func getPostsInUserFeedListener(users_vm: UsersVM, onSuccess: @escaping([Posts]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+        
+        let listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
+        
+        let listenerRegistration = db.collection("posts")
+            .whereField("user_id", in: listOf10Friends)
+            .order(by: "timestamp", descending: true)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                var postsArray = [Posts]()
+                
+                postsArray = documents.compactMap { (queryDocumentSnapshot) -> Posts? in
+                    
+                    
+                    print(try? queryDocumentSnapshot.data(as: Posts.self))
+                    return try? queryDocumentSnapshot.data(as: Posts.self)
+                }
+                onSuccess(postsArray)
+            }
+        listener(listenerRegistration)
+    }
+    
+    
+    
+    
 }
