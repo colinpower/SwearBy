@@ -80,7 +80,7 @@ struct MyReferrals: View {
             case .add_friends:
                 AddFriends(users_vm: users_vm)
             case .add_code:
-                AddNewCode()
+                AddNewCode(users_vm: users_vm)
             case .add_preloaded_code:
                 AddPreloadedCode(preloaded_referral_program: selected_preloaded_code)
             case .add_post:

@@ -11,11 +11,30 @@ struct SelectBrand: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @Binding var selected_brand:Brands
+    
     var body: some View {
         
         VStack {
             Spacer()
             Text("Select Brand page")
+            Spacer()
+            
+            VStack {
+                Text("THE SELECTED BRAND IS...")
+                Text(selected_brand.name)
+            }
+            
+            Spacer()
+            
+            Button {
+                selected_brand = Brands(name: "lsdakfj", website: "asldkfas", brand_id: "asldkfaj")
+            } label: {
+                
+                Text("select this brand")
+                
+            }
+            
             Spacer()
             
             Button {
@@ -28,11 +47,5 @@ struct SelectBrand: View {
         }
         
         
-    }
-}
-
-struct SelectBrand_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectBrand()
     }
 }
