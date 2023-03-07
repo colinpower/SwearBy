@@ -82,6 +82,8 @@ struct AddNewCode: View {
     
     @State var testing_text:String = "ABCDEF"
     
+    @State var isShowingPicker:Bool = false
+    
     
     
     
@@ -129,41 +131,88 @@ struct AddNewCode: View {
                     
                     
                     
-                    Section(footer: offers_commission ? Text("You'll receive \(commission_value) per referral") : Text("")) {
-                        Toggle("Pays Commission", isOn: $offers_commission)
+//                    Section(footer: offers_commission ? Text("You'll receive \(commission_value) per referral") : Text("")) {
+//                        Toggle("Pays Commission", isOn: $offers_commission)
+//                            .toggleStyle(SwitchToggleStyle())
+//                        if offers_commission {
+//                            Picker("Commission Type", selection: $commission_type) {
+//                                Text("Cash").tag(RewardType.cash)
+//                                Text("Gift card").tag(RewardType.giftcard)
+//                                Text("Discount").tag(RewardType.discount)
+//                                Text("Points").tag(RewardType.points)
+//                            }
+//                            if commission_type == .discount {
+//                                Picker("Discount Type", selection: $commission_discount_type) {
+//                                    Text("In Dollars").tag(DiscountType.cash)
+//                                    Text("As a Percentage").tag(DiscountType.percentage)
+//                                }
+//                            }
+//                            HStack {
+//                                Text("Commission Value")
+//                                Spacer()
+//                                TextField("Amount", text: $commission_value)
+//                                    .formatValue(value: $commission_value)
+//                                    .foregroundColor(Color("text.black"))
+//                                    .multilineTextAlignment(.trailing)
+//                                    .keyboardType(.numbersAndPunctuation)
+//                                    .submitLabel(.done)
+//                                    .onSubmit {
+//                                        commission_value_focused = false
+//                                    }
+//                            }
+//                        }
+//                    }
+//
+                    
+                    // DISPLAY THE PICKER ONLY IF THE USER WANTS TO
+                    
+                    Section(header: Text("For you"), footer: offers_commission ? Text("Your commission is always private. This is to help you track your \(commission_value) per referral") : Text("")) {
+                        Toggle("Has Commission", isOn: $offers_commission)
                             .toggleStyle(SwitchToggleStyle())
                         if offers_commission {
-                            Picker("Commission Type", selection: $commission_type) {
-                                Text("Cash").tag(RewardType.cash)
-                                Text("Gift card").tag(RewardType.giftcard)
-                                Text("Discount").tag(RewardType.discount)
-                                Text("Points").tag(RewardType.points)
-                            }
-                            if commission_type == .discount {
-                                Picker("Discount Type", selection: $commission_discount_type) {
-                                    Text("In Dollars").tag(DiscountType.cash)
-                                    Text("As a Percentage").tag(DiscountType.percentage)
+                            
+                            HStack {
+                                Text("Type of commission")
+                                Spacer()
+                                
+                                Button {
+                                    withAnimation {
+                                        isShowingPicker.toggle()
+                                    }
+                                } label: {
+                                    
+                                    Text(commission_type.rawValue)
+                                    //.font(.system(design: .rounded))
+                                        .foregroundColor(isShowingPicker ? Color.red : Color.black)
+                                        .padding(.all, 4)
+                                        .background(RoundedRectangle(cornerRadius: 4).foregroundColor(isShowingPicker ? .gray : .white))
+                                        
                                 }
                             }
-                            HStack {
-                                Text("Commission Value")
-                                Spacer()
-                                TextField("Amount", text: $commission_value)
-                                    .formatValue(value: $commission_value)
-                                    .foregroundColor(Color("text.black"))
-                                    .multilineTextAlignment(.trailing)
-                                    .keyboardType(.numbersAndPunctuation)
-                                    .submitLabel(.done)
-                                    .onSubmit {
-                                        commission_value_focused = false
-                                    }
+                            
+                            //isShowingPicker
+                            
+                            if isShowingPicker {
+                                Picker("Commission Type", selection: $commission_type) {
+                                    Text("Cash").tag(RewardType.cash)
+                                    Text("Gift card").tag(RewardType.giftcard)
+                                    Text("Discount").tag(RewardType.discount)
+                                    Text("Points").tag(RewardType.points)
+                                }.pickerStyle(.wheel)
+                                    //.animation(.easeInOut, value: isShowingPicker)
                             }
                         }
                     }
                     
                     
-                    Section(footer: offers_discount ? Text("They'll receive \(offer_value) on their purchase") : Text("")) {
-                        Toggle("Has Offer for Customer", isOn: $offers_discount)
+                    
+                    
+                    
+                    
+                    
+                    
+                    Section(header: Text("For your friend"), footer: offers_discount ? Text("They'll receive \(offer_value) on their purchase") : Text("")) {
+                        Toggle("Has Customer Offer", isOn: $offers_discount)
                             .toggleStyle(SwitchToggleStyle())
                         if offers_discount {
                             Picker("Offer Type", selection: $offer_type) {
