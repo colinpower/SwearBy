@@ -14,18 +14,20 @@ import FirebaseStorage
 struct MyTabView: View {
     
     @Binding var selectedTab:Int
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
     
     var body: some View {
         VStack(spacing: 0) {
-            Divider().frame(height: 0.5).padding(.bottom, 10)
+//            Divider().frame(height: 0.5).padding(.bottom, 10)
             HStack(alignment: .bottom) {
                 Spacer()
-                TabViewItem(position: 0, selectedTab: $selectedTab)
-                TabViewItem(position: 1, selectedTab: $selectedTab)
-                TabViewItem(position: 2, selectedTab: $selectedTab)
-                TabViewItem(position: 3, selectedTab: $selectedTab)
+                TabViewItem(position: 0, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+                TabViewItem(position: 1, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+                TabViewItem(position: 2, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+                TabViewItem(position: 3, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
                 Spacer()
             }.padding(.horizontal)
+                .padding(.top, 10)
             Spacer()
         }.edgesIgnoringSafeArea(.bottom)
         .frame(height: 80)
@@ -39,17 +41,18 @@ struct TabViewItem: View {
     
     var position: Int
     @Binding var selectedTab:Int
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
     
     var tabViewItemImageName: [String] {
         switch position {
         case 0:
-            return ["house.fill", "Home"]
+            return ["house", "Home"]
         case 1:
             return ["plus.square.fill", "Add Post"]
         case 2:
-            return ["dollarsign.square.fill", "Vault"]
+            return ["dollarsign.square", "Vault"]
         case 3:
-            return ["person.fill", "Profile"]
+            return ["person", "Profile"]
         default:
             return ["house.fill", "Home"]
         }
@@ -58,7 +61,11 @@ struct TabViewItem: View {
     var body: some View {
 
             Button {
-                selectedTab = position
+                if (position == 1) {
+                    fullScreenModalPresented = .add_post
+                } else {
+                    selectedTab = position
+                }
             } label: {
                 VStack (alignment: .center) {
                     
@@ -89,9 +96,9 @@ extension Color {
 struct PrimaryHeader: View {
     
     @ObservedObject var users_vm: UsersVM
-    
     var title: String
-    @Binding var isShowingAddFriendsPage: Bool
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
+    
     
     var body: some View {
 
@@ -106,7 +113,7 @@ struct PrimaryHeader: View {
             
             Button {
 
-                isShowingAddFriendsPage = true
+                fullScreenModalPresented = .add_friends
 
             } label: {
 
@@ -126,6 +133,21 @@ struct PrimaryHeader: View {
         .padding(.top, 60)
         .padding(.horizontal)
         .padding(.horizontal, 4)
+    }
+}
+
+
+enum FullScreenModalPresented: String, Identifiable {
+    case add_friends, add_code, add_preloaded_code, add_post
+    var id: String {
+        return self.rawValue
+    }
+}
+
+enum AddNewCodeSheetPresented: String, Identifiable {
+    case add_brand, add_product
+    var id: String {
+        return self.rawValue
     }
 }
 

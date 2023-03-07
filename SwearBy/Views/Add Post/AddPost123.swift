@@ -10,11 +10,13 @@ import SwiftUI
 import PhotosUI
 import FirebaseStorage
 
-struct AddPostSheet: View {
+struct AddPost123: View {
+    
+    @Environment(\.dismiss) var dismiss
     
     @ObservedObject var users_vm: UsersVM
-    @Binding var selectedTab: Int
-    @Binding var isShowingAddPostSheet: Bool
+//    @Binding var selectedTab: Int
+//    @Binding var isShowingAddPostSheet: Bool
     
     /// - View Properties
     @State private var showPicker: Bool = false
@@ -39,8 +41,8 @@ struct AddPostSheet: View {
                 
                 VStack(spacing: 0) {
                     
-                    AddPostSheetHeader(users_vm: users_vm, isShowingAddPostSheet: $isShowingAddPostSheet, selectedTab: $selectedTab, croppedImage: $croppedImage, description: $description, product_link: $product_link, isPublic: $isPublic)
-                
+                    //AddPostSheetHeader(users_vm: users_vm, croppedImage: $croppedImage, description: $description, product_link: $product_link, isPublic: $isPublic)
+                    addPostSheetHeader
                     
                     ScrollView(showsIndicators: false) {
                         
@@ -279,36 +281,15 @@ struct AddPostSheet: View {
             }
         }
     }
-}
-
-
-
-//MARK: PRIMARY HEADER
-struct AddPostSheetHeader: View {
     
-    @ObservedObject var users_vm: UsersVM
-    
-    @Binding var isShowingAddPostSheet: Bool
-    @Binding var selectedTab: Int
-    
-    @Binding var croppedImage: UIImage?
-    @Binding var description: String
-    @Binding var product_link: String
-    @Binding var isPublic: Bool
-    
-    var body: some View {
+    var addPostSheetHeader: some View {
 
         HStack (alignment: .center) {
             
             
             Button {
 
-                isShowingAddPostSheet = false
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    selectedTab = 0
-                }
-                
+                dismiss()
 
             } label: {
 
@@ -356,9 +337,7 @@ struct AddPostSheetHeader: View {
                         uploadPhoto(post_id: post_id)
                         
                         
-                        isShowingAddPostSheet = false
-                        
-                        selectedTab = 0
+                        dismiss()
                         
 
                     } label: {
@@ -448,5 +427,174 @@ struct AddPostSheetHeader: View {
         
         
     }
-    
 }
+
+
+//
+////MARK: PRIMARY HEADER
+//struct AddPostSheetHeader: View {
+//
+//    @ObservedObject var users_vm: UsersVM
+//
+//    @Binding var isShowingAddPostSheet: Bool
+//    @Binding var selectedTab: Int
+//
+//    @Binding var croppedImage: UIImage?
+//    @Binding var description: String
+//    @Binding var product_link: String
+//    @Binding var isPublic: Bool
+//
+//    var body: some View {
+//
+//        HStack (alignment: .center) {
+//
+//
+//            Button {
+//
+//                isShowingAddPostSheet = false
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                    selectedTab = 0
+//                }
+//
+//
+//            } label: {
+//
+//                ZStack(alignment: .center) {
+//                    Circle()
+//                        .frame(width: 40, height: 40)
+//                        .foregroundColor(Color("Background"))
+//                    Image(systemName: "chevron.down")
+//                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+//                        .foregroundColor(Color("text.black"))
+//                }.padding(.trailing, 40)
+//            }
+//
+//
+//            Spacer()
+//            Text("Add Post")
+//                .font(.system(size: 22, weight: .semibold, design: .rounded))
+//                .foregroundColor(Color("text.black"))
+//            Spacer()
+//
+//            if let croppedImage {
+//                if ((description != "") && (product_link != "")) {
+//
+//                    Button {
+//
+//                        // Create ids
+//                        let brand_id = UUID().uuidString
+//                        let product_id = UUID().uuidString
+//                        let purchase_id = UUID().uuidString
+//                        let post_id = UUID().uuidString
+//
+//                        // Add brand
+//                        BrandsVM().addBrand(brand_id: brand_id, name: "", website: product_link)
+//
+//                        // Add product
+//                        ProductsVM().addProduct(brand_id: brand_id, link: product_link, name: "", product_id: product_id)
+//
+//                        // Add purchase
+//                        PurchasesVM().addPurchase(brand_id: brand_id, product_id: product_id, purchase_id: purchase_id, user_id: users_vm.one_user.user_id, verification_status: "UNVERIFIED")
+//
+//                        // Add post
+//                        PostsVM().addPost(description: description, is_public: isPublic, is_verified: false, post_id: post_id, product_id: product_id, purchase_id: purchase_id, timestamp: getTimestamp(), user_id: users_vm.one_user.user_id)
+//
+//                        // Add image
+//                        uploadPhoto(post_id: post_id)
+//
+//
+//                        isShowingAddPostSheet = false
+//
+//                        selectedTab = 0
+//
+//
+//                    } label: {
+//
+//                        ZStack(alignment: .center) {
+//
+//                            Capsule()
+//                                .foregroundColor(Color.blue)
+//                                .frame(width: 80, height: 32)
+//                            Text("Share")
+//                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+//                                .foregroundColor(Color.white)
+//                        }
+//                    }
+//
+//                } else {
+//                    ZStack(alignment: .center) {
+//
+//                        Capsule()
+//                            .foregroundColor(Color("TextFieldGray"))
+//                            .frame(width: 80, height: 32)
+//                        Text("Share")
+//                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+//                            .foregroundColor(Color.gray)
+//                    }
+//                }
+//            } else {
+//
+//                ZStack(alignment: .center) {
+//
+//                    Capsule()
+//                        .foregroundColor(Color("TextFieldGray"))
+//                        .frame(width: 80, height: 32)
+//                    Text("Share")
+//                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+//                        .foregroundColor(Color.gray)
+//                }
+//            }
+//        }
+//        .padding(.bottom, 4)
+//        .frame(height: 44)
+//        .padding(.top, 60)
+//        .padding(.horizontal)
+//        .padding(.horizontal, 4)
+//    }
+//
+//
+//    func uploadPhoto(post_id: String) {
+//
+//        // Make sure that the selected image property isn't nil
+//        guard croppedImage != nil else {
+//            return
+//        }
+//
+//        // Create storage reference
+//        let storageRef = Storage.storage().reference()
+//
+//        // Turn our image into data
+//        let imageData = croppedImage!.pngData()
+//
+//        //let imageData = croppedImage!.jpegData(compressionQuality: 0.8)
+//
+//        guard imageData != nil else {
+//            print("returned nil.. trying to do it as a png instead")
+//
+//            return
+//        }
+//
+//        //Specify the file path and name
+//        let fileRef = storageRef.child("post/\(post_id).png")             //let fileRef = storageRef.child("images/\(UUID().uuidstring).jpg")
+//
+//        // Upload that data
+//        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+//
+//            //Check for errors
+//            if error == nil && metadata != nil {
+//
+//
+//                print("successfully uploaded")
+//                // TODO: Save a reference to the file in Firestore DB
+//
+//                //PostViewModel().addPost(post_id: post_id, caption: caption, user_id: user_id)
+//
+//            }
+//        }
+//
+//
+//
+//    }
+//
+//}

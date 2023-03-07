@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var email: String = ""
     
     @State var selectedTab:Int = 0
+    @State var fullScreenModalPresented: FullScreenModalPresented? = nil
     
     var body: some View {
         
@@ -30,15 +31,15 @@ struct ContentView: View {
                     
                     switch selectedTab {
                     case 0:
-                        Home(users_vm: users_vm, selectedTab: $selectedTab)
-                    case 1:
-                        AddPost(users_vm: users_vm, selectedTab: $selectedTab)
+                        Home(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+//                    case 1:
+//                        AddPost(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
                     case 2:
-                        Money()
+                        MyReferrals(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
                     case 3:
-                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
                     default:
-                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab)
+                        Profile(users_vm: users_vm, email: $email, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
                     }
                 } else {
                  

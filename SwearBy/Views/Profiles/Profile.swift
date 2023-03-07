@@ -14,13 +14,14 @@ struct Profile: View {
     
     @Binding var email: String
     @Binding var selectedTab: Int
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
     
     @State var isShowingAddFriendsPage: Bool = false
     
     var body: some View {
         VStack {
             
-            PrimaryHeader(users_vm: users_vm, title: "My Profile", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+            PrimaryHeader(users_vm: users_vm, title: "My Profile", fullScreenModalPresented: $fullScreenModalPresented)
             
             
             Spacer()
@@ -54,12 +55,21 @@ struct Profile: View {
             
             Spacer()
             
-            MyTabView(selectedTab: $selectedTab)
-        }.edgesIgnoringSafeArea(.all)
-            .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
-                AddFriends(users_vm: users_vm, isShowingAddFriendsPage: $isShowingAddFriendsPage)
-                
+            MyTabView(selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+        }
+        .edgesIgnoringSafeArea(.all)
+        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { sheet in
+    
+            switch sheet {        //add_friends, add_code, add_preloaded_code
+            case .add_friends:
+                AddFriends(users_vm: users_vm)
+            case .add_post:
+                AddPost123(users_vm: users_vm)
+            default:
+                AddFriends(users_vm: users_vm)
             }
+        }
+        
         
     }
 }

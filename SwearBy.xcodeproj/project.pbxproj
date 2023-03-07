@@ -54,11 +54,18 @@
 		30640C5829B612D800981D3C /* EnterPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5729B612D800981D3C /* EnterPhone.swift */; };
 		30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5929B612E000981D3C /* CheckPhone.swift */; };
 		30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */; };
-		30640C5F29B623A600981D3C /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5E29B623A600981D3C /* AddPost.swift */; };
-		30640C6229B624D000981D3C /* AddPostSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6129B624D000981D3C /* AddPostSheet.swift */; };
+		30640C5F29B623A600981D3C /* AddPostDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5E29B623A600981D3C /* AddPostDeprecated.swift */; };
+		30640C6229B624D000981D3C /* AddPost123.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6129B624D000981D3C /* AddPost123.swift */; };
 		30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6329B62A1800981D3C /* CustomImagePicker.swift */; };
 		30640C6629B62A7C00981D3C /* Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6529B62A7C00981D3C /* Crop.swift */; };
-		30640C6929B7551800981D3C /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6829B7551800981D3C /* Money.swift */; };
+		30640C6929B7551800981D3C /* MyReferrals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6829B7551800981D3C /* MyReferrals.swift */; };
+		30640C6B29B7790C00981D3C /* PreloadedReferralPrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6A29B7790C00981D3C /* PreloadedReferralPrograms.swift */; };
+		30640C6D29B7791700981D3C /* ReferralCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6C29B7791700981D3C /* ReferralCodes.swift */; };
+		30640C6F29B77AC200981D3C /* ReferralCodesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C6E29B77AC200981D3C /* ReferralCodesVM.swift */; };
+		30640C7129B77EE400981D3C /* PreloadedReferralProgramVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7029B77EE400981D3C /* PreloadedReferralProgramVM.swift */; };
+		30640C7329B786D900981D3C /* AddNewCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7229B786D900981D3C /* AddNewCode.swift */; };
+		30640C7529B7876C00981D3C /* AddPreloadedCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7429B7876C00981D3C /* AddPreloadedCode.swift */; };
+		30640C7729B7897A00981D3C /* SelectBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7629B7897A00981D3C /* SelectBrand.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -131,11 +138,18 @@
 		30640C5729B612D800981D3C /* EnterPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhone.swift; sourceTree = "<group>"; };
 		30640C5929B612E000981D3C /* CheckPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhone.swift; sourceTree = "<group>"; };
 		30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth_PhoneVM.swift; sourceTree = "<group>"; };
-		30640C5E29B623A600981D3C /* AddPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPost.swift; sourceTree = "<group>"; };
-		30640C6129B624D000981D3C /* AddPostSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostSheet.swift; sourceTree = "<group>"; };
+		30640C5E29B623A600981D3C /* AddPostDeprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostDeprecated.swift; sourceTree = "<group>"; };
+		30640C6129B624D000981D3C /* AddPost123.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPost123.swift; sourceTree = "<group>"; };
 		30640C6329B62A1800981D3C /* CustomImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePicker.swift; sourceTree = "<group>"; };
 		30640C6529B62A7C00981D3C /* Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crop.swift; sourceTree = "<group>"; };
-		30640C6829B7551800981D3C /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		30640C6829B7551800981D3C /* MyReferrals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReferrals.swift; sourceTree = "<group>"; };
+		30640C6A29B7790C00981D3C /* PreloadedReferralPrograms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedReferralPrograms.swift; sourceTree = "<group>"; };
+		30640C6C29B7791700981D3C /* ReferralCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralCodes.swift; sourceTree = "<group>"; };
+		30640C6E29B77AC200981D3C /* ReferralCodesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralCodesVM.swift; sourceTree = "<group>"; };
+		30640C7029B77EE400981D3C /* PreloadedReferralProgramVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedReferralProgramVM.swift; sourceTree = "<group>"; };
+		30640C7229B786D900981D3C /* AddNewCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCode.swift; sourceTree = "<group>"; };
+		30640C7429B7876C00981D3C /* AddPreloadedCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPreloadedCode.swift; sourceTree = "<group>"; };
+		30640C7629B7897A00981D3C /* SelectBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBrand.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -279,8 +293,8 @@
 		30640C6029B623AB00981D3C /* Add Post */ = {
 			isa = PBXGroup;
 			children = (
-				30640C5E29B623A600981D3C /* AddPost.swift */,
-				30640C6129B624D000981D3C /* AddPostSheet.swift */,
+				30640C5E29B623A600981D3C /* AddPostDeprecated.swift */,
+				30640C6129B624D000981D3C /* AddPost123.swift */,
 				30640C6329B62A1800981D3C /* CustomImagePicker.swift */,
 			);
 			path = "Add Post";
@@ -289,7 +303,10 @@
 		30640C6729B753F700981D3C /* My Codes */ = {
 			isa = PBXGroup;
 			children = (
-				30640C6829B7551800981D3C /* Money.swift */,
+				30640C6829B7551800981D3C /* MyReferrals.swift */,
+				30640C7229B786D900981D3C /* AddNewCode.swift */,
+				30640C7629B7897A00981D3C /* SelectBrand.swift */,
+				30640C7429B7876C00981D3C /* AddPreloadedCode.swift */,
 			);
 			path = "My Codes";
 			sourceTree = "<group>";
@@ -370,6 +387,8 @@
 				30FB5E5629AA73D400020C9A /* Products.swift */,
 				30FB5E5829AA742100020C9A /* Brands.swift */,
 				30640C3629B322AB00981D3C /* EmptyVariables.swift */,
+				30640C6A29B7790C00981D3C /* PreloadedReferralPrograms.swift */,
+				30640C6C29B7791700981D3C /* ReferralCodes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -386,6 +405,8 @@
 				30FB5E6229AAB10A00020C9A /* ProductsVM.swift */,
 				30640C4929B5CFE200981D3C /* ContactsVM.swift */,
 				30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */,
+				30640C6E29B77AC200981D3C /* ReferralCodesVM.swift */,
+				30640C7029B77EE400981D3C /* PreloadedReferralProgramVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -572,7 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30640C6229B624D000981D3C /* AddPostSheet.swift in Sources */,
+				30640C6229B624D000981D3C /* AddPost123.swift in Sources */,
 				30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */,
 				30640BFE29B2EF9F00981D3C /* EnterEmail.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
@@ -581,10 +602,13 @@
 				30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
+				30640C7729B7897A00981D3C /* SelectBrand.swift in Sources */,
 				30640BF829B2D36100981D3C /* FriendProfile.swift in Sources */,
+				30640C6B29B7790C00981D3C /* PreloadedReferralPrograms.swift in Sources */,
 				30640C4629B5CF8E00981D3C /* ContactsView.swift in Sources */,
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C4A29B5CFE200981D3C /* ContactsVM.swift in Sources */,
+				30640C7129B77EE400981D3C /* PreloadedReferralProgramVM.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
 				30640C5829B612D800981D3C /* EnterPhone.swift in Sources */,
 				30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */,
@@ -593,6 +617,7 @@
 				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
+				30640C7529B7876C00981D3C /* AddPreloadedCode.swift in Sources */,
 				30640C5629B612D100981D3C /* EnterName.swift in Sources */,
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
 				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
@@ -602,12 +627,15 @@
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
 				30FB5E3E29A85FFF00020C9A /* Home.swift in Sources */,
-				30640C6929B7551800981D3C /* Money.swift in Sources */,
+				30640C6929B7551800981D3C /* MyReferrals.swift in Sources */,
 				30640C4E29B5D83600981D3C /* FriendRow.swift in Sources */,
+				30640C6D29B7791700981D3C /* ReferralCodes.swift in Sources */,
 				30640C3A29B32BBD00981D3C /* Components.swift in Sources */,
+				30640C7329B786D900981D3C /* AddNewCode.swift in Sources */,
 				30FB5E3C29A85FC600020C9A /* TabRouter.swift in Sources */,
 				30FB5E5329AA72D800020C9A /* Posts.swift in Sources */,
 				30FB5E4229A8603700020C9A /* UsersVM.swift in Sources */,
+				30640C6F29B77AC200981D3C /* ReferralCodesVM.swift in Sources */,
 				30640C5229B5F10800981D3C /* AcceptFriendRow.swift in Sources */,
 				30FB5E5D29AAAAB700020C9A /* ItemHalfSheet.swift in Sources */,
 				30FB5E4F29A9568A00020C9A /* AppViewModel.swift in Sources */,
@@ -615,7 +643,7 @@
 				30640C4C29B5CFF700981D3C /* ContactsViewRow.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,
 				30640C0429B313CE00981D3C /* RequestEmailLinkVM.swift in Sources */,
-				30640C5F29B623A600981D3C /* AddPost.swift in Sources */,
+				30640C5F29B623A600981D3C /* AddPostDeprecated.swift in Sources */,
 				30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */,
 				30640BFC29B2EEFE00981D3C /* Start.swift in Sources */,
 				30FB5E4429A8605E00020C9A /* Users.swift in Sources */,

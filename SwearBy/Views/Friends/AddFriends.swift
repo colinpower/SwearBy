@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddFriends: View {
     
-    @ObservedObject var users_vm: UsersVM
-    @Binding var isShowingAddFriendsPage: Bool
+    @Environment(\.dismiss) var dismiss
     
+    @ObservedObject var users_vm: UsersVM
     
     @StateObject var contactsVM = ContactsViewModel()
     
@@ -26,7 +26,7 @@ struct AddFriends: View {
             
             VStack(spacing: 0) {
                 
-                AddFriendsHeader(isShowingAddFriendsPage: $isShowingAddFriendsPage)
+                addFriendsHeader
                 
                 ScrollView(showsIndicators: false) {
                     
@@ -198,6 +198,43 @@ struct AddFriends: View {
         }
     }
     
+    var addFriendsHeader: some View {
+
+        HStack (alignment: .center) {
+            
+            
+            Button {
+
+                dismiss()
+
+            } label: {
+
+                ZStack(alignment: .center) {
+                    Circle()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(Color("Background"))
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .foregroundColor(Color("text.black"))
+                }
+            }
+            
+            Spacer()
+            Text("Add Friends")
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundColor(Color("text.black"))
+                .padding(.trailing, 40)
+            Spacer()
+            
+            
+        }
+        .padding(.bottom, 4)
+        .frame(height: 44)
+        .padding(.top, 60)
+        .padding(.horizontal)
+        .padding(.horizontal, 4)
+    }
+    
     
     
     func checkForExistingUserBasedOnPhoneNumber(existingUsers: [String], contact: Contact) -> Bool {
@@ -217,44 +254,3 @@ struct AddFriends: View {
     }
 }
 
-
-//MARK: PRIMARY HEADER
-struct AddFriendsHeader: View {
-    
-    @Binding var isShowingAddFriendsPage: Bool
-    
-    var body: some View {
-
-        HStack (alignment: .center) {
-            
-            Spacer()
-            Text("Add Friends")
-                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                .foregroundColor(Color("text.black"))
-                .padding(.leading, 40)
-            Spacer()
-            
-            Button {
-
-                isShowingAddFriendsPage = false
-
-            } label: {
-
-                ZStack(alignment: .center) {
-                    Circle()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(Color("Background"))
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundColor(Color("text.black"))
-                }
-            }
-            
-        }
-        .padding(.bottom, 4)
-        .frame(height: 44)
-        .padding(.top, 60)
-        .padding(.horizontal)
-        .padding(.horizontal, 4)
-    }
-}

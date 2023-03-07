@@ -11,12 +11,11 @@ struct Home: View {
     
     @ObservedObject var users_vm: UsersVM
     @Binding var selectedTab: Int
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
     
     @StateObject var posts_vm = PostsVM()
     
     @State private var path = NavigationPath()
-    
-    @State var isShowingAddFriendsPage: Bool = false
     
     
     var body: some View {
@@ -26,7 +25,7 @@ struct Home: View {
                 
                 VStack(spacing: 0) {
                     
-                    PrimaryHeader(users_vm: users_vm, title: "Home", isShowingAddFriendsPage: $isShowingAddFriendsPage)
+                    PrimaryHeader(users_vm: users_vm, title: "Home", fullScreenModalPresented: $fullScreenModalPresented)
                     
                     ScrollView(showsIndicators: false) {
                     
@@ -56,7 +55,7 @@ struct Home: View {
                     FriendProfile(users_vm: users_vm, path: $path, friend_user: user)
                 }
             }
-            MyTabView(selectedTab: $selectedTab)
+            MyTabView(selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
@@ -64,8 +63,16 @@ struct Home: View {
             self.posts_vm.listenForPostsInUserFeed(users_vm: users_vm)
             
         }
-        .fullScreenCover(isPresented: $isShowingAddFriendsPage) {
-            AddFriends(users_vm: users_vm, isShowingAddFriendsPage: $isShowingAddFriendsPage)
+        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { sheet in
+    
+            switch sheet {        //add_friends, add_code, add_preloaded_code
+            case .add_friends:
+                AddFriends(users_vm: users_vm)
+            case .add_post:
+                AddPost123(users_vm: users_vm)
+            default:
+                AddFriends(users_vm: users_vm)
+            }
         }
     }
 }
