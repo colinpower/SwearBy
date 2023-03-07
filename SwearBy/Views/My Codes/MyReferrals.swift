@@ -78,9 +78,10 @@ struct MyReferrals: View {
     
             switch sheet {        //add_friends, add_code, add_preloaded_code
             case .add_friends:
-                AddFriends(users_vm: users_vm)
-            case .add_code:
+                //AddFriends(users_vm: users_vm)
                 AddNewCode(users_vm: users_vm)
+            case .add_code:
+                AddNewCode(users_vm: users_vm, selected_brand: Brands(name: "OVERRIDE", website: "OVERRIDE", brand_id: "OVERRIDE"))
             case .add_preloaded_code:
                 AddPreloadedCode(preloaded_referral_program: selected_preloaded_code)
             case .add_post:

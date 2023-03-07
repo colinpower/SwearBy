@@ -49,7 +49,7 @@ struct AddNewCode: View {
     @State private var path = NavigationPath()
     
     @State private var new_referral_code = EmptyVariables().empty_referral_code
-    @State private var selected_brand:Brands = EmptyVariables().empty_brand
+    @State var selected_brand:Brands = EmptyVariables().empty_brand
     
     @State private var hasCode:Bool = true
     @State private var code:String = ""
@@ -80,12 +80,17 @@ struct AddNewCode: View {
     
     
     
+    @State var testing_text:String = "ABCDEF"
+    
+    
+    
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 
                 addNewCodeHeader
+                Text(testing_text)
                     
                 Form {
                     
