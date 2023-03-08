@@ -17,8 +17,8 @@ class EmptyVariables {
     
     var empty_user = Users(email: "", email_verified: false, friend_requests: [], friends_added: [], friends_list: [], name: Struct_Profile_Name(first: "", last: "", first_last: ""), phone: "", phone_verified: false, user_id: "")
     
-    var empty_preloaded_referral_program = PreloadedReferralPrograms(brand_id: "", code: "", commission_type: "", commission_value: 0, expiration: 0, for_new_customers_only: false, link: "", link_for_setup: "", offer_type: "", offer_value: 0, preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
+    var empty_preloaded_referral_program = PreloadedReferralPrograms(brand_id: "", brand_name: "", code: "", commission_type: "", commission_value: "", expiration: 0, for_new_customers_only: false, minimum_spend: "", link: "", link_for_setup: "", offer_type: "", offer_value: "", preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
     
-    var empty_referral_code = ReferralCodes(brand_id: "", code: "", commission_type: "", commission_value: 0, expiration: 0, for_new_customers_only: false, link: "", offer_type: "", offer_value: 0, product_ids: [], referral_code_id: "", user_id: "")
+    var empty_referral_code = ReferralCodes(brand_id: "", brand_name: "", code: "", commission_type: "", commission_value: "", expiration: 0, for_new_customers_only: false, imessage_autofill: "", is_public: false, minimum_spend: "", notes: "", link: "", offer_type: "", offer_value: "", product_ids: [], referral_code_id: "", user_id: "")
     
 }

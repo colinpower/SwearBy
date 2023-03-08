@@ -118,6 +118,11 @@ struct LargePostCondensed: View {
                 }
             }
         }
+        .sheet(isPresented: $didMarkStar) {
+            ThrowawaySheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
     }
     
     var miniProfile: some View {

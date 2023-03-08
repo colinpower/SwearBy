@@ -13,26 +13,30 @@ struct PreloadedReferralPrograms: Identifiable, Codable, Hashable {
     
     @DocumentID var id: String? = UUID().uuidString
     var brand_id: String
+    var brand_name: String                          //Added
     var code: String
     var commission_type: String
-    var commission_value: Int
+    var commission_value: String                    //Convert from Int to String
     var expiration: Int
     var for_new_customers_only: Bool
+    var minimum_spend: String                       //Added
     var link: String
     var link_for_setup: String
     var offer_type: String
-    var offer_value: Int
+    var offer_value: String                         //Convert from Int to String
     var preloaded_referral_program_id: String
     var product_ids: [String]
     var steps: SetupReferralSteps
     
     enum CodingKeys: String, CodingKey {
         case brand_id
+        case brand_name
         case code
         case commission_type
         case commission_value
         case expiration
         case for_new_customers_only
+        case minimum_spend
         case link
         case link_for_setup
         case offer_type

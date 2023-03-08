@@ -12,9 +12,8 @@ import SDWebImageSwiftUI
 struct SelectBrand: View {
     
     @Environment(\.dismiss) var dismiss
-    
-    @Binding var selected_brand:Brands
-    @Binding var isPreloadedCode:Bool
+    @ObservedObject var preloaded_referral_programs_vm: PreloadedReferralProgramVM
+    @Binding var preloaded_referral_program: PreloadedReferralPrograms
     
     @StateObject private var private_brands_vm = BrandsVM()
     
@@ -40,8 +39,19 @@ struct SelectBrand: View {
                             
                             Button {
                                 
-                                // Choose brand
-                                selected_brand = brand
+                                let temp_preload:[PreloadedReferralPrograms] = preloaded_referral_programs_vm.preloaded_referral_programs.filter { $0.brand_id == brand.brand_id }
+                                
+                                // If this brand isn't one of the preloaded ones
+                                if temp_preload.isEmpty {
+                                    
+                                    preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
+                                    preloaded_referral_program.brand_name = brand.name
+                                    preloaded_referral_program.brand_id = brand.brand_id
+                                
+                                    // Else if it is one of the preloaded ones
+                                } else {
+                                    preloaded_referral_program = temp_preload.first ?? PreloadedReferralPrograms(brand_id: brand.brand_id, brand_name: brand.name, code: "", commission_type: "", commission_value: "", expiration: 0, for_new_customers_only: false, minimum_spend: "", link: "", link_for_setup: "", offer_type: "", offer_value: "", preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
+                                }
                                 
                                 // Dismiss
                                 dismiss()
@@ -74,7 +84,7 @@ struct SelectBrand: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             
                             Button {
-                                isPreloadedCode = true
+                                
                                 dismiss()
                             } label: {
                                 Image(systemName: "chevron.down")
@@ -121,7 +131,7 @@ struct SelectBrand: View {
             
             Button {
 
-                isPreloadedCode = true
+                //isPreloadedCode = true
                 dismiss()
 
             } label: {
@@ -190,8 +200,9 @@ struct BrandRow: View {
                 WebImage(url: URL(string: private_brandURL)!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 30, height: 30)
+                    .frame(width: 40, height: 40)
                     .clipShape(Circle())
+                    
             } else {
                 ZStack(alignment: .center) {
                     Circle().frame(width: 40, height: 40)

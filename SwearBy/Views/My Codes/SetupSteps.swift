@@ -14,26 +14,47 @@ struct SetupSteps: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .center, spacing: 0) {
             
-            HStack {
-                Spacer()
-                Text("Follow steps")
-                Spacer()
+            Text("Follow these steps")
+                .font(.system(size: 20, weight: .semibold, design: .rounded))
+                .foregroundColor(Color("text.black"))
+                .padding(.bottom).padding(.bottom)
+            
+            Spacer()
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Text(steps.one != "" ? steps.one : "This is step one")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color("text.black"))
+                
+                Text(steps.two != "" ? steps.two : "This is step one")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color("text.black"))
+                    .padding(.vertical)
+                
+                Text(steps.three != "" ? steps.three : "This is step one")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color("text.black"))
+            }.padding(.horizontal)
+
+            Spacer()
+            
+            Link(destination: URL(string: (setup_link != "" ? setup_link : "https://www.google.com") )!) {
+                   
+                HStack(alignment: .center) {
+                    Spacer()
+                    Text("Continue")
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .foregroundColor(Color.white)
+                        .padding(.vertical)
+                    Spacer()
+                }
+                .background(Capsule().foregroundColor(Color.blue))
+                .padding(.horizontal)
+                .padding(.vertical).padding(.vertical)
+                
             }
-            
-            Text(steps.one)
-            Divider()
-            Text(steps.two)
-            Text("alsefj")
-            Divider()
-            Text(steps.three)
-                .padding(.bottom, 50)
-            
-            Link(destination: URL(string: setup_link)!) {
-                Text("Follow this link")
-            }.padding(.bottom, 100)
-            
         }
     }
 }

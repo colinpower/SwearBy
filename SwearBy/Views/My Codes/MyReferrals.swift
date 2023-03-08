@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import SDWebImageSwiftUI
 
 struct MyReferrals: View {
     
@@ -19,7 +21,9 @@ struct MyReferrals: View {
     @StateObject var referral_codes_vm = ReferralCodesVM()
     
     @State private var path = NavigationPath()
-    @State private var selected_preloaded_code:PreloadedReferralPrograms = EmptyVariables().empty_preloaded_referral_program
+    
+    @State private var selected_preloaded_program:PreloadedReferralPrograms = EmptyVariables().empty_preloaded_referral_program
+    @State private var selected_brand:Brands = EmptyVariables().empty_brand
     
     var body: some View {
         
@@ -49,11 +53,28 @@ struct MyReferrals: View {
                         }
                         
                         Button {
-                            fullScreenModalPresented = .add_preloaded_code
+                            fullScreenModalPresented = .add_code
                         } label: {
                             Text("add preloaded referral code")
                                 .padding()
                         }
+                        
+                        ForEach(preloaded_referral_programs_vm.preloaded_referral_programs) { program in
+                            
+                            Button {
+                                
+                                selected_preloaded_program = program
+                                fullScreenModalPresented = .add_code
+                                
+                            } label: {
+                                
+                                PreloadedReferralProgramRow(program: program)
+                            }
+                            
+                            
+                        }
+                        
+                        
  
                     }.padding(.horizontal)
                 }
@@ -74,18 +95,13 @@ struct MyReferrals: View {
             self.preloaded_referral_programs_vm.getPreloadedReferralPrograms()
             
         }
-        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { [selected_preloaded_code] sheet in
+        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { [$selected_preloaded_program] sheet in
     
             switch sheet {        //add_friends, add_code, add_preloaded_code
             case .add_friends:
                 AddFriends(users_vm: users_vm)
-                //AddNewCode(users_vm: users_vm)
             case .add_code:
-                //AddNewCode(users_vm: users_vm, isPreloadedCode: true, setup_link: "udemy://", steps: SetupReferralSteps(one: "asdf", two: "asdfas", three: "asdfad"), selected_brand: Brands(name: "Hertz", website: "cashme://", brand_id: "IbN6AkzKXNM07roWKVMN"))
-                AddNewCode(users_vm: users_vm)          //expiration: Date(timeIntervalSince1970: Double(1697389850))
-            case .add_preloaded_code:
-                AddPreloadedCode(preloaded_referral_program: selected_preloaded_code)
-                    // Preloaded Code must take care of all variables that need to be set.. plus set isPreloadedCode to true...
+                AddNewCode(users_vm: users_vm, preloaded_referral_programs_vm: preloaded_referral_programs_vm, preloaded_referral_program: $selected_preloaded_program)
             case .add_post:
                 AddPost(users_vm: users_vm)
             default:
@@ -150,6 +166,90 @@ struct MyReferrals: View {
             }
             .padding(.horizontal)
             .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
+        }
+    }
+}
+
+
+struct PreloadedReferralProgramRow: View {
+
+    @StateObject private var private_brands_vm = BrandsVM()
+    
+    var program: PreloadedReferralPrograms
+    
+    @State private var private_brandURL = ""
+
+    var body: some View {
+        
+        
+        HStack(alignment: .center, spacing: 0) {
+
+            if private_brandURL != "" {
+                WebImage(url: URL(string: private_brandURL)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 30, height: 30)
+                    .clipShape(Circle())
+            } else {
+                ZStack(alignment: .center) {
+                    Circle().frame(width: 40, height: 40)
+                        .foregroundColor(.blue)
+                    
+                    if private_brands_vm.get_brand_by_id.name.count > 0 {
+                        Text(private_brands_vm.get_brand_by_id.name.prefix(1))
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                    } else {
+                        Text("?")
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
+            }
+            
+
+            //The first + last names and the phone number
+            VStack(alignment: .leading, spacing: 0) {
+
+                Text(private_brands_vm.get_brand_by_id.name != "" ? private_brands_vm.get_brand_by_id.name : "?")
+                    .foregroundColor(Color("text.black"))
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
+                    .padding(.bottom, 6)
+                Text(private_brands_vm.get_brand_by_id.website.lowercased())
+                    .foregroundColor(Color("text.gray"))
+                    .font(.system(size: 16, weight: .regular))
+                    .lineLimit(1)
+            }.padding(.leading, 16)
+
+            Spacer()
+
+            ZStack(alignment: .center) {
+                Circle().frame(width: 24, height: 24)
+                    .foregroundColor(.blue)
+                Image(systemName: "plus")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color.white)
+            }
+
+        }
+        .padding(.vertical, 12)
+        .onAppear {
+            
+            self.private_brands_vm.getBrandById(brand_id: program.brand_id)
+
+            let backgroundPath = "brand/" + program.brand_id + ".png"
+
+            let storage = Storage.storage().reference()
+
+            storage.child(backgroundPath).downloadURL { url, err in
+                if err != nil {
+                    print(err?.localizedDescription ?? "Issue showing the right image")
+                    return
+                } else {
+                    self.private_brandURL = "\(url!)"
+                }
+            }
         }
     }
 }

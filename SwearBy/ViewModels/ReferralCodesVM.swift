@@ -39,30 +39,48 @@ class ReferralCodesVM: ObservableObject, Identifiable {
             }
     }
     
-//    func createNewReferralCode(code: String) {
-//            
-//        db.collection("referral_codes").document(code)
-//            .setData([
-//                "correct_code": "",
-//                "phone": phone,
-//                "submitted_code": "",
-//                "timestamp": [
-//                    "created": getTimestamp(),
-//                    "expires": 0,
-//                    "submitted": 0,
-//                ],
-//                "uuid": [
-//                    "auth_phone": auth_phone_uuid,
-//                    "user": user.user_id
-//                ]
-//            ]) { err in
-//                if let err = err {
-//                    print("Error updating document: \(err)")
-//                } else {
-//                    print("IDK ERROR WHEN SUBMITTING??")
-//                }
-//            }
-//    }
+    func createNewReferralCode(
+        brand_id: String,
+        brand_name: String,
+        code: String,
+        commission_type: String,
+        commission_value: String,
+        expiration: Int,
+        for_new_customers_only: Bool,
+        imessage_autofill: String,
+        is_public: Bool,
+        minimum_spend: String,
+        notes: String,
+        link: String,
+        offer_type: String,
+        offer_value: String,                         //Convert to String
+        product_ids: [String],
+        referral_code_id: String,
+        user_id: String
+    ) {
+            
+        db.collection("referral_codes").document(code)
+            .setData([
+                "correct_code": "",
+                "phone": phone,
+                "submitted_code": "",
+                "timestamp": [
+                    "created": getTimestamp(),
+                    "expires": 0,
+                    "submitted": 0,
+                ],
+                "uuid": [
+                    "auth_phone": auth_phone_uuid,
+                    "user": user.user_id
+                ]
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("IDK ERROR WHEN SUBMITTING??")
+                }
+            }
+    }
     
     
     

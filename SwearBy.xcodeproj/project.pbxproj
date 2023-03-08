@@ -382,16 +382,16 @@
 		30FB5E4729A87F2400020C9A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				30FB5E4329A8605E00020C9A /* Users.swift */,
+				30FB5E5829AA742100020C9A /* Brands.swift */,
 				30640C6529B62A7C00981D3C /* Crop.swift */,
 				30640C4729B5CFBB00981D3C /* ContactModel.swift */,
-				30FB5E5229AA72D800020C9A /* Posts.swift */,
-				30FB5E5429AA736500020C9A /* Purchases.swift */,
-				30FB5E5629AA73D400020C9A /* Products.swift */,
-				30FB5E5829AA742100020C9A /* Brands.swift */,
 				30640C3629B322AB00981D3C /* EmptyVariables.swift */,
+				30FB5E5229AA72D800020C9A /* Posts.swift */,
 				30640C6A29B7790C00981D3C /* PreloadedReferralPrograms.swift */,
+				30FB5E5629AA73D400020C9A /* Products.swift */,
+				30FB5E5429AA736500020C9A /* Purchases.swift */,
 				30640C6C29B7791700981D3C /* ReferralCodes.swift */,
+				30FB5E4329A8605E00020C9A /* Users.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -399,17 +399,17 @@
 		30FB5E4829A87F2A00020C9A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				30FB5E4529A861BD00020C9A /* DataManager.swift */,
-				30FB5E4129A8603700020C9A /* UsersVM.swift */,
-				30640C0329B313CE00981D3C /* RequestEmailLinkVM.swift */,
-				30FB5E5A29AA7C7800020C9A /* PostsVM.swift */,
-				30FB5E5E29AAACA400020C9A /* PurchasesVM.swift */,
-				30FB5E6029AAB0D700020C9A /* BrandsVM.swift */,
-				30FB5E6229AAB10A00020C9A /* ProductsVM.swift */,
-				30640C4929B5CFE200981D3C /* ContactsVM.swift */,
 				30640C5C29B613B900981D3C /* Auth_PhoneVM.swift */,
-				30640C6E29B77AC200981D3C /* ReferralCodesVM.swift */,
+				30FB5E6029AAB0D700020C9A /* BrandsVM.swift */,
+				30640C4929B5CFE200981D3C /* ContactsVM.swift */,
+				30FB5E4529A861BD00020C9A /* DataManager.swift */,
+				30FB5E5A29AA7C7800020C9A /* PostsVM.swift */,
 				30640C7029B77EE400981D3C /* PreloadedReferralProgramVM.swift */,
+				30FB5E6229AAB10A00020C9A /* ProductsVM.swift */,
+				30FB5E5E29AAACA400020C9A /* PurchasesVM.swift */,
+				30640C6E29B77AC200981D3C /* ReferralCodesVM.swift */,
+				30640C0329B313CE00981D3C /* RequestEmailLinkVM.swift */,
+				30FB5E4129A8603700020C9A /* UsersVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
