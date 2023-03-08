@@ -25,3 +25,4 @@ func getTimestamp() -> Int {
     return Int(round(Date().timeIntervalSince1970))
 
 }
+

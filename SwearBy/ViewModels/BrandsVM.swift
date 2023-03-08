@@ -17,6 +17,9 @@ class BrandsVM: ObservableObject, Identifiable {
     private var db = Firestore.firestore()
     
     @Published var get_brand_by_id = Brands(name: "", website: "", brand_id: "")
+    @Published var all_brands = [Brands]()
+    
+    var all_brands_listener: ListenerRegistration!
         
     func getBrandById(brand_id: String) {
         
@@ -38,10 +41,21 @@ class BrandsVM: ObservableObject, Identifiable {
                 }
             }
         }
-        
-        
     }
-        
+    
+    
+    func listenForAllBrands() {
+    
+        self.dm.getAllBrandsListener(onSuccess: { (brands) in
+
+            self.all_brands = brands
+
+        }, listener: { (listener) in
+            self.all_brands_listener = listener
+        })
+    }
+    
+    
     func addBrand(brand_id: String, name: String, website: String) {
          
         db.collection("brands").document(brand_id).setData([
@@ -56,8 +70,4 @@ class BrandsVM: ObservableObject, Identifiable {
             }
         }
     }
-    
-    
-    
-    
 }

@@ -38,4 +38,33 @@ class ReferralCodesVM: ObservableObject, Identifiable {
                 })
             }
     }
+    
+//    func createNewReferralCode(code: String) {
+//            
+//        db.collection("referral_codes").document(code)
+//            .setData([
+//                "correct_code": "",
+//                "phone": phone,
+//                "submitted_code": "",
+//                "timestamp": [
+//                    "created": getTimestamp(),
+//                    "expires": 0,
+//                    "submitted": 0,
+//                ],
+//                "uuid": [
+//                    "auth_phone": auth_phone_uuid,
+//                    "user": user.user_id
+//                ]
+//            ]) { err in
+//                if let err = err {
+//                    print("Error updating document: \(err)")
+//                } else {
+//                    print("IDK ERROR WHEN SUBMITTING??")
+//                }
+//            }
+//    }
+    
+    
+    
+    
 }

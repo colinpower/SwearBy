@@ -1,5 +1,5 @@
 //
-//  AddPostSheet.swift
+//  AddPost.swift
 //  SwearBy
 //
 //  Created by Colin Power on 3/6/23.
@@ -10,7 +10,7 @@ import SwiftUI
 import PhotosUI
 import FirebaseStorage
 
-struct AddPost123: View {
+struct AddPost: View {
     
     @Environment(\.dismiss) var dismiss
     

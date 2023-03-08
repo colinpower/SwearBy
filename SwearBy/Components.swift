@@ -145,7 +145,7 @@ enum FullScreenModalPresented: String, Identifiable {
 }
 
 enum AddNewCodeSheetPresented: String, Identifiable {
-    case add_brand, add_product
+    case add_brand, follow_setup_steps
     var id: String {
         return self.rawValue
     }

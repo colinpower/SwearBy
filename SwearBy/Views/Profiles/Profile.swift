@@ -64,7 +64,7 @@ struct Profile: View {
             case .add_friends:
                 AddFriends(users_vm: users_vm)
             case .add_post:
-                AddPost123(users_vm: users_vm)
+                AddPost(users_vm: users_vm)
             default:
                 AddFriends(users_vm: users_vm)
             }

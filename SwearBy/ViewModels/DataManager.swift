@@ -99,6 +99,29 @@ class DataManager: ObservableObject {
     }
     
     
+    func getAllBrandsListener(onSuccess: @escaping([Brands]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+        
+        let listenerRegistration = db.collection("brands")
+            .order(by: "name", descending: true)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                var brandsArray = [Brands]()
+                
+                brandsArray = documents.compactMap { (queryDocumentSnapshot) -> Brands? in
+                    
+                    
+                    print(try? queryDocumentSnapshot.data(as: Brands.self))
+                    return try? queryDocumentSnapshot.data(as: Brands.self)
+                }
+                onSuccess(brandsArray)
+            }
+        listener(listenerRegistration)
+    }
+    
+    
     
     
 }

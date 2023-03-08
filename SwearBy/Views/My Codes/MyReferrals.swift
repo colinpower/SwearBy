@@ -78,14 +78,16 @@ struct MyReferrals: View {
     
             switch sheet {        //add_friends, add_code, add_preloaded_code
             case .add_friends:
-                //AddFriends(users_vm: users_vm)
-                AddNewCode(users_vm: users_vm)
+                AddFriends(users_vm: users_vm)
+                //AddNewCode(users_vm: users_vm)
             case .add_code:
-                AddNewCode(users_vm: users_vm, selected_brand: Brands(name: "OVERRIDE", website: "OVERRIDE", brand_id: "OVERRIDE"))
+                //AddNewCode(users_vm: users_vm, isPreloadedCode: true, setup_link: "udemy://", steps: SetupReferralSteps(one: "asdf", two: "asdfas", three: "asdfad"), selected_brand: Brands(name: "Hertz", website: "cashme://", brand_id: "IbN6AkzKXNM07roWKVMN"))
+                AddNewCode(users_vm: users_vm)          //expiration: Date(timeIntervalSince1970: Double(1697389850))
             case .add_preloaded_code:
                 AddPreloadedCode(preloaded_referral_program: selected_preloaded_code)
+                    // Preloaded Code must take care of all variables that need to be set.. plus set isPreloadedCode to true...
             case .add_post:
-                AddPost123(users_vm: users_vm)
+                AddPost(users_vm: users_vm)
             default:
                 AddFriends(users_vm: users_vm)
             }
