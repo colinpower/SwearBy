@@ -534,6 +534,17 @@ struct AddNewCode: View {
                 
                 // upload the new code
                 
+                if imessage_autofill == "" {
+                    if code_or_link_selected == "Link" {
+                        imessage_autofill = code
+                    } else {
+                        imessage_autofill = "Use my code \(code) at \(brand_name)"
+                    }
+                }
+                
+                let referral_code_id = UUID().uuidString
+                
+                ReferralCodesVM().createNewReferralCode(brand_id: brand_id, brand_name: brand_name, code: (code_or_link_selected == "Code" ? code : ""), commission_type: commission_type, commission_value: commission_value, expiration: Int(round(expiration.timeIntervalSince1970)), for_new_customers_only: for_new_customers_only, imessage_autofill: imessage_autofill, is_public: isPublic, minimum_spend: minimum_spend, notes: notes, link: (code_or_link_selected == "Link" ? code : ""), offer_type: offer_type, offer_value: offer_value, product_ids: [], referral_code_id: referral_code_id, user_id: users_vm.one_user.user_id)
                 
                 // reset the variables
                 resetVariablesForPreloadedCode()
