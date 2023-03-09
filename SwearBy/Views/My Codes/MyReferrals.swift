@@ -212,9 +212,9 @@ struct MyReferralCodeRow: View {
                 "Sending \(my_code.offer_type) \(my_code.offer_value)",
                 image: Image("AppIcon"))) {
                     ZStack(alignment: .center) {
-                        Capsule().frame(width: 80, height: 36)
+                        Capsule().frame(width: 66, height: 32)
                             .foregroundColor(.green)
-                        Text("Share")
+                        Text("Send")
                             .font(.system(size: 16, weight: .medium, design: .rounded))
                             .foregroundColor(Color.white)
                     }
@@ -295,7 +295,7 @@ struct FriendsReferralCodeRow: View {
                 
             } label: {
                 ZStack(alignment: .center) {
-                    Capsule().frame(width: 80, height: 36)
+                    Capsule().frame(width: 66, height: 32)
                         .foregroundColor(.blue)
                     Text("Use")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
@@ -379,11 +379,11 @@ struct PreloadedReferralProgramRow: View {
 
             ZStack(alignment: .center) {
                 
-                Capsule().frame(width: 80, height: 36)
+                Capsule().frame(width: 66, height: 32)
                     .foregroundColor(Color("TextFieldGray"))
-                HStack(alignment: .center, spacing: 6) {
+                HStack(alignment: .center, spacing: 3) {
                     Image(systemName: "plus")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundColor(Color("text.gray"))
                     Text("Add")
                         .font(.system(size: 16, weight: .semibold, design: .rounded))

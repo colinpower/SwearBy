@@ -50,7 +50,7 @@ struct SelectBrand: View {
                                 
                                     // Else if it is one of the preloaded ones
                                 } else {
-                                    preloaded_referral_program = temp_preload.first ?? PreloadedReferralPrograms(brand_id: brand.brand_id, brand_name: brand.name, code: "", commission_type: "", commission_value: "", expiration: 0, for_new_customers_only: false, minimum_spend: "", link: "", link_for_setup: "", offer_type: "", offer_value: "", preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
+                                    preloaded_referral_program = temp_preload.first ?? PreloadedReferralPrograms(brand_id: brand.brand_id, brand_name: brand.name, code: "", commission_type: "None", commission_value: "", expiration: 0, for_new_customers_only: false, minimum_spend: "", link: "", link_for_setup: "", offer_type: "", offer_value: "", preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
                                 }
                                 
                                 // Dismiss

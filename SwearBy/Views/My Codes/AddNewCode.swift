@@ -20,6 +20,9 @@ enum DiscountType: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
+// DO IT WITH AN HSTACK INSTEAD!
+// https://stackoverflow.com/questions/60427656/add-a-prefix-to-textfield-in-swiftui
+
 struct TextFieldValueModifer: ViewModifier {
     @Binding var value_formatted: String
     @Binding var value: String
@@ -142,12 +145,12 @@ struct AddNewCode: View {
     @State var code_or_link_selected:String = "Code"                                                                        //DETERMINE WHETHER TO FILL IN CODE OR LINK
     @State var code:String = ""                                                                                             //CODE OR LINK
     
-    @State private var commission_options:[String] = ["Cash", "Gift Card", "Discount ($)", "Discount (%)", "Points"]
+    @State private var commission_options:[String] = ["None", "Cash", "Gift Card", "Discount ($)", "Discount (%)", "Points"]
     @State var commission_available:Bool = true
-    @State var commission_type:String = "Cash"
+    @State var commission_type:String = "None"
     @State var commission_value:String = ""
     
-    @State private var offer_options:[String] = ["Cash", "Gift Card", "Discount ($)", "Discount (%)", "Points"]
+    @State private var offer_options:[String] = ["None", "Cash", "Gift Card", "Discount ($)", "Discount (%)", "Points"]
     @State var discount_available:Bool = false
     @State var offer_type:String = "Discount (%)"
     @State var offer_value:String = ""
@@ -196,6 +199,7 @@ struct AddNewCode: View {
                                 brandAndLogoRow
                             }
                         }
+                    
                     }
                     
                     
@@ -223,28 +227,88 @@ struct AddNewCode: View {
                     }
 
 
-                    Section(header: Text("Your Commission"), footer: commission_available ? Text("Add your commission to keep track of your incentives. Your commission is always private.") : Text("No commission available")) {
-                        Toggle("Commission Available", isOn: $commission_available.animation(.easeInOut))
-                            .toggleStyle(SwitchToggleStyle())
+                    Section(header: Text("For You"), footer: (commission_type != "None") ? Text("Your commission is always private.") : Text("")) {
                         
-                        if commission_available {
+                        Picker("Commission", selection: $commission_type.animation(.easeInOut)) {
+                            ForEach(commission_options, id: \.self) { option in
+                                Text(option)
+                            }
+                        }
+                        
+                        if commission_type != "None" {
                                 
+                            HStack {
+                                Text("Value")
+                                
+                                HStack(alignment: .center, spacing: 0) {
+                            
+                                
+                                    ZStack(alignment: .trailing) {
+                                        TextField("0", text: $commission_value)
+                                            .foregroundColor(Color("text.black"))
+                                            .multilineTextAlignment(.trailing)
+                                            .keyboardType(.numbersAndPunctuation)
+                                            .submitLabel(.done)
+                                        if ((commission_type == "Cash") || (commission_type == "Gift Card") || (commission_type == "Discount ($)")) {
+                                            HStack(alignment: .center, spacing: 0) {
+                                                Text("$")
+                                                    .foregroundColor(commission_value == "" ? Color("text.gray").opacity(0.8) : Color("text.black"))
+                                                Text(commission_value == "" ? "0" : commission_value)
+                                                    .foregroundColor(commission_value == "" ? Color.clear : Color("text.black"))
+                                            }
+                                        }
+                                    }
+                                    
+                                    if ((commission_type == "Points")) {
+                                        Text(" points")
+                                            .foregroundColor(Color(commission_value == "" ? "text.gray" : "text.black"))
+                                    }
+                                    
+                                    if ((commission_type == "Discount (%)")) {
+                                        Text("%")
+                                            .foregroundColor(Color(commission_value == "" ? "text.gray" : "text.black"))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if commission_available {
+                        
+                        Section {
+                            
+//                            Toggle("NEW Available", isOn: $discount_available.animation(.easeInOut))
+//                                .toggleStyle(SwitchToggleStyle())
+                            HStack(alignment: .center, spacing: 0) {
+                                
+                                Text("Select a brand")
+                                    //.font(.system(design: .rounded))
+                                    .foregroundColor(Color("text.black"))
+                                
+                                Spacer()
+                                
+                                Text(brand_name == "" ? "None" : brand_name)
+                                    .foregroundColor(brand_name == "" ? Color("text.gray") : Color("text.black"))
+                                    .padding(.trailing, 8)
+                                
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color("text.gray"))
+                                
+                            }
+                            
+                            
                             Picker("Commission Type", selection: $commission_type) {
                                 ForEach(commission_options, id: \.self) { option in
                                     Text(option)
                                 }
+                            }.onTapGesture {
+                                addNewCodeSheetPresented = .add_brand
                             }
-                            HStack {
-                                Text("Commission Value")
-                                Spacer()
-                                TextField("Amount", text: $commission_value)
-                                    .foregroundColor(Color("text.black"))
-                                    .multilineTextAlignment(.trailing)
-                                    .keyboardType(.numbersAndPunctuation)
-                                    .submitLabel(.done)
-                            }
+                            
                         }
                     }
+                    
                     
                     Section(header: Text("Your Friend's Offer"), footer: discount_available ? Text("You can share details of this offer with your friend.") : Text("No offer available")) {
                         Toggle("Offer Available", isOn: $discount_available.animation(.easeInOut))
@@ -479,11 +543,11 @@ struct AddNewCode: View {
         self.code_or_link_selected = "Code"
         
         self.commission_available = true
-        self.commission_type = "Cash"
+        self.commission_type = "None"
         self.commission_value = ""
 
         self.discount_available = false
-        self.offer_type = "Discount (%)"
+        self.offer_type = "None"
         self.offer_value = ""
 
         self.has_expiration = false
