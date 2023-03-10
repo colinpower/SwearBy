@@ -99,6 +99,29 @@ class DataManager: ObservableObject {
     }
     
     
+    func getMyPostsListener(users_vm: UsersVM, onSuccess: @escaping([Posts]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+        
+        let listenerRegistration = db.collection("posts")
+            .whereField("user_id", isEqualTo: users_vm.one_user.user_id)
+            .order(by: "timestamp", descending: true)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                var mypostsArray = [Posts]()
+                
+                mypostsArray = documents.compactMap { (queryDocumentSnapshot) -> Posts? in
+                    
+                    print(try? queryDocumentSnapshot.data(as: Posts.self))
+                    return try? queryDocumentSnapshot.data(as: Posts.self)
+                }
+                onSuccess(mypostsArray)
+            }
+        listener(listenerRegistration)
+    }
+    
+    
     func getAllBrandsListener(onSuccess: @escaping([Brands]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
         
         let listenerRegistration = db.collection("brands")
@@ -117,6 +140,29 @@ class DataManager: ObservableObject {
                     return try? queryDocumentSnapshot.data(as: Brands.self)
                 }
                 onSuccess(brandsArray)
+            }
+        listener(listenerRegistration)
+    }
+    
+    
+    func getMyReferralCodesListener(user_id: String, onSuccess: @escaping([ReferralCodes]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+
+        let listenerRegistration = db.collection("referral_codes")
+            .whereField("user_id", isEqualTo: user_id)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                var temp_referral_codes_array = [ReferralCodes]()
+
+                temp_referral_codes_array = documents.compactMap { (queryDocumentSnapshot) -> ReferralCodes? in
+
+
+                    print(try? queryDocumentSnapshot.data(as: ReferralCodes.self))
+                    return try? queryDocumentSnapshot.data(as: ReferralCodes.self)
+                }
+                onSuccess(temp_referral_codes_array)
             }
         listener(listenerRegistration)
     }

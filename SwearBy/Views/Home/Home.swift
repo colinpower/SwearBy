@@ -55,7 +55,7 @@ struct Home: View {
                     FriendProfile(users_vm: users_vm, path: $path, friend_user: user)
                 }
             }
-            MyTabView(selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+            MyTabView(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
@@ -74,5 +74,6 @@ struct Home: View {
                 AddFriends(users_vm: users_vm)
             }
         }
+
     }
 }

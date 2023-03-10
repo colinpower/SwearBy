@@ -23,11 +23,15 @@ class PostsVM: ObservableObject, Identifiable {
     
     @Published var all_posts = [Posts]()
     
+    @Published var my_posts = [Posts]()
+    
     @Published var one_user_posts = [Posts]()
     
     @Published var posts_in_user_feed = [Posts]()
     
     var posts_in_user_feed_listener: ListenerRegistration!
+    var my_posts_listener: ListenerRegistration!
+    
     
     func getAllPosts() {
         
@@ -63,6 +67,19 @@ class PostsVM: ObservableObject, Identifiable {
             self.posts_in_user_feed_listener = listener
         })
     }
+    
+    func listenForMyPosts(users_vm: UsersVM) {
+    
+        self.dm.getMyPostsListener(users_vm: users_vm, onSuccess: { (posts) in
+
+            self.my_posts = posts
+
+        }, listener: { (listener) in
+            self.my_posts_listener = listener
+        })
+    }
+    
+    
 
     func getOneUserPosts(user_id: String) {
         

@@ -9,11 +9,6 @@ import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-
-
-
-
-
 struct MyReferrals: View {
     
     //Received from ContentView
@@ -27,6 +22,7 @@ struct MyReferrals: View {
     // Varibles used for adding new referral codes
     @StateObject var preloaded_referral_programs_vm = PreloadedReferralProgramVM()
     @State private var selected_preloaded_program:PreloadedReferralPrograms = EmptyVariables().empty_preloaded_referral_program
+    @State private var selected_my_code:ReferralCodes = EmptyVariables().empty_referral_code
     
     // Variables used for finding my referral codes and my friends'
     @StateObject var referral_codes_vm = ReferralCodesVM()
@@ -91,11 +87,34 @@ struct MyReferrals: View {
                 VStack(alignment: .center) {
                     
                     if selectedButton == 1 {
-                        ForEach(referral_codes_vm.my_referral_codes) { my_code in
+                        
+                        if referral_codes_vm.my_referral_codes.count == 0 {
                             
-                            MyReferralCodeRow(my_code: my_code)
-                                .foregroundColor(.white)
+//                            ForEach(preloaded_referral_programs_vm.preloaded_referral_programs) { program in
+//                                
+//                                Button {
+//                                    
+//                                    selected_preloaded_program = program
+//                                    fullScreenModalPresented = .add_code
+//                                    
+//                                } label: {
+//                                    
+//                                    PreloadedReferralProgramRow(program: program)
+//                                }
+//                            }
                             
+                        } else {
+                            
+                            ForEach(referral_codes_vm.my_referral_codes) { my_code in
+                                
+                                Button {
+                                    selected_my_code = my_code
+                                    fullScreenModalPresented = .edit_code
+                                } label: {
+                                    MyReferralCodeRow(my_code: my_code)
+                                        .foregroundColor(.white)
+                                }
+                            }
                         }
                     } else if selectedButton == 2 {
                         ForEach(referral_codes_vm.my_friends_referral_codes) { friends_code in
@@ -127,27 +146,29 @@ struct MyReferrals: View {
 
             
             
-                
-            MyTabView(selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+            MyTabView(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+            //MyTabView(selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color("Background"))
         .onAppear {
             
-            self.referral_codes_vm.getMyReferralCodes(user_id: users_vm.one_user.user_id)
+            self.referral_codes_vm.listenForMyReferralCodes(user_id: users_vm.one_user.user_id)
             
             self.referral_codes_vm.getMyFriendsCodes(users_vm: users_vm)
             
             self.preloaded_referral_programs_vm.getPreloadedReferralPrograms()
             
         }
-        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { [$selected_preloaded_program] sheet in
+        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { [$selected_preloaded_program, $selected_my_code] sheet in
     
             switch sheet {        //add_friends, add_code, add_preloaded_code
             case .add_friends:
                 AddFriends(users_vm: users_vm)
             case .add_code:
                 AddNewCode(users_vm: users_vm, preloaded_referral_programs_vm: preloaded_referral_programs_vm, preloaded_referral_program: $selected_preloaded_program)
+            case .edit_code:
+                EditMyCode(users_vm: users_vm, referral_codes_vm: referral_codes_vm, my_code: $selected_my_code)
             case .add_post:
                 AddPost(users_vm: users_vm)
             default:
@@ -486,12 +507,12 @@ struct StaticPlusButton: View {
                 
                 Capsule()
                     .foregroundColor(Color("TextFieldGray"))
-                    .frame(width: 100, height: 32)
+                    .frame(width: 110, height: 32)
                 HStack(alignment: .center, spacing: 4) {
                     Image(systemName: "plus")
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                         .foregroundColor(Color("text.gray"))
-                    Text("Custom")
+                    Text("Add New")
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .kerning(-0.4)
                         .foregroundColor(Color("text.gray"))

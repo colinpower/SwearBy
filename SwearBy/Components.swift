@@ -13,18 +13,20 @@ import FirebaseStorage
 //MARK: TABVIEW
 struct MyTabView: View {
     
+    @ObservedObject var users_vm: UsersVM
     @Binding var selectedTab:Int
     @Binding var fullScreenModalPresented: FullScreenModalPresented?
+    @State var showHalfSheet:Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
 //            Divider().frame(height: 0.5).padding(.bottom, 10)
             HStack(alignment: .bottom) {
                 Spacer()
-                TabViewItem(position: 0, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
-                TabViewItem(position: 1, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
-                TabViewItem(position: 2, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
-                TabViewItem(position: 3, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented)
+                TabViewItem(position: 0, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, showHalfSheet: $showHalfSheet)
+                TabViewItem(position: 1, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, showHalfSheet: $showHalfSheet)
+                TabViewItem(position: 2, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, showHalfSheet: $showHalfSheet)
+                TabViewItem(position: 3, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, showHalfSheet: $showHalfSheet)
                 Spacer()
             }.padding(.horizontal)
                 .padding(.top, 10)
@@ -32,6 +34,49 @@ struct MyTabView: View {
         }.edgesIgnoringSafeArea(.bottom)
         .frame(height: 80)
         .background(Color("Background"))
+//        .sheet(item: $fullScreenModalPresented, onDismiss: {
+//            
+//            if selectedPage == 0 {
+//                fullScreenModalPresented = nil
+//            } else if selectedPage == 1 {
+//                fullScreenModalPresented = .add_post
+//            } else if selectedPage == 2 {
+//                fullScreenModalPresented = .add_friends
+//            }
+//            
+//            
+//        }) { half_sheet in
+//              AddTabHalfSheet(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, selectedPage: $selectedPage)
+//                .presentationDetents([.medium])
+//                .presentationDragIndicator(.visible)
+//        }
+        
+        
+//        .sheet(item: $fullScreenModalPresented, onDismiss: { isShowingAddScreen = false }) {
+//            AddTabHalfSheet(users_vm: users_vm, selectedTab: $selectedTab, fullScreenModalPresented: $fullScreenModalPresented, isShowingAddScreen: $isShowingAddScreen)
+//                .presentationDetents([.medium])
+//                .presentationDragIndicator(.visible)
+//        }
+        
+        
+//        .sheet(isPresented: $didMarkStar) {
+//            ThrowawaySheet()
+//                .presentationDetents([.medium])
+//                .presentationDragIndicator(.visible)
+//        }
+        
+//        .fullScreenCover(item: $fullScreenModalPresented, onDismiss: { fullScreenModalPresented = nil }) { sheet in
+//
+//            switch sheet {        //add_friends, add_code, add_preloaded_code
+//            case .add_friends:
+//                AddFriends(users_vm: users_vm)
+//            case .add_post:
+//                AddPost(users_vm: users_vm)
+//            default:
+//                AddFriends(users_vm: users_vm)
+//            }
+//        }
+        
     }
 }
 
@@ -42,6 +87,7 @@ struct TabViewItem: View {
     var position: Int
     @Binding var selectedTab:Int
     @Binding var fullScreenModalPresented: FullScreenModalPresented?
+    @Binding var showHalfSheet:Bool
     
     var tabViewItemImageName: [String] {
         switch position {
@@ -60,8 +106,10 @@ struct TabViewItem: View {
     
     var body: some View {
 
+        Group {
             Button {
                 if (position == 1) {
+//                    showHalfSheet = true
                     fullScreenModalPresented = .add_post
                 } else {
                     selectedTab = position
@@ -79,6 +127,7 @@ struct TabViewItem: View {
                     
                 }
             }.frame(maxWidth: .infinity, maxHeight: 36)
+        }
     }
 }
 
@@ -137,8 +186,32 @@ struct PrimaryHeader: View {
 }
 
 
+struct ShareViaIMessageButton: View {
+    
+    var share_imessage_autofill: String
+    var share_offer_type: String
+    var share_offer_value: String
+    
+    var body: some View {
+        
+        ShareLink(item: share_imessage_autofill, preview: SharePreview(
+            "Sending \(share_offer_type) \(share_offer_value)",
+            image: Image("AppIcon"))) {
+                ZStack(alignment: .center) {
+                    Capsule().frame(width: 66, height: 32)
+                        .foregroundColor(.green)
+                    Text("Send")
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(Color.white)
+                }
+            }
+    }
+    
+}
+
+
 enum FullScreenModalPresented: String, Identifiable {
-    case add_friends, add_code, add_preloaded_code, add_post
+    case add_friends, add_code, add_preloaded_code, add_post, edit_code, show_add_half_sheet, settings
     var id: String {
         return self.rawValue
     }

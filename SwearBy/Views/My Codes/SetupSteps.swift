@@ -11,6 +11,7 @@ struct SetupSteps: View {
     
     @Binding var setup_link:String
     @Binding var steps:SetupReferralSteps
+    var brand_name: String
     
     var body: some View {
         
@@ -44,7 +45,7 @@ struct SetupSteps: View {
                    
                 HStack(alignment: .center) {
                     Spacer()
-                    Text("Continue")
+                    Text("Go to \(brand_name)")
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
                         .foregroundColor(Color.white)
                         .padding(.vertical)

@@ -126,7 +126,7 @@ struct CropView: View{
     var body: some View{
         NavigationStack{
             ImageView()
-                .navigationTitle("Crop View")
+                .navigationTitle("Crop")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarBackground(Color.black, for: .navigationBar)

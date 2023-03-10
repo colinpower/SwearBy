@@ -229,7 +229,7 @@ struct BrandRow: View {
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
                     .padding(.bottom, 6)
-                Text(brand.website.lowercased())
+                Text(formattedBrandWebsite(website: brand.website))
                     .foregroundColor(Color("text.gray"))
                     .font(.system(size: 16, weight: .regular))
                     .lineLimit(1)
@@ -237,9 +237,13 @@ struct BrandRow: View {
 
             Spacer()
 
-            Image(systemName: "chevron.right")
-                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                .foregroundColor(Color("text.gray"))
+            ZStack(alignment: .center) {
+                Capsule().frame(width: 90, height: 36)
+                    .foregroundColor(.green)
+                Text("Select")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Color.white)
+            }
 
         }
         .padding(.vertical, 12)
@@ -259,6 +263,23 @@ struct BrandRow: View {
             }
         }
     }
+    
+    func formattedBrandWebsite(website: String) -> String {
+        
+        var parsed = website.replacingOccurrences(of: "https://", with: "")
+        
+        parsed = website.replacingOccurrences(of: "http://", with: "")
+        
+        parsed = website.replacingOccurrences(of: "www.", with: "")
+        
+        if parsed.last == "/" {
+            parsed = String(parsed.prefix(parsed.count-1))
+        }
+        
+        return parsed.lowercased()
+    }
+    
+    
 }
 
 

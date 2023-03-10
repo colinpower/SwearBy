@@ -32,8 +32,7 @@ struct AddFriends: View {
                     
                     myShareLink
                         .padding(.vertical)
-                    
-                    if true {
+                    if (users_vm.one_user.friend_requests.count > 0) {
                         addedMe
                             .padding(.bottom)
                     }
@@ -70,34 +69,45 @@ struct AddFriends: View {
     
     var myShareLink: some View {
         
-        
-        ShareLink(item: "Hey, join me on SwearBy app! <insert URL here>", preview: SharePreview(
-            "Join me on SwearBy!",
-            image: Image("AppIcon"))) {
+        ZStack(alignment: .center) {
             
-            HStack(alignment: .center, spacing: 0) {
-                
-                Image("SwearByIcon")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 32, height: 32)
-                    .clipShape(RoundedRectangle(cornerRadius: 6))
-                    .padding(.trailing, 16)
-                
-                Text("Share your link")
-                    .foregroundColor(Color("text.black"))
-                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                
+            HStack {
                 Spacer()
-                
-                Image(systemName: "message")
-                    .foregroundColor(.green)
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    .padding(.horizontal, 8)
-                
+                Text("blank").foregroundColor(.clear)
+                Spacer()
             }
-            .padding()
+            .frame(height: 44)
             .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
+            .padding(.horizontal, 4)
+            .shadow(radius: 2)
+            
+            ShareLink(item: "Hey, join me on SwearBy app! <insert URL here>", preview: SharePreview(
+                "Join me on SwearBy!",
+                image: Image("AppIcon"))) {
+                    
+                    HStack(alignment: .center, spacing: 0) {
+                        
+                        Image(systemName: "person.crop.square.filled.and.at.rectangle.fill")
+                            .foregroundColor(Color("text.gray"))
+                            .font(.system(size: 24, weight: .medium, design: .rounded))
+                            .padding(.leading, 8)
+                            .padding(.trailing, 8)
+                        
+                        Text("Invite your friends")
+                            .foregroundColor(Color("text.gray"))
+                            .font(.system(size: 18, weight: .regular, design: .rounded))
+                        
+                        Spacer()
+                        
+                        Image(systemName: "arrow.right")
+                            .foregroundColor(Color("TextFieldGray"))
+                            .font(.system(size: 18, weight: .semibold, design: .rounded))
+                            .padding(.trailing)
+                        
+                    }
+                    .frame(height: 44)
+                    .padding(.horizontal, 4)
+                }
         }
     }
     
@@ -155,7 +165,7 @@ struct AddFriends: View {
                         let contact_phone = contact.phone ?? ""
                         let numberWithNumbersOnly = contact_phone.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+1", with: "")
                         
-                        SuggestedFriendRow(users_vm: users_vm, friend_phone_number: numberWithNumbersOnly)
+                        SuggestedFriendRow(users_vm: users_vm, friend_phone_number: numberWithNumbersOnly, contact: contact)
                         
                     }
                 }

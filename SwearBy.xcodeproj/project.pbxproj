@@ -67,6 +67,9 @@
 		30640C7729B7897A00981D3C /* SelectBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7629B7897A00981D3C /* SelectBrand.swift */; };
 		30640C7929B81A3F00981D3C /* SetupSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7829B81A3F00981D3C /* SetupSteps.swift */; };
 		30640C7B29B8382900981D3C /* AddNewBrand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7A29B8382900981D3C /* AddNewBrand.swift */; };
+		30640C7D29B9FBE000981D3C /* EditMyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7C29B9FBE000981D3C /* EditMyCode.swift */; };
+		30640C7F29BA7ECF00981D3C /* AddTabHalfSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */; };
+		30640C8129BA945A00981D3C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8029BA945A00981D3C /* Settings.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -152,6 +155,9 @@
 		30640C7629B7897A00981D3C /* SelectBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBrand.swift; sourceTree = "<group>"; };
 		30640C7829B81A3F00981D3C /* SetupSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSteps.swift; sourceTree = "<group>"; };
 		30640C7A29B8382900981D3C /* AddNewBrand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBrand.swift; sourceTree = "<group>"; };
+		30640C7C29B9FBE000981D3C /* EditMyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyCode.swift; sourceTree = "<group>"; };
+		30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabHalfSheet.swift; sourceTree = "<group>"; };
+		30640C8029BA945A00981D3C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 			children = (
 				30640BF729B2D36100981D3C /* FriendProfile.swift */,
 				30FB5E3F29A8600500020C9A /* Profile.swift */,
+				30640C8029BA945A00981D3C /* Settings.swift */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -306,6 +313,7 @@
 			children = (
 				30640C6829B7551800981D3C /* MyReferrals.swift */,
 				30640C7229B786D900981D3C /* AddNewCode.swift */,
+				30640C7C29B9FBE000981D3C /* EditMyCode.swift */,
 				30640C7629B7897A00981D3C /* SelectBrand.swift */,
 				30640C7A29B8382900981D3C /* AddNewBrand.swift */,
 				30640C7829B81A3F00981D3C /* SetupSteps.swift */,
@@ -428,6 +436,7 @@
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
 				30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */,
+				30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */,
 				30640C6729B753F700981D3C /* My Codes */,
 				30640C4429B5CF8000981D3C /* Friends */,
 			);
@@ -602,6 +611,7 @@
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */,
+				30640C7F29BA7ECF00981D3C /* AddTabHalfSheet.swift in Sources */,
 				30640C6429B62A1800981D3C /* CustomImagePicker.swift in Sources */,
 				30FB5E5F29AAACA400020C9A /* PurchasesVM.swift in Sources */,
 				30640C3C29B339DE00981D3C /* AddFriends.swift in Sources */,
@@ -619,11 +629,13 @@
 				30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */,
 				30FB5E5B29AA7C7800020C9A /* PostsVM.swift in Sources */,
 				30FB5E5529AA736500020C9A /* Purchases.swift in Sources */,
+				30640C7D29B9FBE000981D3C /* EditMyCode.swift in Sources */,
 				30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */,
 				30640C7529B7876C00981D3C /* AddPreloadedCode.swift in Sources */,
 				30640C5629B612D100981D3C /* EnterName.swift in Sources */,
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
 				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
+				30640C8129BA945A00981D3C /* Settings.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
 				30640C6629B62A7C00981D3C /* Crop.swift in Sources */,
 				30640C5429B5FE2B00981D3C /* ThrowawaySheet.swift in Sources */,

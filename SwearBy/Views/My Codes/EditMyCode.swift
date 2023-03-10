@@ -1,69 +1,25 @@
 //
-//  AddNewCode.swift
+//  EditMyCode.swift
 //  SwearBy
 //
-//  Created by Colin Power on 3/7/23.
+//  Created by Colin Power on 3/9/23.
 //
 
 import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-
-enum RewardType: String, CaseIterable, Identifiable {
-    case cash, giftcard, discount_percentage, discount, points
-    var id: Self { self }
-}
-
-enum DiscountType: String, CaseIterable, Identifiable {
-    case cash, percentage
-    var id: Self { self }
-}
-
-struct TextFieldReferralValueModifier: ViewModifier {
-    @Binding var value: String
-
-    func body(content: Content) -> some View {
-        content
-            .onReceive(value.publisher.collect()) {
-                
-                value = String($0).filter("0123456789.".contains)
-                
-            }
-    }
-}
-
-extension View {
-    func formatReferralValue(value: Binding<String>) -> some View {
-        self.modifier(TextFieldReferralValueModifier(value: value))
-    }
-}
-
-
-
-
-struct AddNewCode: View {
+struct EditMyCode: View {
     
     @Environment(\.dismiss) var dismiss
     @ObservedObject var users_vm: UsersVM
-    @ObservedObject var preloaded_referral_programs_vm: PreloadedReferralProgramVM
-    @State var addNewCodeSheetPresented: AddNewCodeSheetPresented? = nil
+    @ObservedObject var referral_codes_vm: ReferralCodesVM
+    @Binding var my_code: ReferralCodes
+    
     @State private var path = NavigationPath()
     
-    
-    // Pass in any of the Preloaded Code Variables if available, or leave them blank
-            // selected_brand
-            // preloaded_referral_code
-            //
-    
-    @Binding var preloaded_referral_program:PreloadedReferralPrograms  // = EmptyVariables().empty_preloaded_referral_program
-    
-    // Preloaded code variables
-    @State var isPreloadedCode:Bool = false
-    @State var setup_link:String = ""
-    @State var steps:SetupReferralSteps = SetupReferralSteps(one: "", two: "", three: "")
-    
     // Regular variables
+    @State var referral_code_id:String = ""
     @State var brand_id:String = ""
     @State var brand_name:String = ""
     
@@ -110,26 +66,12 @@ struct AddNewCode: View {
         NavigationStack {
             VStack(spacing: 0) {
                 
-                addNewCodeHeader
+                editCodeHeader
                     
                 Form {
                     
                     Section {
-                        Button {
-                            
-                            addNewCodeSheetPresented = .add_brand
-                            
-                                /////////////  --- ------------- ------------------------------------------------------------------------------ NOTE MUST RESET ALL THE VARIABLES WHEN LOOKING FOR A NEW BRAND
-                        } label: {
-                            
-                            if brand_name == "" {
-                                Text("Select a brand")
-                                    .foregroundColor(.blue)
-                            } else {
-                                brandAndLogoRow
-                            }
-                        }
-                    
+                        brandAndLogoRow
                     }
                     
                     
@@ -152,11 +94,6 @@ struct AddNewCode: View {
                                     Text(option)
                                 }
                             }
-                        }
-                        if setup_link != "" {
-                            
-                            HowToGetReferralCode(setup_link: $setup_link, steps: $steps, brand_name: brand_name)
-                        
                         }
                     }
                     
@@ -384,40 +321,10 @@ struct AddNewCode: View {
             .background(Color("Background"))
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
-            .fullScreenCover(item: $addNewCodeSheetPresented, onDismiss: { addNewCodeSheetPresented = nil }) { [preloaded_referral_program, setup_link, steps] sheet in
-                
-                switch sheet {        //add_brand, follow_setup_steps
-                case .add_brand:
-                    SelectBrand(preloaded_referral_programs_vm: preloaded_referral_programs_vm, preloaded_referral_program: $preloaded_referral_program)
-                        .presentationDetents([.medium])
-                        .presentationDragIndicator(.visible)
-                case .follow_setup_steps:
-                    SetupSteps(setup_link: $setup_link, steps: $steps, brand_name: brand_name)
-                        .presentationDetents([.medium])
-                        .presentationDragIndicator(.visible)
-                default:
-                    SelectBrand(preloaded_referral_programs_vm: preloaded_referral_programs_vm, preloaded_referral_program: $preloaded_referral_program)
-                        .presentationDetents([.medium])
-                        .presentationDragIndicator(.visible)
-                }
-            }
             .onAppear {
                 
-                if preloaded_referral_program.brand_id != "" {
-                    
-                    loadVariablesForPreloadedCode()
-                    
-                }
+                loadMyCodeDetails()
                    
-            }
-            .onChange(of: preloaded_referral_program) { new_preloaded_referral_program in
-                
-                if preloaded_referral_program.brand_id != "" {
-                    
-                    loadVariablesForPreloadedCode()
-                    
-                }
-                
             }
         }
         
@@ -491,76 +398,69 @@ struct AddNewCode: View {
     }
     
     
-    func loadVariablesForPreloadedCode() {
+    func loadMyCodeDetails() {
         
-        // Preloaded code variables
-        self.isPreloadedCode = true
-        self.setup_link = preloaded_referral_program.link_for_setup
-        self.steps = preloaded_referral_program.steps
-
-        self.brand_id = preloaded_referral_program.brand_id
-        self.brand_name = preloaded_referral_program.brand_name
+        self.referral_code_id = my_code.referral_code_id
+        self.brand_id = my_code.brand_id
+        self.brand_name = my_code.brand_name
         
-        self.code_or_link_selected = preloaded_referral_program.link != "" ? "Link" : "Code"
+        self.code_or_link_selected = my_code.link != "" ? "Link" : "Code"
+        self.code = my_code.link != "" ? my_code.link : my_code.code
         
-        self.commission_type = preloaded_referral_program.commission_type
-        self.commission_value = preloaded_referral_program.commission_value
+        self.commission_type = my_code.commission_type
+        self.commission_value = my_code.commission_value
 
-        self.offer_type = preloaded_referral_program.offer_type
-        self.offer_value = preloaded_referral_program.offer_value
+        self.offer_type = my_code.offer_type
+        self.offer_value = my_code.offer_value
 
-        self.has_expiration = preloaded_referral_program.expiration > 0
-        self.expiration = preloaded_referral_program.expiration > 0 ? Date(timeIntervalSince1970: Double(preloaded_referral_program.expiration)) : Date()
+        self.has_expiration = my_code.expiration > 0
+        self.expiration = my_code.expiration > 0 ? Date(timeIntervalSince1970: Double(my_code.expiration)) : Date()
 
-        self.for_new_customers_only = preloaded_referral_program.for_new_customers_only
+        self.for_new_customers_only = my_code.for_new_customers_only
 
-        self.minimum_spend_type = preloaded_referral_program.minimum_spend != "" ? "Minimum" : "None"
-        self.minimum_spend = preloaded_referral_program.minimum_spend
-
+        self.minimum_spend_type = my_code.minimum_spend != "" ? "Minimum" : "None"
+        self.minimum_spend = my_code.minimum_spend
         
-    }
-    
-    
-    func resetVariablesForPreloadedCode() {
+        self.visibility_type = my_code.is_public ? "Friends" : "Private"
+        self.isPublic = my_code.is_public
         
-        preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
+        self.notes = my_code.notes
         
-        // Preloaded code variables
-        self.isPreloadedCode = false
-        self.setup_link = ""
-        self.steps = SetupReferralSteps(one: "", two: "", three: "")
-
-        self.brand_id = ""
-        self.brand_name = ""
-        
-        self.code_or_link_selected = "Code"
-        
-        self.commission_type = "None"
-        self.commission_value = ""
-
-        self.offer_type = "None"
-        self.offer_value = ""
-
-        self.has_expiration = false
-        self.expiration = Date()
-
-        self.for_new_customers_only = false
-
-        self.minimum_spend_type = "None"
-        self.minimum_spend = ""
+        self.imessage_autofill = my_code.imessage_autofill
         
     }
     
+    func updateMyCode() {
+        
+        if imessage_autofill == "" {
+            if code_or_link_selected == "Link" {
+                imessage_autofill = code
+            } else {
+                imessage_autofill = "Use my code \(code) at \(brand_name)"
+            }
+        }
+        
+        if visibility_type == "Friends" {
+            isPublic = false
+        } else {
+            isPublic = true
+        }
+        
+        referral_codes_vm.updateMyReferralCode(brand_id: brand_id, brand_name: brand_name, code: (code_or_link_selected == "Code" ? code : ""), commission_type: commission_type, commission_value: commission_value, expiration: Int(round(expiration.timeIntervalSince1970)), for_new_customers_only: for_new_customers_only, imessage_autofill: imessage_autofill, is_public: isPublic, minimum_spend: minimum_spend, notes: notes, link: (code_or_link_selected == "Link" ? code : ""), offer_type: offer_type, offer_value: offer_value, product_ids: [], referral_code_id: referral_code_id, user_id: users_vm.one_user.user_id)
+        
+        
+    }
+
     
     
     
-    var addNewCodeHeader: some View {
+    var editCodeHeader: some View {
 
         HStack (alignment: .center) {
             
             Button {
 
-                resetVariablesForPreloadedCode()
+                updateMyCode()
                 dismiss()
 
             } label: {
@@ -569,61 +469,39 @@ struct AddNewCode: View {
                     Circle()
                         .frame(width: 40, height: 40)
                         .foregroundColor(Color("Background"))
-                    Image(systemName: "chevron.down")
+                    Image(systemName: "checkmark")
                         .font(.system(size: 24, weight: .semibold, design: .rounded))
                         .foregroundColor(Color("text.black"))
                 }
             }
             
             Spacer()
-            Text("Add New Code")
+            Text("\(brand_name)")
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundColor(Color("text.black"))
                 .padding(.leading, 40)
             Spacer()
             
             
-            let canAddCode = ((brand_id != "") && (code != ""))
+            ShareViaIMessageButton(share_imessage_autofill: imessage_autofill, share_offer_type: offer_type, share_offer_value: offer_value)
             
-            Button {
-                
-                // upload the new code
-                
-                if imessage_autofill == "" {
-                    if code_or_link_selected == "Link" {
-                        imessage_autofill = code
-                    } else {
-                        imessage_autofill = "Use my code \(code) at \(brand_name)"
-                    }
-                }
-                
-                if visibility_type == "Friends" {
-                    isPublic = false
-                } else {
-                    isPublic = true
-                }
-                
-                let referral_code_id = UUID().uuidString
-                
-                ReferralCodesVM().createNewReferralCode(brand_id: brand_id, brand_name: brand_name, code: (code_or_link_selected == "Code" ? code : ""), commission_type: commission_type, commission_value: commission_value, expiration: Int(round(expiration.timeIntervalSince1970)), for_new_customers_only: for_new_customers_only, imessage_autofill: imessage_autofill, is_public: isPublic, minimum_spend: minimum_spend, notes: notes, link: (code_or_link_selected == "Link" ? code : ""), offer_type: offer_type, offer_value: offer_value, product_ids: [], referral_code_id: referral_code_id, user_id: users_vm.one_user.user_id)
-                
-                // reset the variables
-                resetVariablesForPreloadedCode()
-                
-                //dismiss the sheet
-                dismiss()
-                
-            } label: {
-                ZStack(alignment: .center) {
-                    
-                    Capsule()
-                        .foregroundColor(canAddCode ? Color.blue : Color.gray)
-                        .frame(width: 80, height: 32)
-                    Text("Add")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundColor(Color.white)
-                }
-            }.disabled(!canAddCode)
+//            Button {
+//
+//                updateMyCode()
+//                //dismiss the sheet
+//                dismiss()
+//
+//            } label: {
+//                ZStack(alignment: .center) {
+//
+//                    Capsule()
+//                        .foregroundColor(canAddCode ? Color.blue : Color.gray)
+//                        .frame(width: 80, height: 32)
+//                    Text("Update")
+//                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+//                        .foregroundColor(Color.white)
+//                }
+//            }.disabled(!canAddCode)
             
         }
         .padding(.bottom, 4)
@@ -634,30 +512,3 @@ struct AddNewCode: View {
     }
 }
 
-
-
-struct HowToGetReferralCode: View {
-    
-    @State private var isPresentingModal:Bool = false
-    
-    @Binding var setup_link: String
-    @Binding var steps: SetupReferralSteps
-    var brand_name: String
-    
-    var body: some View {
-        
-        VStack(spacing: 0) {
-            Button {
-                isPresentingModal = true
-            } label: {
-                Text(brand_name != "" ? "Find your \(brand_name) code - Instructions" : "Find your code - Instructions")
-            }
-        }
-        .frame(height: 20)
-        .sheet(isPresented: $isPresentingModal) {
-            SetupSteps(setup_link: $setup_link, steps: $steps, brand_name: brand_name)
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
-    }
-}
