@@ -32,7 +32,8 @@ struct AddFriends: View {
                     
                     myShareLink
                         .padding(.vertical)
-                    if (users_vm.one_user.friend_requests.count > 0) {
+                    
+                    if (!users_vm.one_user.friend_requests.isEmpty) {
                         addedMe
                             .padding(.bottom)
                     }
@@ -55,8 +56,11 @@ struct AddFriends: View {
             .background(Color("Background"))
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Users.self) { user in
-                FriendProfile(users_vm: users_vm, path: $path, friend_user: user)
+            .navigationDestination(for: Users.self) { friend_user in
+                FriendProfile(users_vm: users_vm, path: $path, friend_user: friend_user)
+            }
+            .navigationDestination(for: Posts.self) { post in
+                ExpandedPost(users_vm: users_vm, post: post, path: $path)
             }
             .sheet(isPresented: $isShowingContactsList) {
                 isShowingContactsList = false
@@ -197,8 +201,14 @@ struct AddFriends: View {
                     
                     if friend_id != "" {
                         
-                        FriendRow(friend_user_id: friend_id, path: $path)
-
+//                        Button {
+//                            path.append(users_vm.one_user)
+//                        } label: {
+//                            Text("try going to my profile")
+//                        }
+                        
+                        FriendRow(users_vm: users_vm, friend_user_id: friend_id, path: $path)
+                        
                     }
                     
                 }

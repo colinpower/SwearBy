@@ -92,7 +92,7 @@ struct Profile: View {
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Posts.self) { post in
-                    PostView(users_vm: users_vm, post: post, path: $path)
+                    ExpandedPost(users_vm: users_vm, post: post, path: $path)
                 }
                 .navigationDestination(for: Users.self) { user in
                     FriendProfile(users_vm: users_vm, path: $path, friend_user: user)

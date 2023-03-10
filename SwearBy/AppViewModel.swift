@@ -98,6 +98,23 @@ class AppViewModel: ObservableObject {
       }
     
     
+    func signIn(email: String, password: String,
+                completion: @escaping (Result<User, Error>) -> Void) {
+
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            
+            if let error = error {
+
+                completion(.failure(error))
+            } else {
+
+                completion(.success(result!.user))
+            }
+            
+        }
+    }
+    
+    
     func signOut(users_vm: UsersVM) -> Bool {
         do {
             

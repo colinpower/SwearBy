@@ -5,6 +5,25 @@
 //  Created by Colin Power on 3/3/23.
 //
 
+
+//if Auth.auth().isSignIn(withEmailLink: link) {
+//    viewModel.passwordlessSignIn(email: email, link: link) { result in
+//        
+//        switch result {
+//        
+//        case let .success(user):
+//            viewModel.listen(users_vm: users_vm)
+//            
+//        case let .failure(error):
+//            print("error with result of passwordlessSignIn function")
+//            //alertItem = AlertItem(title: "An auth error occurred.", message: error.localizedDescription)
+//        }
+//    }
+//}
+
+
+
+
 import Foundation
 import SwiftUI
 import FirebaseFunctions

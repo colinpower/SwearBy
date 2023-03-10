@@ -11,6 +11,8 @@ import SDWebImageSwiftUI
 
 struct FriendRow: View {
     
+    @ObservedObject var users_vm: UsersVM
+    
     var friend_user_id: String
     
     @Binding var path: NavigationPath
@@ -20,7 +22,7 @@ struct FriendRow: View {
     @State private var friend_profileURL: String = ""
     
     var body: some View {
-        Group {
+        VStack(spacing: 0) {
             Button {
                 path.append(lookup_users_vm.get_user_by_id)
             } label : {
@@ -73,6 +75,9 @@ struct FriendRow: View {
                 .padding(.vertical, 12)
             }
         }
+//        .navigationDestination(for: Users.self) { friend_user in
+//            FriendProfile(users_vm: users_vm, path: $path, friend_user: friend_user)
+//        }
         .onAppear {
             
             self.lookup_users_vm.getUserByID(user_id: friend_user_id)

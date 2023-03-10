@@ -9,17 +9,16 @@ import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-
 struct FriendProfile: View {
     
     @ObservedObject var users_vm: UsersVM
     @Binding var path: NavigationPath
     var friend_user: Users
     
-    @StateObject private var private_posts_vm = PostsVM()
-    @StateObject private var private_user_vm = UsersVM()
+    @StateObject private var private_friends_posts_vm = PostsVM()
+    @StateObject private var private_friends_user_vm = UsersVM()
     
-    @State private var private_friend_profileImageURL:String = ""
+    @State private var private_friend_profile_ImageURL:String = ""
     
     let columns: [GridItem] = [
                 GridItem(.fixed(UIScreen.main.bounds.width / 2 - 32), spacing: 16, alignment: nil),
@@ -46,15 +45,15 @@ struct FriendProfile: View {
             
             friendProfileTopSection
                 .padding(.vertical)
-            
+
             friendProfileButtons
                 .padding(.vertical)
                 .padding(.bottom)
-            
+
             ScrollView(showsIndicators: false) {
-            
+
                 VStack (alignment: .center, spacing: 0) {
-                    
+
                     HStack (spacing: 0) {
                         Text("Things \(friend_user.name.first) Swears By")
                             .font(.system(size: 18, weight: .bold, design: .rounded))
@@ -63,15 +62,15 @@ struct FriendProfile: View {
                         Spacer()
                     }
                     .padding(.bottom)
-                    
+
                     LazyVGrid(columns: columns, spacing: 16) {
-                        
-                        ForEach(private_posts_vm.one_user_posts) { post in
-                            
+
+                        ForEach(private_friends_posts_vm.one_user_posts) { post in
+
                             Button {
-                                
+
                                 path.append(post)
-                                
+
                             } label: {
                                 ProfilePostWidget(post: post)
                                     .overlay(RoundedRectangle(cornerRadius: 10)
@@ -81,20 +80,17 @@ struct FriendProfile: View {
                         }
                     }.padding(.bottom, 100)
                 }
-                
+
             }.padding(.horizontal)
         }
         .edgesIgnoringSafeArea(.all)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: Posts.self) { post in
-            PostView(users_vm: users_vm, post: post, path: $path)
-        }
         .onAppear {
             
-            self.private_posts_vm.getOneUserPosts(user_id: friend_user.user_id)
+            self.private_friends_posts_vm.getOneUserPosts(user_id: friend_user.user_id)
             
-            self.private_user_vm.getUserByID(user_id: friend_user.user_id)
+            self.private_friends_user_vm.getUserByID(user_id: friend_user.user_id)
             
             let storage = Storage.storage().reference()
             
@@ -105,7 +101,7 @@ struct FriendProfile: View {
                     print(err?.localizedDescription ?? "Issue showing the right image")
                     return
                 } else {
-                    self.private_friend_profileImageURL = "\(url!)"
+                    self.private_friend_profile_ImageURL = "\(url!)"
                 }
             }
             
@@ -117,8 +113,8 @@ struct FriendProfile: View {
         // Image, Name, Num of friends
         HStack(alignment: .top, spacing: 0) {
             
-            if private_friend_profileImageURL != "" {
-                WebImage(url: URL(string: private_friend_profileImageURL)!)
+            if private_friend_profile_ImageURL != "" {
+                WebImage(url: URL(string: private_friend_profile_ImageURL)!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100, height: 100)
@@ -138,8 +134,8 @@ struct FriendProfile: View {
                     
                 HStack(spacing: 0) {
                     
-                    let num_friends = private_user_vm.get_user_by_id.friends_list.count
-                    let num_posts = private_posts_vm.one_user_posts.count
+                    let num_friends = private_friends_user_vm.get_user_by_id.friends_list.isEmpty ? 0 : private_friends_user_vm.get_user_by_id.friends_list.count
+                    let num_posts = private_friends_posts_vm.one_user_posts.isEmpty ? 0 : private_friends_posts_vm.one_user_posts.count
                     
                     Text(String(num_friends))
                         .font(.system(size: 16, weight: .semibold, design: .rounded))

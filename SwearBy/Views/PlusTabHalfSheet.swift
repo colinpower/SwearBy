@@ -30,7 +30,7 @@ struct PlusTabHalfSheet: View {
                     fullScreenModalPresented = .add_post
                 }
             } label: {
-                PlusTabHalfSheetButton(icon_halfSheet: "checkmark.seal", title_halfSheet: "Swear By")                //person.badge.shield.checkmark
+                PlusTabHalfSheetButton(icon_halfSheet: "checkmark.seal", title_halfSheet: "Purchase I Swear By")                //person.badge.shield.checkmark
             }
             
             Button {

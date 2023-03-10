@@ -72,6 +72,9 @@
 		30640C8129BA945A00981D3C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8029BA945A00981D3C /* Settings.swift */; };
 		30640C8329BAC50900981D3C /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8229BAC50900981D3C /* CreatePost.swift */; };
 		30640C8529BAC50F00981D3C /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8429BAC50F00981D3C /* CreateRequest.swift */; };
+		30640C8729BAE24900981D3C /* PostInFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8629BAE24900981D3C /* PostInFeed.swift */; };
+		30640C8929BAEF4A00981D3C /* EnterEmailAndPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8829BAEF4A00981D3C /* EnterEmailAndPassword.swift */; };
+		30640C8B29BAF76A00981D3C /* ExpandedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8A29BAF76A00981D3C /* ExpandedPost.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -162,6 +165,9 @@
 		30640C8029BA945A00981D3C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		30640C8229BAC50900981D3C /* CreatePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePost.swift; sourceTree = "<group>"; };
 		30640C8429BAC50F00981D3C /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
+		30640C8629BAE24900981D3C /* PostInFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInFeed.swift; sourceTree = "<group>"; };
+		30640C8829BAEF4A00981D3C /* EnterEmailAndPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmailAndPassword.swift; sourceTree = "<group>"; };
+		30640C8A29BAF76A00981D3C /* ExpandedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPost.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 			children = (
 				30640BFB29B2EEFE00981D3C /* Start.swift */,
 				30640BFD29B2EF9F00981D3C /* EnterEmail.swift */,
+				30640C8829BAEF4A00981D3C /* EnterEmailAndPassword.swift */,
 				30640BFF29B2EFD800981D3C /* CheckEmail.swift */,
 			);
 			path = "Sign up or login";
@@ -258,6 +265,8 @@
 			children = (
 				30FB5E3D29A85FFF00020C9A /* Home.swift */,
 				30640C3D29B33B0F00981D3C /* LargePostCondensed.swift */,
+				30640C8629BAE24900981D3C /* PostInFeed.swift */,
+				30640C8A29BAF76A00981D3C /* ExpandedPost.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -642,6 +651,7 @@
 				30640C5629B612D100981D3C /* EnterName.swift in Sources */,
 				30FB5E6129AAB0D700020C9A /* BrandsVM.swift in Sources */,
 				30640C4029B3424500981D3C /* HelperFunctions.swift in Sources */,
+				30640C8929BAEF4A00981D3C /* EnterEmailAndPassword.swift in Sources */,
 				30640C8129BA945A00981D3C /* Settings.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
 				30640C6629B62A7C00981D3C /* Crop.swift in Sources */,
@@ -667,8 +677,10 @@
 				30640BFA29B2E41800981D3C /* TestSheet.swift in Sources */,
 				30640C4C29B5CFF700981D3C /* ContactsViewRow.swift in Sources */,
 				30FB5E4B29A87F8400020C9A /* PostView.swift in Sources */,
+				30640C8729BAE24900981D3C /* PostInFeed.swift in Sources */,
 				30640C0429B313CE00981D3C /* RequestEmailLinkVM.swift in Sources */,
 				30640C5D29B613B900981D3C /* Auth_PhoneVM.swift in Sources */,
+				30640C8B29BAF76A00981D3C /* ExpandedPost.swift in Sources */,
 				30640BFC29B2EEFE00981D3C /* Start.swift in Sources */,
 				30FB5E4429A8605E00020C9A /* Users.swift in Sources */,
 				30640C4829B5CFBB00981D3C /* ContactModel.swift in Sources */,

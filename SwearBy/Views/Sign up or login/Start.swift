@@ -10,7 +10,8 @@ import SwiftUI
 
 struct Start: View {
     
-    var enterEmailPages: [EnterEmailPage] = [.init(screen: "EnterEmail", content: "")]
+    var enterEmailPages: [EnterEmailPage] = [.init(screen: "EnterEmail", content: ""),
+                                             .init(screen: "EnterEmailAndPassword", content: "")]
     
     @ObservedObject var users_vm: UsersVM
     
@@ -24,7 +25,7 @@ struct Start: View {
             
             ZStack(alignment: .top) {
                 
-                Color.red.ignoresSafeArea()
+                Color("SwearByGold").ignoresSafeArea()
                 
                 TabView {
                     Text("First")
@@ -40,21 +41,40 @@ struct Start: View {
                     NavigationLink(value: enterEmailPages[0]) {
                         HStack(alignment: .center) {
                             Spacer()
-                            Text("Get Started")
+                            Text("Sign In With Email Link")
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .foregroundColor(Color("text.black"))
+                                .foregroundColor(Color.white)
                                 .padding(.vertical)
                             Spacer()
                         }
-                        .background(Capsule().foregroundColor(Color("ShareGray")))
+                        .background(Capsule().foregroundColor(Color.white.opacity(0.1)))
+                        .padding(.horizontal).padding(.horizontal)
+                    }
+                    .padding(.bottom).padding(.bottom)
+                    
+                    NavigationLink(value: enterEmailPages[1]) {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Text("Sign In With Email & Password")
+                                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color.white)
+                                .padding(.vertical)
+                            Spacer()
+                        }
                         .padding(.horizontal).padding(.horizontal)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.1)
                     }
+                    
                 }
             }
             .navigationTitle("")
             .navigationDestination(for: EnterEmailPage.self) { page in
-                EnterEmail(email: $email, startpath: $startpath)
+                if page.screen == "EnterEmail" {
+                    EnterEmail(email: $email, startpath: $startpath)
+                } else {
+                    EnterEmailAndPassword(users_vm: users_vm, email: $email, startpath: $startpath)
+                }
+                
             }   
         }
     }

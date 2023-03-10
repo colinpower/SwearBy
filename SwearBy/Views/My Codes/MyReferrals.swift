@@ -28,6 +28,7 @@ struct MyReferrals: View {
     @StateObject var referral_codes_vm = ReferralCodesVM()
     
     
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
@@ -215,16 +216,47 @@ struct MyReferralCodeRow: View {
 
             //The first + last names and the phone number
             VStack(alignment: .leading, spacing: 0) {
+                
+                let subtitle_arr:[Any] = convertMyReferralCodeSubtitle(commission_type: my_code.commission_type,
+                                                                       commission_value: my_code.commission_value,
+                                                                       offer_type: my_code.offer_type,
+                                                                       offer_value: my_code.offer_value)
+                
+                let icon:String = subtitle_arr[0] as! String
+                let icon_color:Color = subtitle_arr[1] as? Color ?? Color.black
+                let commission_string:String = subtitle_arr[2] as! String
+                
+                //let offer_icon:String = subtitle_arr[3] as! String
+                //let offer_icon_color:Color = subtitle_arr[4] as? Color ?? Color.black
+                let offer_string:String = subtitle_arr[5] as! String
+                
+                
+                
 
                 Text(my_code.brand_name != "" ? my_code.brand_name : "?")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
                     .padding(.bottom, 6)
-                Text(my_code.offer_type + " " + my_code.commission_type)
-                    .foregroundColor(Color("text.gray"))
-                    .font(.system(size: 16, weight: .regular))
-                    .lineLimit(1)
+                
+                HStack(alignment: .center, spacing: 0) {
+                    Image(systemName: icon)
+                        .foregroundColor(icon_color)
+                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .frame(width: 20, alignment: .center)
+                        .padding(.trailing, 6)
+                    Text(commission_string + ", \(offer_string.lowercased())")
+                        .foregroundColor(Color("text.gray"))
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
+                    Spacer()
+                }
+                
+                
+//
+//                Text(my_code.offer_type + " " + my_code.commission_type)
+//                    .foregroundColor(Color("text.gray"))
+//                    .font(.system(size: 16, weight: .regular))
+//                    .lineLimit(1)
             }.padding(.leading, 16)
 
             Spacer()
@@ -266,6 +298,8 @@ struct FriendsReferralCodeRow: View {
     var friends_code:ReferralCodes
     
     @State private var friends_codes_private_brandURL = ""
+    
+    @StateObject private var private_users_vm = UsersVM()
 
     var body: some View {
         
@@ -298,16 +332,37 @@ struct FriendsReferralCodeRow: View {
 
             //The first + last names and the phone number
             VStack(alignment: .leading, spacing: 0) {
+                
+                let subtitle_arr:[Any] = convertMyReferralCodeSubtitle(commission_type: friends_code.commission_type,
+                                                                       commission_value: friends_code.commission_value,
+                                                                       offer_type: friends_code.offer_type,
+                                                                       offer_value: friends_code.offer_value)
+                
+                let offer_icon:String = subtitle_arr[3] as! String
+                let offer_icon_color:Color = subtitle_arr[4] as? Color ?? Color.black
+                let offer_string:String = subtitle_arr[5] as! String
+                
 
-                Text(friends_code.brand_name != "" ? friends_code.brand_name : "?")
+                Text(friends_code.brand_name != "" ? (friends_code.brand_name + " - Shared by " + private_users_vm.get_user_by_id.name.first) : "Brand name missing. Shared by \(private_users_vm.get_user_by_id.name.first)")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
                     .padding(.bottom, 6)
-                Text(friends_code.offer_type + " " + friends_code.commission_type)
-                    .foregroundColor(Color("text.gray"))
-                    .font(.system(size: 16, weight: .regular))
-                    .lineLimit(1)
+                HStack(alignment: .center, spacing: 0) {
+                    Image(systemName: offer_icon)
+                        .foregroundColor(offer_icon_color)
+                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .frame(width: 20, alignment: .center)
+                        .padding(.trailing, 6)
+                    Text(offer_string)
+                        .foregroundColor(Color("text.gray"))
+                        .font(.system(size: 15, weight: .regular, design: .rounded))
+                    Spacer()
+                }
+//                Text(friends_code.offer_type + " " + friends_code.commission_type)
+//                    .foregroundColor(Color("text.gray"))
+//                    .font(.system(size: 16, weight: .regular))
+//                    .lineLimit(1)
             }.padding(.leading, 16)
 
             Spacer()
@@ -329,6 +384,8 @@ struct FriendsReferralCodeRow: View {
         .padding(.vertical, 12)
         .onAppear {
 
+            self.private_users_vm.getUserByID(user_id: friends_code.user_id)
+            
             let backgroundPath = "brand/" + friends_code.brand_id + ".png"
 
             let storage = Storage.storage().reference()
@@ -384,16 +441,54 @@ struct PreloadedReferralProgramRow: View {
 
             //The first + last names and the phone number
             VStack(alignment: .leading, spacing: 0) {
-
+                
+                
+                let subtitle_arr:[Any] = convertMyReferralCodeSubtitle(commission_type: program.commission_type,
+                                                                       commission_value: program.commission_value,
+                                                                       offer_type: program.offer_type,
+                                                                       offer_value: program.offer_value)
+                
+                let icon:String = subtitle_arr[0] as! String
+                let icon_color:Color = subtitle_arr[1] as? Color ?? Color.black
+                let commission_string:String = subtitle_arr[2] as! String
+                
+                let offer_icon:String = subtitle_arr[3] as! String
+                let offer_icon_color:Color = subtitle_arr[4] as? Color ?? Color.black
+                let offer_string:String = subtitle_arr[5] as! String
+                
+                
                 Text(private_brands_vm.get_brand_by_id.name != "" ? private_brands_vm.get_brand_by_id.name : "?")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
                     .padding(.bottom, 6)
-                Text(private_brands_vm.get_brand_by_id.website.lowercased())
-                    .foregroundColor(Color("text.gray"))
-                    .font(.system(size: 16, weight: .regular))
-                    .lineLimit(1)
+                
+                if program.commission_type != "" {
+                    HStack(alignment: .center, spacing: 0) {
+                        Image(systemName: icon)
+                            .foregroundColor(icon_color)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .frame(width: 20, alignment: .center)
+                            .padding(.trailing, 6)
+                        Text(commission_string + ", \(offer_string.lowercased())")
+                            .foregroundColor(Color("text.gray"))
+                            .font(.system(size: 15, weight: .regular, design: .rounded))
+                        Spacer()
+                    }
+                } else {
+                    HStack(alignment: .center, spacing: 0) {
+                        Image(systemName: offer_icon)
+                            .foregroundColor(offer_icon_color)
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .frame(width: 20, alignment: .center)
+                            .padding(.trailing, 6)
+                        Text(offer_string)
+                            .foregroundColor(Color("text.gray"))
+                            .font(.system(size: 15, weight: .regular, design: .rounded))
+                        Spacer()
+                    }
+                }
+                
             }.padding(.leading, 16)
 
             Spacer()

@@ -569,14 +569,14 @@ struct AddNewCode: View {
                     Circle()
                         .frame(width: 40, height: 40)
                         .foregroundColor(Color("Background"))
-                    Image(systemName: "chevron.down")
+                    Image(systemName: "xmark")
                         .font(.system(size: 24, weight: .semibold, design: .rounded))
                         .foregroundColor(Color("text.black"))
                 }
             }
             
             Spacer()
-            Text("Add New Code")
+            Text("New Code")
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundColor(Color("text.black"))
                 .padding(.leading, 40)

@@ -35,15 +35,15 @@ struct Home: View {
                         VStack(alignment: .center) {
                             ForEach(posts_vm.posts_in_user_feed) { post in
                                 
-                                Button {
+                                
                                     
-                                    path.append(post)
+                                PostInFeed(users_vm: users_vm, post: post, path: $path)
+                                    .padding(.bottom, 60)
+                                Divider()
+                                    .padding(.bottom, 20)
+                                    //LargePostCondensed(post: post, path: $path, fullScreenModalPresented: $fullScreenModalPresented)
                                     
-                                } label: {
-                                    
-                                    LargePostCondensed(post: post, path: $path, fullScreenModalPresented: $fullScreenModalPresented)
-                                    
-                                }
+//                                }
                             }
                         }.padding(.bottom, 100)
                     }
@@ -52,7 +52,7 @@ struct Home: View {
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Posts.self) { post in
-                    PostView(users_vm: users_vm, post: post, path: $path)
+                    ExpandedPost(users_vm: users_vm, post: post, path: $path)
                 }
                 .navigationDestination(for: Users.self) { user in
                     FriendProfile(users_vm: users_vm, path: $path, friend_user: user)
