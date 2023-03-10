@@ -33,10 +33,9 @@ struct FriendProfile: View {
             // Header
             HStack (alignment: .center) {
                 Spacer()
-                Text(friend_user.name.first_last)
+                Text(friend_user.name.first + "'s Profile")
                     .font(.system(size: 22, weight: .semibold, design: .rounded))
                     .foregroundColor(Color("text.black"))
-                    .padding(.trailing, 40)
                 Spacer()
             }
             .padding(.bottom, 4)
@@ -88,6 +87,9 @@ struct FriendProfile: View {
         .edgesIgnoringSafeArea(.all)
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: Posts.self) { post in
+            PostView(users_vm: users_vm, post: post, path: $path)
+        }
         .onAppear {
             
             self.private_posts_vm.getOneUserPosts(user_id: friend_user.user_id)

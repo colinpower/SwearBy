@@ -34,6 +34,11 @@ struct MyTabView: View {
         }.edgesIgnoringSafeArea(.bottom)
         .frame(height: 80)
         .background(Color("Background"))
+        .sheet(isPresented: $showHalfSheet) {
+            PlusTabHalfSheet(fullScreenModalPresented: $fullScreenModalPresented)
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
 //        .sheet(item: $fullScreenModalPresented, onDismiss: {
 //            
 //            if selectedPage == 0 {
@@ -94,9 +99,9 @@ struct TabViewItem: View {
         case 0:
             return ["house", "Home"]
         case 1:
-            return ["plus.square.fill", "Add Post"]
+            return ["plus.square", "Add Post"]
         case 2:
-            return ["dollarsign.square", "Vault"]
+            return ["barcode.viewfinder", "Vault"]
         case 3:
             return ["person", "Profile"]
         default:
@@ -109,21 +114,22 @@ struct TabViewItem: View {
         Group {
             Button {
                 if (position == 1) {
-//                    showHalfSheet = true
-                    fullScreenModalPresented = .add_post
+                    showHalfSheet = true
+//                    fullScreenModalPresented = .add_post
                 } else {
                     selectedTab = position
                 }
             } label: {
                 VStack (alignment: .center) {
                     
+                    Spacer()
                     Image(systemName: tabViewItemImageName[0])
                         .foregroundColor(selectedTab == position ? Color("text.black") : Color("text.gray"))
                         .font(.system(size: 25, weight: .regular))
                     Spacer()
-                    Text(tabViewItemImageName[1])
-                        .foregroundColor(selectedTab == position ? Color("text.black") : Color("text.gray"))
-                        .font(.system(size: 10, weight: .medium))
+//                    Text(tabViewItemImageName[1])
+//                        .foregroundColor(selectedTab == position ? Color("text.black") : Color("text.gray"))
+//                        .font(.system(size: 10, weight: .medium))
                     
                 }
             }.frame(maxWidth: .infinity, maxHeight: 36)

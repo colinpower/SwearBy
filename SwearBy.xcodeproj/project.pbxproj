@@ -49,7 +49,7 @@
 		30640C4E29B5D83600981D3C /* FriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4D29B5D83600981D3C /* FriendRow.swift */; };
 		30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */; };
 		30640C5229B5F10800981D3C /* AcceptFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5129B5F10800981D3C /* AcceptFriendRow.swift */; };
-		30640C5429B5FE2B00981D3C /* ThrowawaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */; };
+		30640C5429B5FE2B00981D3C /* PlusTabHalfSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5329B5FE2B00981D3C /* PlusTabHalfSheet.swift */; };
 		30640C5629B612D100981D3C /* EnterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5529B612D100981D3C /* EnterName.swift */; };
 		30640C5829B612D800981D3C /* EnterPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5729B612D800981D3C /* EnterPhone.swift */; };
 		30640C5A29B612E100981D3C /* CheckPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C5929B612E000981D3C /* CheckPhone.swift */; };
@@ -70,6 +70,8 @@
 		30640C7D29B9FBE000981D3C /* EditMyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7C29B9FBE000981D3C /* EditMyCode.swift */; };
 		30640C7F29BA7ECF00981D3C /* AddTabHalfSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */; };
 		30640C8129BA945A00981D3C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8029BA945A00981D3C /* Settings.swift */; };
+		30640C8329BAC50900981D3C /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8229BAC50900981D3C /* CreatePost.swift */; };
+		30640C8529BAC50F00981D3C /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8429BAC50F00981D3C /* CreateRequest.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -137,7 +139,7 @@
 		30640C4D29B5D83600981D3C /* FriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRow.swift; sourceTree = "<group>"; };
 		30640C4F29B5E7B400981D3C /* SuggestedFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedFriendRow.swift; sourceTree = "<group>"; };
 		30640C5129B5F10800981D3C /* AcceptFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptFriendRow.swift; sourceTree = "<group>"; };
-		30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowawaySheet.swift; sourceTree = "<group>"; };
+		30640C5329B5FE2B00981D3C /* PlusTabHalfSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusTabHalfSheet.swift; sourceTree = "<group>"; };
 		30640C5529B612D100981D3C /* EnterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterName.swift; sourceTree = "<group>"; };
 		30640C5729B612D800981D3C /* EnterPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhone.swift; sourceTree = "<group>"; };
 		30640C5929B612E000981D3C /* CheckPhone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhone.swift; sourceTree = "<group>"; };
@@ -158,6 +160,8 @@
 		30640C7C29B9FBE000981D3C /* EditMyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMyCode.swift; sourceTree = "<group>"; };
 		30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabHalfSheet.swift; sourceTree = "<group>"; };
 		30640C8029BA945A00981D3C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		30640C8229BAC50900981D3C /* CreatePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePost.swift; sourceTree = "<group>"; };
+		30640C8429BAC50F00981D3C /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -303,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				30640C6129B624D000981D3C /* AddPost.swift */,
+				30640C8229BAC50900981D3C /* CreatePost.swift */,
+				30640C8429BAC50F00981D3C /* CreateRequest.swift */,
 				30640C6329B62A1800981D3C /* CustomImagePicker.swift */,
 			);
 			path = "Add Post";
@@ -435,7 +441,7 @@
 				30640C6029B623AB00981D3C /* Add Post */,
 				30FB5E5C29AAAAB700020C9A /* ItemHalfSheet.swift */,
 				30640BF929B2E41800981D3C /* TestSheet.swift */,
-				30640C5329B5FE2B00981D3C /* ThrowawaySheet.swift */,
+				30640C5329B5FE2B00981D3C /* PlusTabHalfSheet.swift */,
 				30640C7E29BA7ECF00981D3C /* AddTabHalfSheet.swift */,
 				30640C6729B753F700981D3C /* My Codes */,
 				30640C4429B5CF8000981D3C /* Friends */,
@@ -622,6 +628,7 @@
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C4A29B5CFE200981D3C /* ContactsVM.swift in Sources */,
 				30640C7129B77EE400981D3C /* PreloadedReferralProgramVM.swift in Sources */,
+				30640C8529BAC50F00981D3C /* CreateRequest.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
 				30640C5829B612D800981D3C /* EnterPhone.swift in Sources */,
 				30640C3E29B33B0F00981D3C /* LargePostCondensed.swift in Sources */,
@@ -638,7 +645,8 @@
 				30640C8129BA945A00981D3C /* Settings.swift in Sources */,
 				30FB5E4D29A87FBD00020C9A /* PostStruct.swift in Sources */,
 				30640C6629B62A7C00981D3C /* Crop.swift in Sources */,
-				30640C5429B5FE2B00981D3C /* ThrowawaySheet.swift in Sources */,
+				30640C8329BAC50900981D3C /* CreatePost.swift in Sources */,
+				30640C5429B5FE2B00981D3C /* PlusTabHalfSheet.swift in Sources */,
 				30FB5E6329AAB10A00020C9A /* ProductsVM.swift in Sources */,
 				30FB5E5929AA742100020C9A /* Brands.swift in Sources */,
 				30FB5E3E29A85FFF00020C9A /* Home.swift in Sources */,

@@ -14,6 +14,7 @@ struct LargePostCondensed: View {
     var post: Posts
     
     @Binding var path: NavigationPath
+    @Binding var fullScreenModalPresented: FullScreenModalPresented?
     
     @StateObject private var private_users_vm = UsersVM()
     @StateObject private var private_posts_vm = PostsVM()
@@ -119,7 +120,7 @@ struct LargePostCondensed: View {
             }
         }
         .sheet(isPresented: $didMarkStar) {
-            ThrowawaySheet()
+            PlusTabHalfSheet(fullScreenModalPresented: $fullScreenModalPresented)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }

@@ -18,6 +18,9 @@ struct Home: View {
     @State private var path = NavigationPath()
     
     
+    @StateObject private var private_tab_bar_preloaded_referral_program_vm = PreloadedReferralProgramVM()
+    @State private var private_tab_bar_preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
+    
     var body: some View {
         VStack(spacing: 0) {
             
@@ -38,7 +41,7 @@ struct Home: View {
                                     
                                 } label: {
                                     
-                                    LargePostCondensed(post: post, path: $path)
+                                    LargePostCondensed(post: post, path: $path, fullScreenModalPresented: $fullScreenModalPresented)
                                     
                                 }
                             }
@@ -70,6 +73,8 @@ struct Home: View {
                 AddFriends(users_vm: users_vm)
             case .add_post:
                 AddPost(users_vm: users_vm)
+            case .add_code:
+                AddNewCode(users_vm: users_vm, preloaded_referral_programs_vm: private_tab_bar_preloaded_referral_program_vm, preloaded_referral_program: $private_tab_bar_preloaded_referral_program)
             default:
                 AddFriends(users_vm: users_vm)
             }
@@ -77,3 +82,60 @@ struct Home: View {
 
     }
 }
+
+
+
+
+//struct TriggerHalfSheet: View {
+//
+//    @Binding var fullScreenModalPresented: FullScreenModalPresented?
+//
+//    @Environment(\.dismiss) var dismiss
+//    @ObservedObject var users_vm: UsersVM
+//
+//    @State var type_selected:Int = 0
+//
+//    var body: some View {
+//
+//        ZStack(alignment: .bottomTrailing) {
+//            if type_selected == 0 {
+//                CreatePost(users_vm: users_vm)
+//            } else {
+//                CreateRequest()
+//            }
+//
+//            ZStack(alignment: .center) {
+//
+//                Capsule()
+//                    .foregroundColor(.blue)
+//                    .frame(width: UIScreen.main.bounds.width / 2, height: 60)
+//
+//                HStack {
+//                    Spacer()
+//                    Button {
+//                        type_selected = 0
+//                    } label: {
+//                        Text(" Post ")
+//                            .font(.system(size: 16, weight: .medium, design: .rounded))
+//                            .foregroundColor(Color.white)
+//                            .padding(.horizontal, 4)
+//                    }
+//                    Spacer()
+//                    Button {
+//                        type_selected = 1
+//                    } label: {
+//                        Text("Request")
+//                            .font(.system(size: 16, weight: .medium, design: .rounded))
+//                            .foregroundColor(Color.white)
+//                            .padding(.horizontal, 4)
+//                    }
+//                    Spacer()
+//                }
+//
+//
+//
+//            }
+//        }
+//    }
+//
+//}

@@ -100,7 +100,7 @@ struct AddFriends: View {
                         Spacer()
                         
                         Image(systemName: "arrow.right")
-                            .foregroundColor(Color("TextFieldGray"))
+                            .foregroundColor(Color("text.gray"))
                             .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .padding(.trailing)
                         
@@ -142,7 +142,7 @@ struct AddFriends: View {
         VStack(alignment: .leading, spacing: 0) {
             
             HStack (spacing: 0) {
-                Text("My Friends on SwearBy")
+                Text("Friends on SwearBy - From Your Contacts")
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundColor(Color("text.black"))
                     .padding(.bottom, 4)

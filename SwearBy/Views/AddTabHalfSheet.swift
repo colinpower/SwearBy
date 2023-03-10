@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AddTabHalfSheet: View {
 
-    @ObservedObject var users_vm: UsersVM
-    @Binding var selectedTab:Int
+    @Environment(\.dismiss) var dismiss
+    
+    //@ObservedObject var users_vm: UsersVM
+    //@Binding var selectedTab:Int
     @Binding var fullScreenModalPresented: FullScreenModalPresented?
     //@Binding var selectedPage:Int
 
@@ -21,7 +23,13 @@ struct AddTabHalfSheet: View {
 
             Button {
                 //self.selectedPage = 1
-                fullScreenModalPresented = .add_post
+                
+                dismiss()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    fullScreenModalPresented = .add_post
+                }
+                
 
             } label: {
                 Text("Add Post")
@@ -30,8 +38,15 @@ struct AddTabHalfSheet: View {
             Spacer()
 
             Button {
+                
+                dismiss()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    fullScreenModalPresented = .add_friends
+                }
+                
                 //self.selectedPage = 2
-                fullScreenModalPresented = .add_friends
+                //fullScreenModalPresented = .add_friends
 
             } label: {
                 Text("add friends")
