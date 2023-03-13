@@ -75,7 +75,12 @@ class DataManager: ObservableObject {
     
     func getPostsInUserFeedListener(users_vm: UsersVM, onSuccess: @escaping([Posts]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
         
-        let listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
+        var listOf10Friends = [""]
+        if !Array(users_vm.one_user.friends_list.prefix(10)).isEmpty {
+            listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
+        }
+
+        // let listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
         
         let listenerRegistration = db.collection("posts")
             .whereField("user_id", in: listOf10Friends)

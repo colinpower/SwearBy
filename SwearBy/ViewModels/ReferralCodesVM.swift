@@ -36,7 +36,12 @@ class ReferralCodesVM: ObservableObject, Identifiable {
     
     func getMyFriendsCodes(users_vm: UsersVM) {
         
-        let listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
+        var listOf10Friends = [""]
+        if !Array(users_vm.one_user.friends_list.prefix(10)).isEmpty {
+            listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
+        }
+        
+        //let listOf10Friends = Array(users_vm.one_user.friends_list.prefix(10))
         
         db.collection("referral_codes")
             .whereField("user_id", in: listOf10Friends)

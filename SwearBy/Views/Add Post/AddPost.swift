@@ -26,7 +26,6 @@ struct AddPost: View {
     @State private var croppedImage: UIImage?
     @State private var path = NavigationPath()
     
-    
     @State var description: String = ""
     @State var product_link: String = ""
     @State private var isPublic = false
@@ -58,7 +57,6 @@ struct AddPost: View {
                 
                 VStack(spacing: 0) {
                     
-                    //AddPostSheetHeader(users_vm: users_vm, croppedImage: $croppedImage, description: $description, product_link: $product_link, isPublic: $isPublic)
                     addPostSheetHeader
                     
                     ScrollView(showsIndicators: false) {
@@ -122,66 +120,6 @@ struct AddPost: View {
                             
                             Spacer()
                             
-//                            Button {
-//
-//                                pasteLinkFocused = true
-//                            } label: {
-//
-//                                ZStack(alignment: .center) {
-//                                    RoundedRectangle(cornerRadius: 20)
-//                                        .foregroundColor(Color("TextFieldGray"))
-//                                        .frame(width: pic_width, height: pic_width)
-//                                        .shadow(radius: 4)
-//
-//                                    VStack(alignment: .center, spacing: 0) {
-//
-//                                        Rectangle()
-//                                            .foregroundColor(.clear)
-//                                            .frame(width: 120, height: 32)
-//
-//                                        Spacer()
-//
-//                                        Text("Product image")
-//                                            .font(.system(size: 12, weight: .regular, design: .rounded))
-//                                            .foregroundColor(Color("text.gray"))
-//
-//                                        Spacer()
-//                                        Spacer()
-//
-//
-//                                        if (!description.isEmpty && product_link.isEmpty && !pasteLinkFocused) {
-//                                            // blue
-//                                            ZStack(alignment: .center) {
-//
-//                                                Capsule()
-//                                                    .foregroundColor(.blue)
-//                                                    .frame(width: 120, height: 32)
-//                                                Text("Paste link")
-//                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-//                                                    .foregroundColor(Color.white)
-//
-//                                            }
-//                                        } else {
-//                                            ZStack(alignment: .center) {
-//
-//                                                Capsule()
-//                                                    .strokeBorder(lineWidth: 2).foregroundColor(Color.gray)
-//                                                    .frame(width: 120, height: 32)
-//                                                Text("Paste link")
-//                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-//                                                    .foregroundColor(Color.gray)
-//
-//                                            }
-//                                        }
-//
-//                                    }.padding(.horizontal).padding(.vertical)
-//                                        .frame(width: pic_width, height: pic_width)
-//                                }
-//
-//                            }
-//                            Spacer()
-                            
-                            
                         }
                         .padding(.vertical).padding(.vertical)
                         
@@ -223,98 +161,7 @@ struct AddPost: View {
                             }
                         }
                         
-//                        AddPost_BrandOrProductButton(icon_halfSheet: "bag", title_halfSheet: "Select a product")
-//
-//                        AddPost_BrandOrProductButton(icon_halfSheet: "barcode", title_halfSheet: "Add referral code")
-
-//
-//                        // UNDO THIS ONCE IVE CREATED AN ENUM TO HANDLE THIS INSTEAD
-//                        if private_preloaded_referral_program.brand_id == "" {
-//                            Button {
-//                                addNewPostFullScreenPresented = .add_brand
-////                                isShowingBrandPicker = true
-//                            } label: {
-//                                HStack {
-//                                    Text("Select a brand")
-//                                    Spacer()
-//                                }
-//                                .padding()
-//                            }
-//
-//                        } else {
-//
-//                            HStack {
-//                                Text(private_preloaded_referral_program.brand_name)
-//                                Spacer()
-//                                Button {
-//                                    private_preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
-//                                } label: {
-//                                    Image(systemName: "xmark")
-//                                }
-//                            }
-//                            .padding()
-//
-//                        }
-                        
-                        
-                        //DFDC5036-081B-4E0E-80A5-6020C00D7A95
-
-//                        let brand_id_temp_var = "DFDC5036-081B-4E0E-80A5-6020C00D7A95"
-//
-//                        if private_preloaded_referral_program.brand_id == "" {
-////                        if brand_id_temp_var == "" {
-//
-//                        } else {
-//                            if selected_product.product_id == "" {
-//                                Button {
-//                                    addNewPostFullScreenPresented = .add_product
-////                                    isShowingProductPicker = true
-//                                } label: {
-//                                    HStack {
-//                                        Text("Select a product")
-//                                        Spacer()
-//                                    }
-//                                    .padding()
-//                                }
-//
-//                            } else {
-//
-//                                HStack {
-//                                    Text(selected_product.name)
-//                                    Spacer()
-//                                    Button {
-//                                        selected_product = EmptyVariables().empty_products
-//                                    } label: {
-//                                        Image(systemName: "xmark")
-//                                    }
-//                                }
-//                                .padding()
-//
-//                            }
-//                        }
-
-                        
-                        
-                        // POTENTIALLY KEEP THIS SECTION
-//                        Divider()
-//                            .padding(.vertical)
-//
-//                        VStack (alignment: .leading, spacing: 0) {
-//
-//                            Text(isPublic ? "Visibility: Everyone" : "Visibility: Friends Only")
-//                                .font(.system(size: 18, weight: .semibold, design: .rounded))
-//                                .padding(.bottom, 4)
-//
-//                            Toggle(isOn: $isPublic) {
-//                                Text("Share with everyone on SwearBy")
-//                                    .font(.system(size: 16, weight: .regular, design: .rounded))
-//                                    .foregroundColor(.gray)
-//                            }
-//
-//                        }.padding(.bottom)
-//                            .padding(.horizontal)
-                        
-                        
+                        AddPost_IsPublicButton(isPublic: $isPublic)
                         
                         Spacer()
                     }
@@ -375,21 +222,15 @@ struct AddPost: View {
             Spacer()
             
             if let croppedImage {
-                if ((description != "") && (product_link != "")) {
+                if ((description != "") && (selected_product.product_id != "")) {
                     
                     Button {
                         
                         // Create ids
-                        let brand_id = UUID().uuidString
-                        let product_id = UUID().uuidString
+                        let brand_id = private_preloaded_referral_program.brand_id
+                        let product_id = selected_product.product_id
                         let purchase_id = UUID().uuidString
                         let post_id = UUID().uuidString
-                        
-                        // Add brand
-                        BrandsVM().addBrand(brand_id: brand_id, name: "", website: product_link)
-                        
-                        // Add product
-                        ProductsVM().addProduct(brand_id: brand_id, link: product_link, name: "", product_id: product_id)
                         
                         // Add purchase
                         PurchasesVM().addPurchase(brand_id: brand_id, product_id: product_id, purchase_id: purchase_id, user_id: users_vm.one_user.user_id, verification_status: "UNVERIFIED")
@@ -399,7 +240,6 @@ struct AddPost: View {
                         
                         // Add image
                         uploadPhoto(post_id: post_id)
-                        
                         
                         dismiss()
                         
@@ -594,5 +434,60 @@ struct AddPost_ProductButton: View {
                 Divider().foregroundColor(Color("text.gray"))
             }.frame(height: 60)
         }.frame(height: 60)
+    }
+}
+
+struct AddPost_IsPublicButton: View {
+    
+    @Binding var isPublic:Bool
+    //@Binding var chosen_product: Products
+    
+    
+    var body: some View {
+        
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Spacer()
+                    Image(systemName: "infinity")
+                        .font(.system(size: 26, weight: .regular, design: .rounded))
+                        .foregroundColor(Color("text.black"))
+                        .padding(.vertical, 17)
+                    Spacer()
+                }.frame(width: 36)
+                    .padding(.horizontal)
+                    .padding(.leading, 8)
+                
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: 0) {
+                        Text("Allow Friends to Repost")
+                            .font(.system(size: 17, weight: .regular, design: .rounded))
+                            .foregroundColor(Color("text.black"))
+                        Spacer()
+                        
+                        Toggle(isOn: $isPublic) {}
+                            .labelsHidden()
+                    }
+                }
+                .padding(.trailing)
+                .padding(.top, 20)
+                .padding(.bottom, 21)
+                .frame(height: 60)
+            }.frame(height: 60)
+
+            HStack(spacing: 0) {
+                Image(systemName: "square")
+                    .foregroundColor(.clear)
+                    .frame(width: 36)
+                    .padding(.leading, 8)
+                    .padding(.horizontal)
+                Text("Let your friends share this post with their friends")
+                    .font(.system(size: 14, weight: .regular, design: .rounded))
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .foregroundColor(Color("text.gray"))
+                    .padding(.vertical, 8)
+            }.frame(height: 28)
+        }
     }
 }

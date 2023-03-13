@@ -20,7 +20,6 @@ struct ContentView: View {
     
     var body: some View {
         
-
         let currentSessionUID = viewModel.session?.uid ?? ""
         let currentSessionEmail = viewModel.session?.email ?? ""
         

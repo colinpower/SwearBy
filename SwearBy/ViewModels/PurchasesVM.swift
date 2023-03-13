@@ -57,8 +57,4 @@ class PurchasesVM: ObservableObject, Identifiable {
             }
         }
     }
-    
-    
-    
-    
 }
