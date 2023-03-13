@@ -1,23 +1,22 @@
 //
-//  AddNewBrand.swift
+//  AddNewProduct.swift
 //  SwearBy
 //
-//  Created by Colin Power on 3/7/23.
+//  Created by Colin Power on 3/10/23.
 //
-
 import SwiftUI
 import PhotosUI
 import FirebaseStorage
 
-struct AddNewBrand: View {
+struct AddNewProduct: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var private_brands_vm: BrandsVM
+    @Binding var brand_id: String
     
     @State private var name = ""
     
-    @State private var website = ""
+    @State private var link = ""
     
     @Binding var searchQuery:String
     
@@ -29,7 +28,7 @@ struct AddNewBrand: View {
 
         VStack(spacing: 0) {
             
-            addNewBrandHeader
+            addNewProductHeader
             
             Form {
                 Section {
@@ -67,7 +66,7 @@ struct AddNewBrand: View {
                                     
                                     Spacer()
                                     
-                                    Text("Add a brand image (optional")
+                                    Text("Add a high-quality product image")
                                         .font(.system(size: 12, weight: .regular, design: .rounded))
                                         .multilineTextAlignment(.center)
                                         .lineLimit(2)
@@ -96,7 +95,7 @@ struct AddNewBrand: View {
                     
                 }
                 Section {
-                    TextField("Brand's name", text: $name)
+                    TextField("Product's name", text: $name)
                         .foregroundColor(Color("text.black"))
                         .multilineTextAlignment(.leading)
                         .keyboardType(.default)
@@ -104,7 +103,7 @@ struct AddNewBrand: View {
                 }
                 
                 Section {
-                    TextField("Brand's website", text: $website)
+                    TextField("Link to product", text: $link)
                         .foregroundColor(Color("text.black"))
                         .multilineTextAlignment(.leading)
                         .keyboardType(.default)
@@ -129,7 +128,7 @@ struct AddNewBrand: View {
         )
     }
     
-    func uploadPhoto(brand_id: String) {
+    func uploadPhoto(product_id: String) {
         
         // Make sure that the selected image property isn't nil
         guard croppedImage != nil else {
@@ -151,7 +150,7 @@ struct AddNewBrand: View {
         }
         
         //Specify the file path and name
-        let fileRef = storageRef.child("brand/\(brand_id).png")             //let fileRef = storageRef.child("images/\(UUID().uuidstring).jpg")
+        let fileRef = storageRef.child("product/\(product_id).png")             //let fileRef = storageRef.child("images/\(UUID().uuidstring).jpg")
         
         // Upload that data
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
@@ -171,7 +170,7 @@ struct AddNewBrand: View {
     
     
     
-    var addNewBrandHeader: some View {
+    var addNewProductHeader: some View {
 
         HStack (alignment: .center) {
             
@@ -192,25 +191,25 @@ struct AddNewBrand: View {
             }
             
             Spacer()
-            Text("Add New Brand")
+            Text("Add New Product")
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundColor(Color("text.black"))
                 .padding(.leading, 40)
             Spacer()
             
             
-            let canAddBrand = ((name != "") && (website != ""))
+            let canAddProduct = ((name != "") && (link != ""))
             
             Button {
                 
                 // create
-                let brand_id = UUID().uuidString
+                let product_id = UUID().uuidString
                 
                 // upload the new code
-                private_brands_vm.addBrand(brand_id: brand_id, name: name, website: website)
+                ProductsVM().addProduct(brand_id: brand_id, link: link, name: name, product_id: product_id)
                 
                 // upload the image
-                uploadPhoto(brand_id: brand_id)
+                uploadPhoto(product_id: product_id)
                 
                 // add the brand's name to the search query on prior page
                 searchQuery = name
@@ -222,13 +221,13 @@ struct AddNewBrand: View {
                 ZStack(alignment: .center) {
                     
                     Capsule()
-                        .foregroundColor(canAddBrand ? Color.blue : Color.gray)
+                        .foregroundColor(canAddProduct ? Color.blue : Color.gray)
                         .frame(width: 80, height: 32)
                     Text("Add")
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .foregroundColor(Color.white)
                 }
-            }.disabled(!canAddBrand)
+            }.disabled(!canAddProduct)
             
         }
         .padding(.bottom, 4)

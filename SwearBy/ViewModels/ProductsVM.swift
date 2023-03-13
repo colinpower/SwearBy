@@ -17,6 +17,9 @@ class ProductsVM: ObservableObject, Identifiable {
     private var db = Firestore.firestore()
     
     @Published var get_product_by_id = Products(name: "", link: "https://uncommon.app", brand_id: "", product_id: "")
+    @Published var products_for_brand = [Products]()
+    
+    var products_for_brand_listener: ListenerRegistration!
         
     func getProductById(product_id: String) {
         
@@ -39,6 +42,25 @@ class ProductsVM: ObservableObject, Identifiable {
             }
         }
     }
+    
+    
+    //getAllProductsForBrandListener
+    
+    func listenForProductsForBrand(brand_id: String) {
+    
+        self.dm.getAllProductsForBrandListener(brand_id: brand_id, onSuccess: { (products) in
+
+            self.products_for_brand = products
+
+//            print("FOUND PRODUCTS")
+//            print(self.products_for_brand)
+
+        }, listener: { (listener) in
+            self.products_for_brand_listener = listener
+        })
+    }
+
+    
     
     func addProduct(brand_id: String, link: String, name: String, product_id: String) {
          

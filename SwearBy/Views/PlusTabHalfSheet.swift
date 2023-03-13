@@ -16,7 +16,7 @@ struct PlusTabHalfSheet: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Spacer()
-                Text("Add New")
+                Text("Add")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
                 Spacer()
@@ -41,7 +41,7 @@ struct PlusTabHalfSheet: View {
                 }
                 
             } label: {
-                PlusTabHalfSheetButton(icon_halfSheet: "questionmark.square.dashed", title_halfSheet: "Request")
+                PlusTabHalfSheetButton(icon_halfSheet: "questionmark.square.dashed", title_halfSheet: "Request for Recommendations")
             }
             
             Button {
@@ -51,7 +51,7 @@ struct PlusTabHalfSheet: View {
                     fullScreenModalPresented = .add_code
                 }
             } label: {
-                PlusTabHalfSheetButton(icon_halfSheet: "barcode", title_halfSheet: "Code")
+                PlusTabHalfSheetButton(icon_halfSheet: "barcode", title_halfSheet: "Code or Link")
             }
             
             Button {

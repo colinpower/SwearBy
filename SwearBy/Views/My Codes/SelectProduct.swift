@@ -1,25 +1,27 @@
 //
-//  SelectBrand.swift
+//  SelectProduct.swift
 //  SwearBy
 //
-//  Created by Colin Power on 3/7/23.
+//  Created by Colin Power on 3/10/23.
 //
 
 import SwiftUI
 import FirebaseStorage
 import SDWebImageSwiftUI
 
-struct SelectBrand: View {
+struct SelectProduct: View {
     
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var preloaded_referral_programs_vm: PreloadedReferralProgramVM
-    @Binding var preloaded_referral_program: PreloadedReferralPrograms
     
-    @StateObject private var private_brands_vm = BrandsVM()
+    @State var brand_id_filtered:String = ""
     
-    @State var searchQuery = ""
-    @State var filteredBrands:[Brands] = []
-    @State var isShowingAddBrandSheet:Bool = false
+    @StateObject private var private_products_vm = ProductsVM()
+    @Binding var selected_product: Products
+    
+    @State private var searchQuery = ""
+//    @State private var filteredProducts:[Products] = []
+    @State private var isShowingAddProductSheet:Bool = false
+    
     
     var body: some View {
         
@@ -35,42 +37,30 @@ struct SelectBrand: View {
                     VStack(alignment: .leading, spacing: 0) {
     
                         
-                        ForEach(searchQuery == "" ? private_brands_vm.all_brands : private_brands_vm.all_brands.filter { $0.name.localizedCaseInsensitiveContains(searchQuery) }) { brand in
+                        ForEach(searchQuery == "" ? private_products_vm.products_for_brand : private_products_vm.products_for_brand.filter { $0.name.localizedCaseInsensitiveContains(searchQuery) }) { temp_product in
                             
                             Button {
                                 
-                                let temp_preload:[PreloadedReferralPrograms] = preloaded_referral_programs_vm.preloaded_referral_programs.filter { $0.brand_id == brand.brand_id }
-                                
-                                // If this brand isn't one of the preloaded ones
-                                if temp_preload.isEmpty {
-                                    
-                                    preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
-                                    preloaded_referral_program.brand_name = brand.name
-                                    preloaded_referral_program.brand_id = brand.brand_id
-                                
-                                    // Else if it is one of the preloaded ones
-                                } else {
-                                    preloaded_referral_program = temp_preload.first ?? PreloadedReferralPrograms(brand_id: brand.brand_id, brand_name: brand.name, code: "", commission_type: "None", commission_value: "", expiration: 0, for_new_customers_only: false, minimum_spend: "", link: "", link_for_setup: "", offer_type: "", offer_value: "", preloaded_referral_program_id: "", product_ids: [], steps: SetupReferralSteps(one: "", two: "", three: ""))
-                                }
+                                selected_product = Products(name: temp_product.name, link: temp_product.link, brand_id: temp_product.brand_id, product_id: temp_product.product_id)
                                 
                                 // Dismiss
                                 dismiss()
                                 
                             } label: {
                                 
-                                BrandRow(brand: brand)
+                                ProductRow(product: temp_product)
                                 
                             }
                         }
                         
                         Button {
-                            isShowingAddBrandSheet = true
+                            isShowingAddProductSheet = true
                         } label: {
-                            AddBrandRow()
+                            AddProductRow()
                         }
                         
                     }
-                    .searchable(text: $searchQuery, prompt: "Search by brand name")
+                    .searchable(text: $searchQuery, prompt: "Search by product or add new")
                     .padding(.bottom, 100)
                     .padding(.horizontal)
                     .navigationTitle("Select Brand")
@@ -99,21 +89,20 @@ struct SelectBrand: View {
 //            filterBrands()
 //            })
         .onAppear {
-
-            self.private_brands_vm.listenForAllBrands()
             
-            filteredBrands = private_brands_vm.all_brands
-
-        }
-        .onDisappear {
-            
-            if self.private_brands_vm.all_brands_listener != nil {
-                self.private_brands_vm.all_brands_listener.remove()
+            if brand_id_filtered == "" {
+                
+            } else {
+                self.private_products_vm.listenForProductsForBrand(brand_id: brand_id_filtered)
+                
             }
             
+//            filteredProducts = private_products_vm.listenForProductsForBrand(brand_id: brand_id_filtered)
+
         }
-        .sheet(isPresented: $isShowingAddBrandSheet) {
-            AddNewBrand(private_brands_vm: private_brands_vm, searchQuery: $searchQuery)
+        .sheet(isPresented: $isShowingAddProductSheet) {
+            AddNewProduct(brand_id: $brand_id_filtered, searchQuery: $searchQuery)
+            //AddNewBrand(private_brands_vm: private_brands_vm, searchQuery: $searchQuery)
         }
     }
     
@@ -145,7 +134,7 @@ struct SelectBrand: View {
             Button {
                 
                 // load the "Add Brand" sheet
-                isShowingAddBrandSheet = true
+                isShowingAddProductSheet = true
                 
             } label: {
                 ZStack(alignment: .center) {
@@ -179,19 +168,19 @@ struct SelectBrand: View {
 
 
 
-struct BrandRow: View {
+struct ProductRow: View {
 
-    var brand:Brands
+    var product:Products
     
-    @State private var private_brandURL = ""
+    @State private var private_productURL = ""
 
     var body: some View {
         
         
         HStack(alignment: .center, spacing: 0) {
 
-            if private_brandURL != "" {
-                WebImage(url: URL(string: private_brandURL)!)
+            if private_productURL != "" {
+                WebImage(url: URL(string: private_productURL)!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 40, height: 40)
@@ -202,8 +191,8 @@ struct BrandRow: View {
                     Circle().frame(width: 40, height: 40)
                         .foregroundColor(.blue)
                     
-                    if brand.name.count > 0 {
-                        Text(brand.name.prefix(1))
+                    if product.name.count > 0 {
+                        Text(product.name.prefix(1))
                             .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     } else {
@@ -218,15 +207,15 @@ struct BrandRow: View {
             //The first + last names and the phone number
             VStack(alignment: .leading, spacing: 0) {
 
-                Text(brand.name != "" ? brand.name : "?")
+                Text(product.name != "" ? product.name : "?")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
-                    .padding(.bottom, 6)
-                Text(formattedBrandWebsite(website: brand.website))
-                    .foregroundColor(Color("text.gray"))
-                    .font(.system(size: 16, weight: .regular))
-                    .lineLimit(1)
+                    .padding(.vertical, 6)
+//                Text(formattedBrandWebsite(website: brand.website))
+//                    .foregroundColor(Color("text.gray"))
+//                    .font(.system(size: 16, weight: .regular))
+//                    .lineLimit(1)
             }.padding(.leading, 16)
 
             Spacer()
@@ -243,7 +232,7 @@ struct BrandRow: View {
         .padding(.vertical, 12)
         .onAppear {
 
-            let backgroundPath = "brand/" + brand.brand_id + ".png"
+            let backgroundPath = "product/" + product.product_id + ".png"
 
             let storage = Storage.storage().reference()
 
@@ -252,31 +241,31 @@ struct BrandRow: View {
                     print(err?.localizedDescription ?? "Issue showing the right image")
                     return
                 } else {
-                    self.private_brandURL = "\(url!)"
+                    self.private_productURL = "\(url!)"
                 }
             }
         }
     }
     
-    func formattedBrandWebsite(website: String) -> String {
-        
-        var parsed = website.replacingOccurrences(of: "https://", with: "")
-        
-        parsed = website.replacingOccurrences(of: "http://", with: "")
-        
-        parsed = website.replacingOccurrences(of: "www.", with: "")
-        
-        if parsed.last == "/" {
-            parsed = String(parsed.prefix(parsed.count-1))
-        }
-        
-        return parsed.lowercased()
-    }
+//    func formattedProductWebsite(website: String) -> String {
+//
+//        var parsed = website.replacingOccurrences(of: "https://", with: "")
+//
+//        parsed = website.replacingOccurrences(of: "http://", with: "")
+//
+//        parsed = website.replacingOccurrences(of: "www.", with: "")
+//
+//        if parsed.last == "/" {
+//            parsed = String(parsed.prefix(parsed.count-1))
+//        }
+//
+//        return parsed.lowercased()
+//    }
     
     
 }
 
-struct AddBrandRow: View {
+struct AddProductRow: View {
 
     var body: some View {
         
@@ -295,7 +284,7 @@ struct AddBrandRow: View {
             //The first + last names and the phone number
             VStack(alignment: .leading, spacing: 0) {
 
-                Text("New brand")
+                Text("New product")
                     .foregroundColor(Color("text.black"))
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .lineLimit(1)
@@ -320,3 +309,4 @@ struct AddBrandRow: View {
         .padding(.vertical, 12)
     }
 }
+

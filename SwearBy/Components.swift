@@ -230,4 +230,9 @@ enum AddNewCodeSheetPresented: String, Identifiable {
     }
 }
 
-
+enum AddNewPostFullScreenPresented: String, Identifiable {
+    case add_brand, add_product
+    var id: String {
+        return self.rawValue
+    }
+}

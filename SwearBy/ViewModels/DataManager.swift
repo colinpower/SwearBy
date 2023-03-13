@@ -145,6 +145,30 @@ class DataManager: ObservableObject {
     }
     
     
+    func getAllProductsForBrandListener(brand_id: String, onSuccess: @escaping([Products]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+        
+        let listenerRegistration = db.collection("products")
+            .whereField("brand_id", isEqualTo: brand_id)
+            .order(by: "name", descending: true)
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                var productsForBrandArray = [Products]()
+                
+                productsForBrandArray = documents.compactMap { (queryDocumentSnapshot) -> Products? in
+                    
+                    
+                    print(try? queryDocumentSnapshot.data(as: Products.self))
+                    return try? queryDocumentSnapshot.data(as: Products.self)
+                }
+                onSuccess(productsForBrandArray)
+            }
+        listener(listenerRegistration)
+    }
+    
+    
     func getMyReferralCodesListener(user_id: String, onSuccess: @escaping([ReferralCodes]) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
 
         let listenerRegistration = db.collection("referral_codes")

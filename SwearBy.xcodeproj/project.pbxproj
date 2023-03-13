@@ -75,6 +75,8 @@
 		30640C8729BAE24900981D3C /* PostInFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8629BAE24900981D3C /* PostInFeed.swift */; };
 		30640C8929BAEF4A00981D3C /* EnterEmailAndPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8829BAEF4A00981D3C /* EnterEmailAndPassword.swift */; };
 		30640C8B29BAF76A00981D3C /* ExpandedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8A29BAF76A00981D3C /* ExpandedPost.swift */; };
+		30640C8D29BB26C000981D3C /* SelectProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8C29BB26C000981D3C /* SelectProduct.swift */; };
+		30640C8F29BB299C00981D3C /* AddNewProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30640C8E29BB299C00981D3C /* AddNewProduct.swift */; };
 		30FB5DEB29A7E20900020C9A /* SwearByApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEA29A7E20900020C9A /* SwearByApp.swift */; };
 		30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB5DEC29A7E20900020C9A /* ContentView.swift */; };
 		30FB5DEF29A7E20B00020C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB5DEE29A7E20B00020C9A /* Assets.xcassets */; };
@@ -168,6 +170,8 @@
 		30640C8629BAE24900981D3C /* PostInFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInFeed.swift; sourceTree = "<group>"; };
 		30640C8829BAEF4A00981D3C /* EnterEmailAndPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmailAndPassword.swift; sourceTree = "<group>"; };
 		30640C8A29BAF76A00981D3C /* ExpandedPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPost.swift; sourceTree = "<group>"; };
+		30640C8C29BB26C000981D3C /* SelectProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProduct.swift; sourceTree = "<group>"; };
+		30640C8E29BB299C00981D3C /* AddNewProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewProduct.swift; sourceTree = "<group>"; };
 		30FB5DE729A7E20900020C9A /* SwearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB5DEA29A7E20900020C9A /* SwearByApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwearByApp.swift; sourceTree = "<group>"; };
 		30FB5DEC29A7E20900020C9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -331,6 +335,8 @@
 				30640C7C29B9FBE000981D3C /* EditMyCode.swift */,
 				30640C7629B7897A00981D3C /* SelectBrand.swift */,
 				30640C7A29B8382900981D3C /* AddNewBrand.swift */,
+				30640C8C29BB26C000981D3C /* SelectProduct.swift */,
+				30640C8E29BB299C00981D3C /* AddNewProduct.swift */,
 				30640C7829B81A3F00981D3C /* SetupSteps.swift */,
 				30640C7429B7876C00981D3C /* AddPreloadedCode.swift */,
 			);
@@ -623,6 +629,7 @@
 				30640C6229B624D000981D3C /* AddPost.swift in Sources */,
 				30FB5DED29A7E20900020C9A /* ContentView.swift in Sources */,
 				30640BFE29B2EF9F00981D3C /* EnterEmail.swift in Sources */,
+				30640C8D29BB26C000981D3C /* SelectProduct.swift in Sources */,
 				30FB5E4629A861BD00020C9A /* DataManager.swift in Sources */,
 				30FB5E4029A8600500020C9A /* Profile.swift in Sources */,
 				30640C5029B5E7B400981D3C /* SuggestedFriendRow.swift in Sources */,
@@ -637,6 +644,7 @@
 				30640C0029B2EFD800981D3C /* CheckEmail.swift in Sources */,
 				30640C4A29B5CFE200981D3C /* ContactsVM.swift in Sources */,
 				30640C7129B77EE400981D3C /* PreloadedReferralProgramVM.swift in Sources */,
+				30640C8F29BB299C00981D3C /* AddNewProduct.swift in Sources */,
 				30640C8529BAC50F00981D3C /* CreateRequest.swift in Sources */,
 				30640C3729B322AB00981D3C /* EmptyVariables.swift in Sources */,
 				30640C5829B612D800981D3C /* EnterPhone.swift in Sources */,
@@ -841,7 +849,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;
@@ -879,7 +887,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SwearBy/SwearBy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"SwearBy/Preview Content\"";
 				DEVELOPMENT_TEAM = F6HF4R7G4W;
 				ENABLE_PREVIEWS = YES;

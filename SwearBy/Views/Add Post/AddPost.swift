@@ -10,6 +10,9 @@ import SwiftUI
 import PhotosUI
 import FirebaseStorage
 
+
+
+
 struct AddPost: View {
     
     @Environment(\.dismiss) var dismiss
@@ -33,6 +36,20 @@ struct AddPost: View {
     @FocusState private var descriptionFocused: Bool
     @FocusState private var pasteLinkFocused: Bool
     
+    // Add Brand Picker
+    @StateObject private var private_preloaded_referral_programs_vm = PreloadedReferralProgramVM()
+    @State private var private_preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
+    //@State private var isShowingBrandPicker:Bool = false
+    // NOTE - use the preload to convert the brand info back into just the title and the website
+    
+    // Add Product Picker
+    // TO DO...
+    @State private var selected_product:Products = EmptyVariables().empty_products
+    @State private var isShowingProductPicker:Bool = false
+    
+    // Enum to filter between brands and products modals
+    @State private var addNewPostFullScreenPresented: AddNewPostFullScreenPresented?
+    
     var body: some View {
         
         VStack (spacing: 0) {
@@ -48,7 +65,7 @@ struct AddPost: View {
                         
                         HStack(alignment: .top, spacing: 0) {
                             
-                            let pic_width = UIScreen.main.bounds.width / 2 - 40
+                            let pic_width = UIScreen.main.bounds.width * 0.6
                             
                             Spacer()
                             
@@ -105,64 +122,64 @@ struct AddPost: View {
                             
                             Spacer()
                             
-                            Button {
- 
-                                pasteLinkFocused = true
-                            } label: {
-                                
-                                ZStack(alignment: .center) {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .foregroundColor(Color("TextFieldGray"))
-                                        .frame(width: pic_width, height: pic_width)
-                                        .shadow(radius: 4)
-                                    
-                                    VStack(alignment: .center, spacing: 0) {
-                                        
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: 120, height: 32)
-                                        
-                                        Spacer()
-                                        
-                                        Text("Product image")
-                                            .font(.system(size: 12, weight: .regular, design: .rounded))
-                                            .foregroundColor(Color("text.gray"))
-                                        
-                                        Spacer()
-                                        Spacer()
-                                        
-                                        
-                                        if (!description.isEmpty && product_link.isEmpty && !pasteLinkFocused) {
-                                            // blue
-                                            ZStack(alignment: .center) {
-                                                
-                                                Capsule()
-                                                    .foregroundColor(.blue)
-                                                    .frame(width: 120, height: 32)
-                                                Text("Paste link")
-                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                                                    .foregroundColor(Color.white)
-                                                
-                                            }
-                                        } else {
-                                            ZStack(alignment: .center) {
-                                                
-                                                Capsule()
-                                                    .strokeBorder(lineWidth: 2).foregroundColor(Color.gray)
-                                                    .frame(width: 120, height: 32)
-                                                Text("Paste link")
-                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                                                    .foregroundColor(Color.gray)
-                                                
-                                            }
-                                        }
-                                        
-                                    }.padding(.horizontal).padding(.vertical)
-                                        .frame(width: pic_width, height: pic_width)
-                                }
-                                
-                            }
-                            Spacer()
+//                            Button {
+//
+//                                pasteLinkFocused = true
+//                            } label: {
+//
+//                                ZStack(alignment: .center) {
+//                                    RoundedRectangle(cornerRadius: 20)
+//                                        .foregroundColor(Color("TextFieldGray"))
+//                                        .frame(width: pic_width, height: pic_width)
+//                                        .shadow(radius: 4)
+//
+//                                    VStack(alignment: .center, spacing: 0) {
+//
+//                                        Rectangle()
+//                                            .foregroundColor(.clear)
+//                                            .frame(width: 120, height: 32)
+//
+//                                        Spacer()
+//
+//                                        Text("Product image")
+//                                            .font(.system(size: 12, weight: .regular, design: .rounded))
+//                                            .foregroundColor(Color("text.gray"))
+//
+//                                        Spacer()
+//                                        Spacer()
+//
+//
+//                                        if (!description.isEmpty && product_link.isEmpty && !pasteLinkFocused) {
+//                                            // blue
+//                                            ZStack(alignment: .center) {
+//
+//                                                Capsule()
+//                                                    .foregroundColor(.blue)
+//                                                    .frame(width: 120, height: 32)
+//                                                Text("Paste link")
+//                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+//                                                    .foregroundColor(Color.white)
+//
+//                                            }
+//                                        } else {
+//                                            ZStack(alignment: .center) {
+//
+//                                                Capsule()
+//                                                    .strokeBorder(lineWidth: 2).foregroundColor(Color.gray)
+//                                                    .frame(width: 120, height: 32)
+//                                                Text("Paste link")
+//                                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+//                                                    .foregroundColor(Color.gray)
+//
+//                                            }
+//                                        }
+//
+//                                    }.padding(.horizontal).padding(.vertical)
+//                                        .frame(width: pic_width, height: pic_width)
+//                                }
+//
+//                            }
+//                            Spacer()
                             
                             
                         }
@@ -175,95 +192,132 @@ struct AddPost: View {
                             .submitLabel(.done)
                             .onSubmit {
                                 descriptionFocused = false
-                                pasteLinkFocused = true
+                                //pasteLinkFocused = true
                             }
                             .padding(.leading)
                             .frame(minHeight: 60, alignment: .topLeading)
                             .padding(.horizontal)
                         
                         Divider()
-                            .padding(.vertical)
+                            .padding(.top)
                         
-                        VStack (alignment: .leading, spacing: 0) {
-                            
-                            HStack {
-                                Text("Paste link to product")
-                                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                                    .padding(.bottom, 4)
-                                
-                                Spacer()
-                                
-                                
-                                // in-app webview
-                                // https://www.swiftanytime.com/blog/links-in-swiftui
-                                
-                                
+                        if private_preloaded_referral_program.brand_id == "" {
+                            Button {
+                                addNewPostFullScreenPresented = .add_brand
+                            } label: {
+                                AddPost_BrandButton(icon_halfSheet: "heart", referral_program: $private_preloaded_referral_program)
                             }
-                            
-                            Text("SwearBy will autofill details after you post")
-                                .font(.system(size: 15, weight: .regular, design: .rounded))
-                                .foregroundColor(.gray)
-                                .padding(.bottom)
-                            
-                            ZStack(alignment: .trailing) {
-                                TextField("https://www.apple.com/iphone-14/", text: $product_link)
-                                    .font(.system(size: 16, weight: .regular))
-                                    .foregroundColor(Color("text.black"))
-                                    .frame(height: 48)
-                                    .padding(.horizontal)
-                                    .background(RoundedRectangle(cornerRadius: 12).foregroundColor(Color("TextFieldGray")))
-                                    .submitLabel(.done)
-                                    .focused($pasteLinkFocused)
-                                    .keyboardType(.URL)
-                                    .disableAutocorrection(true)
-                             
-                                    
-                                    Link(destination: URL(string: "https://www.google.com")!) {
-                                        Text("Google")
-                                            .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                            .foregroundColor((pasteLinkFocused && product_link.isEmpty) ? Color.blue : Color.clear)
-                                            .padding(.vertical, 8)
-                                            .padding(.trailing)
-                                    }
-                                    
-                                
-                                
-                            }
-                            .padding(.bottom)
-                            
-                        }.padding(.horizontal)
+                        } else {
+                            AddPost_BrandButton(icon_halfSheet: "heart", referral_program: $private_preloaded_referral_program)
+                        }
                         
-                        Divider()
-                            .padding(.vertical)
-                        
-                        VStack (alignment: .leading, spacing: 0) {
-                            
-                            Text(isPublic ? "Visibility: Everyone" : "Visibility: Friends Only")
-                                .font(.system(size: 18, weight: .semibold, design: .rounded))
-                                .padding(.bottom, 4)
-                            
-                            Toggle(isOn: $isPublic) {
-                                Text("Share with everyone on SwearBy")
-                                    .font(.system(size: 16, weight: .regular, design: .rounded))
-                                    .foregroundColor(.gray)
+                        if private_preloaded_referral_program.brand_id != "" {
+                            if selected_product.product_id == "" {
+                                Button {
+                                    addNewPostFullScreenPresented = .add_product
+                                } label: {
+                                    AddPost_ProductButton(icon_halfSheet: "bag", chosen_product: $selected_product)
+                                }
+                            } else {
+                                AddPost_ProductButton(icon_halfSheet: "bag", chosen_product: $selected_product)
                             }
-                            
-                        }.padding(.bottom)
-                            .padding(.horizontal)
+                        }
+                        
+//                        AddPost_BrandOrProductButton(icon_halfSheet: "bag", title_halfSheet: "Select a product")
+//
+//                        AddPost_BrandOrProductButton(icon_halfSheet: "barcode", title_halfSheet: "Add referral code")
+
+//
+//                        // UNDO THIS ONCE IVE CREATED AN ENUM TO HANDLE THIS INSTEAD
+//                        if private_preloaded_referral_program.brand_id == "" {
+//                            Button {
+//                                addNewPostFullScreenPresented = .add_brand
+////                                isShowingBrandPicker = true
+//                            } label: {
+//                                HStack {
+//                                    Text("Select a brand")
+//                                    Spacer()
+//                                }
+//                                .padding()
+//                            }
+//
+//                        } else {
+//
+//                            HStack {
+//                                Text(private_preloaded_referral_program.brand_name)
+//                                Spacer()
+//                                Button {
+//                                    private_preloaded_referral_program = EmptyVariables().empty_preloaded_referral_program
+//                                } label: {
+//                                    Image(systemName: "xmark")
+//                                }
+//                            }
+//                            .padding()
+//
+//                        }
+                        
+                        
+                        //DFDC5036-081B-4E0E-80A5-6020C00D7A95
+
+//                        let brand_id_temp_var = "DFDC5036-081B-4E0E-80A5-6020C00D7A95"
+//
+//                        if private_preloaded_referral_program.brand_id == "" {
+////                        if brand_id_temp_var == "" {
+//
+//                        } else {
+//                            if selected_product.product_id == "" {
+//                                Button {
+//                                    addNewPostFullScreenPresented = .add_product
+////                                    isShowingProductPicker = true
+//                                } label: {
+//                                    HStack {
+//                                        Text("Select a product")
+//                                        Spacer()
+//                                    }
+//                                    .padding()
+//                                }
+//
+//                            } else {
+//
+//                                HStack {
+//                                    Text(selected_product.name)
+//                                    Spacer()
+//                                    Button {
+//                                        selected_product = EmptyVariables().empty_products
+//                                    } label: {
+//                                        Image(systemName: "xmark")
+//                                    }
+//                                }
+//                                .padding()
+//
+//                            }
+//                        }
+
+                        
+                        
+                        // POTENTIALLY KEEP THIS SECTION
+//                        Divider()
+//                            .padding(.vertical)
+//
+//                        VStack (alignment: .leading, spacing: 0) {
+//
+//                            Text(isPublic ? "Visibility: Everyone" : "Visibility: Friends Only")
+//                                .font(.system(size: 18, weight: .semibold, design: .rounded))
+//                                .padding(.bottom, 4)
+//
+//                            Toggle(isOn: $isPublic) {
+//                                Text("Share with everyone on SwearBy")
+//                                    .font(.system(size: 16, weight: .regular, design: .rounded))
+//                                    .foregroundColor(.gray)
+//                            }
+//
+//                        }.padding(.bottom)
+//                            .padding(.horizontal)
                         
                         
                         
                         Spacer()
                     }
-                    
-    //                NavigationLink(destination: PostDetails(users_vm: users_vm, croppedImage: $croppedImage, presentedSheet: $presentedSheet)) {
-    //                    Text("Go to next page")
-    //                }
-                    
-//                    Image(systemName: "bag.badge.plus")
-//
-//                    Image(systemName: "bag.fill.badge.questionmark")
-                    
                 }
                 .onChange(of: croppedImage, perform: { newValue in
                     //croppedimage
@@ -278,6 +332,16 @@ struct AddPost: View {
                     show: $showPicker,
                     croppedImage: $croppedImage
                 )
+                .fullScreenCover(item: $addNewPostFullScreenPresented, onDismiss: { addNewPostFullScreenPresented = nil }) { sheet in
+                    
+                    switch sheet {        //add_friends, add_code, add_preloaded_code
+                    case .add_brand:
+                        SelectBrand(preloaded_referral_programs_vm: private_preloaded_referral_programs_vm, preloaded_referral_program: $private_preloaded_referral_program)
+                    case .add_product:
+                        SelectProduct(brand_id_filtered: private_preloaded_referral_program.brand_id, selected_product: $selected_product)
+                    }
+                }
+                
             }
         }
     }
@@ -426,5 +490,109 @@ struct AddPost: View {
         
         
         
+    }
+}
+
+
+struct AddPost_BrandButton: View {
+    
+    var icon_halfSheet: String
+    @Binding var referral_program: PreloadedReferralPrograms
+    
+    
+    var body: some View {
+        
+        HStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Spacer()
+                Image(systemName: icon_halfSheet)
+                    .font(.system(size: 26, weight: .regular, design: .rounded))
+                    .foregroundColor(Color("text.black"))
+                    .padding(.vertical, 17)
+                Spacer()
+            }.frame(width: 36)
+                .padding(.horizontal)
+                .padding(.leading, 8)
+                
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 0) {
+                    Text(referral_program.brand_name == "" ? "Add brand" : referral_program.brand_name)
+                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                        .foregroundColor(Color("text.black"))
+                    Spacer()
+                    
+                    if referral_program.brand_name == "" {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            .foregroundColor(Color("text.gray"))
+                    } else {
+                        Button {
+                            referral_program = EmptyVariables().empty_preloaded_referral_program
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("text.gray"))
+                        }
+                    }
+                }
+                .padding(.trailing)
+                .padding(.top, 20)
+                .padding(.bottom, 21)
+                Divider().foregroundColor(Color("text.gray"))
+            }.frame(height: 60)
+        }.frame(height: 60)
+    }
+}
+
+
+
+
+struct AddPost_ProductButton: View {
+    
+    var icon_halfSheet: String
+    @Binding var chosen_product: Products
+    
+    
+    var body: some View {
+        
+        HStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Spacer()
+                Image(systemName: icon_halfSheet)
+                    .font(.system(size: 26, weight: .regular, design: .rounded))
+                    .foregroundColor(Color("text.black"))
+                    .padding(.vertical, 17)
+                Spacer()
+            }.frame(width: 36)
+                .padding(.horizontal)
+                .padding(.leading, 8)
+                
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 0) {
+                    Text(chosen_product.name == "" ? "Select product" : chosen_product.name)
+                        .font(.system(size: 17, weight: .regular, design: .rounded))
+                        .foregroundColor(Color("text.black"))
+                    Spacer()
+                    
+                    if chosen_product.name == "" {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            .foregroundColor(Color("text.gray"))
+                    } else {
+                        Button {
+                            chosen_product = EmptyVariables().empty_products
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                                .foregroundColor(Color("text.gray"))
+                        }
+                    }
+                    
+                }.padding(.trailing)
+                .padding(.top, 20)
+                .padding(.bottom, 21)
+                Divider().foregroundColor(Color("text.gray"))
+            }.frame(height: 60)
+        }.frame(height: 60)
     }
 }
